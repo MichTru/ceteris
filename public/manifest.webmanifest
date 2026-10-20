@@ -1,0 +1,17 @@
+{
+  "name": "Ceteris · Economia e Politica Industriale",
+  "short_name": "Ceteris",
+  "description": "Lezioni, esercizi, flashcard e simulazioni d’esame per il primo parziale di Economia e Politica Industriale.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fc",
+  "theme_color": "#4f46e5",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
