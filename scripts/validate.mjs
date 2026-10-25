@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url';
 const dir = mkdtempSync(join(tmpdir(), 'val-'));
 const out = join(dir, 'data.mjs');
 await build({ entryPoints: ['src/data/index.ts'], bundle: true, format: 'esm', platform: 'node', outfile: out, logLevel: 'error' });
-const { UNITS } = await import(pathToFileURL(out).href);
+const { UNITS, COURSES } = await import(pathToFileURL(out).href);
 rmSync(dir, { recursive: true, force: true });
 
 const SCENES = {
@@ -26,6 +26,12 @@ const SCENES = {
   'conc-monopolistica': ['tan', 'rc'],
   'ricavi-costi-totali': ['qstar', 'q2', 'q9'],
   cmlp: ['eco', 'sem', 'dis'],
+  'g-x2': [], 'g-x3': [], 'g-abs': [], 'g-sqrt': [], 'g-inv': [], 'g-exp': [], 'g-expd': [], 'g-log': [], 'g-logd': [],
+  asintoti: ['av', 'ao'],
+  discont: ['salto', 'cont', 'elim'],
+  tangente: ['tan', 'sec'],
+  studio: ['max', 'flesso', 'min'],
+  area: ['neg', 'pos'],
 };
 
 const errors = [];
@@ -47,7 +53,7 @@ for (const u of UNITS) {
       if (ex.type === 'mc') {
         if (ex.answer < 0 || ex.answer >= ex.options.length) errors.push(`${ex.id}: answer fuori range`);
         if (new Set(ex.options).size !== ex.options.length) errors.push(`${ex.id}: opzioni duplicate`);
-        if (ex.figure && !SCENES[ex.figure]) errors.push(`${ex.id}: figura sconosciuta`);
+        if (ex.figure && !(ex.figure in SCENES)) errors.push(`${ex.id}: figura sconosciuta`);
       }
       if (ex.type === 'fill') {
         const blanks = ex.text.split('___').length - 1;

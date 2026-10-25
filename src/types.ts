@@ -13,7 +13,22 @@ export type SceneId =
   | 'conc-perfetta-lp'
   | 'conc-monopolistica'
   | 'ricavi-costi-totali'
-  | 'cmlp';
+  | 'cmlp'
+  // Metodi Matematici
+  | 'g-x2'
+  | 'g-x3'
+  | 'g-abs'
+  | 'g-sqrt'
+  | 'g-inv'
+  | 'g-exp'
+  | 'g-expd'
+  | 'g-log'
+  | 'g-logd'
+  | 'asintoti'
+  | 'discont'
+  | 'tangente'
+  | 'studio'
+  | 'area';
 
 export interface Theory {
   title: string;
@@ -81,6 +96,7 @@ export interface NumEx extends ExBase {
   hint?: string;
   /** Come mostrare la risposta corretta (es. "5/16"). */
   shown?: string;
+  scenario?: string;
 }
 
 export interface HotspotEx extends ExBase {

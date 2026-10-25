@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ALL_CARDS, UNITS } from '../data';
+import { ALL_CARDS } from '../data';
+import { useCourse } from '../data/useCourse';
 import { addXp, setState, useStore } from '../engine/store';
 import { isDue, sm2 } from '../engine/srs';
 import { shuffle } from '../engine/utils';
@@ -7,6 +8,7 @@ import { sfx } from '../engine/sound';
 import Mascot from '../components/Mascot';
 
 export default function Flashcards({ onExit }: { onExit: () => void }) {
+  const course = useCourse();
   const srs = useStore((s) => s.srs);
   const [unit, setUnit] = useState<string>('all');
   const [mode, setMode] = useState<'due' | 'all'>('due');
@@ -16,7 +18,7 @@ export default function Flashcards({ onExit }: { onExit: () => void }) {
   const [doneCount, setDoneCount] = useState(0);
 
   const pool = useMemo(
-    () => ALL_CARDS.filter((c) => (unit === 'all' || c.unit.id === unit) && (mode === 'all' || isDue(srs[c.id]))),
+    () => course.cards.filter((c) => (unit === 'all' || c.unit.id === unit) && (mode === 'all' || isDue(srs[c.id]))),
     [unit, mode, deck === null],
   );
 
@@ -80,7 +82,7 @@ export default function Flashcards({ onExit }: { onExit: () => void }) {
               <button className="unit-chip" aria-pressed={unit === 'all'} onClick={() => setUnit('all')}>
                 Tutte
               </button>
-              {UNITS.map((u) => (
+              {course.units.map((u) => (
                 <button key={u.id} className="unit-chip" style={{ ['--c' as any]: u.color }} aria-pressed={unit === u.id} onClick={() => setUnit(u.id)}>
                   {u.n}. {u.title}
                 </button>

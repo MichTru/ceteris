@@ -18,6 +18,7 @@ export interface ExamResult {
   score: number;
   total: number;
   grade: string;
+  course?: 'econ' | 'mate';
 }
 
 export interface State {
@@ -51,6 +52,8 @@ export interface State {
   perfectLessons: number;
   bestCombo: number;
   onboarded: boolean;
+  /** Corso attivo. */
+  course: 'econ' | 'mate';
 }
 
 export const today = (d = new Date()) => {
@@ -100,6 +103,7 @@ const fresh = (): State => ({
   perfectLessons: 0,
   bestCombo: 0,
   onboarded: false,
+  course: 'econ',
 });
 
 function load(): State {

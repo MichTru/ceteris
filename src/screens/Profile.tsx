@@ -1,7 +1,8 @@
 import { ask } from '../components/Confirm';
 import { useRef, useState } from 'react';
 import { exportState, importState, resetState, setState, useStore } from '../engine/store';
-import { totals } from '../data';
+import { COURSES, totals } from '../data';
+import { useCourse } from '../data/useCourse';
 import Mascot from '../components/Mascot';
 
 const GOALS: [number, string][] = [
@@ -15,7 +16,8 @@ export default function Profile() {
   const s = useStore((x) => x);
   const file = useRef<HTMLInputElement>(null);
   const [msg, setMsg] = useState('');
-  const t = totals();
+  const course = useCourse();
+  const t = totals(course);
 
   const doExport = () => {
     const blob = new Blob([exportState()], { type: 'application/json' });
@@ -54,8 +56,19 @@ export default function Profile() {
           <h1 className="page-title" style={{ padding: 0 }}>
             {s.name}
           </h1>
-          <p style={{ color: 'var(--ink-2)' }}>Economia e Politica Industriale · primo parziale</p>
+          <p style={{ color: 'var(--ink-2)' }}>
+            {course.title} · {course.sub}
+          </p>
         </div>
+      </div>
+
+      <h2 className="section-title">Corso</h2>
+      <div className="goal-grid">
+        {COURSES.map((c) => (
+          <button key={c.id} className={`btn small ${s.course === c.id ? '' : 'ghost'}`} onClick={() => setState((x) => void (x.course = c.id))}>
+            {c.icon} {c.short}
+          </button>
+        ))}
       </div>
 
       <h2 className="section-title">Il tuo nome</h2>
@@ -119,7 +132,7 @@ export default function Profile() {
       <h2 className="section-title">Cosa c’è nell’app</h2>
       <div className="card" style={{ lineHeight: 1.6, fontSize: 15 }}>
         <p>
-          7 unità e {t.lessons} lezioni costruite sugli appunti del primo parziale: {t.exercises} esercizi, {t.open} domande da interrogazione, {t.cards} flashcard e il formulario.
+          {course.title}: {t.units} unità e {t.lessons} lezioni costruite sugli appunti: {t.exercises} esercizi, {t.open} domande da interrogazione, {t.cards} flashcard e il formulario.
         </p>
         <p style={{ marginTop: 8 }}>
           Dove negli appunti c’è un errore o un refuso, dopo la risposta compare il riquadro <b>⚠️ Nota del prof</b> con la versione corretta.

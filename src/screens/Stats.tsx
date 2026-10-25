@@ -1,4 +1,5 @@
-import { EX_INDEX, UNITS } from '../data';
+import { EX_INDEX } from '../data';
+import { useCourse } from '../data/useCourse';
 import { BADGES } from '../data/badges';
 import { addDays, level, today, useStore } from '../engine/store';
 import { Bar } from '../components/UI';
@@ -14,6 +15,7 @@ function masteryColor(v: number) {
 
 export default function Stats() {
   const s = useStore((x) => x);
+  const course = useCourse();
   const lv = level(s.xp);
   const t = today();
   const week = Array.from({ length: 7 }, (_, i) => addDays(t, i - 6));
@@ -23,7 +25,7 @@ export default function Stats() {
   const okAll = Object.values(s.ex).reduce((a, e) => a + e.ok, 0);
 
   // precisione per unità e per argomento
-  const unitAcc = UNITS.map((u) => {
+  const unitAcc = course.units.map((u) => {
     let seen = 0,
       ok = 0;
     Object.entries(s.ex).forEach(([id, e]) => {
@@ -37,7 +39,7 @@ export default function Stats() {
   const topics = new Map<string, { seen: number; ok: number; color: string }>();
   Object.entries(s.ex).forEach(([id, e]) => {
     const info = EX_INDEX.get(id);
-    if (!info) return;
+    if (!info || info.course.id !== course.id) return;
     const k = info.ex.topic;
     const cur = topics.get(k) ?? { seen: 0, ok: 0, color: info.unit.color };
     cur.seen += e.seen;

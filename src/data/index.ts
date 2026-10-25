@@ -6,21 +6,16 @@ import u4 from './u4';
 import u5 from './u5';
 import u6 from './u6';
 import u7 from './u7';
+import m1 from './mate/m1';
+import m2 from './mate/m2';
+import m3 from './mate/m3';
+import m4 from './mate/m4';
+import m5 from './mate/m5';
+import m6 from './mate/m6';
+import m7 from './mate/m7';
+import { FORMULAS_MATE } from './mate/formulas';
 
-export const UNITS: Unit[] = [u1, u2, u3, u4, u5, u6, u7];
-
-export const ALL_LESSONS: (Lesson & { unit: Unit })[] = UNITS.flatMap((u) =>
-  u.lessons.map((l) => ({ ...l, unit: u })),
-);
-
-export const EX_INDEX = new Map<string, { ex: Exercise; unit: Unit; lesson: Lesson }>();
-UNITS.forEach((u) => u.lessons.forEach((l) => l.exercises.forEach((ex) => EX_INDEX.set(ex.id, { ex, unit: u, lesson: l }))));
-
-export const ALL_EXERCISES: Exercise[] = [...EX_INDEX.values()].map((v) => v.ex);
-export const ALL_OPEN: (OpenQ & { unit: Unit })[] = UNITS.flatMap((u) => u.open.map((o) => ({ ...o, unit: u })));
-export const ALL_CARDS: (Flashcard & { unit: Unit })[] = UNITS.flatMap((u) => u.cards.map((c) => ({ ...c, unit: u })));
-
-export const unitById = (id: string) => UNITS.find((u) => u.id === id)!;
+export type CourseId = 'econ' | 'mate';
 
 export const FORMULAS: Formula[] = [
   { id: 'f1', unit: 2, name: 'Surplus del consumatore', expr: 'SC = Σ (disponibilità a pagare − P)', symbols: ['Area sopra P* e sotto la domanda'], example: 'Libro a 30 $: (35−30) + (45−30) + (59−30) = 49 $' },
@@ -51,11 +46,80 @@ export const FORMULAS: Formula[] = [
   { id: 'f26', unit: 4, name: 'Test SSNIP', expr: 'Aumento ipotetico del prezzo del 5-10%', symbols: ['Se i profitti salgono: è un mercato', 'Se i clienti fuggono: il mercato è più ampio'], example: 'Errore del cellophane: mercato troppo ampio' },
 ];
 
-export function totals() {
+export interface Course {
+  id: CourseId;
+  title: string;
+  short: string;
+  sub: string;
+  icon: string;
+  units: Unit[];
+  lessons: (Lesson & { unit: Unit })[];
+  open: (OpenQ & { unit: Unit })[];
+  cards: (Flashcard & { unit: Unit })[];
+  formulas: Formula[];
+  /** Domande per unità nella simulazione d'esame (30 in totale). */
+  examPer: number[];
+  /** Frase finale in fondo al percorso. */
+  outro: string;
+}
+
+function makeCourse(c: Omit<Course, 'lessons' | 'open' | 'cards'>): Course {
   return {
-    exercises: ALL_EXERCISES.length,
-    open: ALL_OPEN.length,
-    cards: ALL_CARDS.length,
-    lessons: ALL_LESSONS.length,
+    ...c,
+    lessons: c.units.flatMap((u) => u.lessons.map((l) => ({ ...l, unit: u }))),
+    open: c.units.flatMap((u) => u.open.map((o) => ({ ...o, unit: u }))),
+    cards: c.units.flatMap((u) => u.cards.map((x) => ({ ...x, unit: u }))),
+  };
+}
+
+export const COURSES: Course[] = [
+  makeCourse({
+    id: 'econ',
+    title: 'Economia e Politica Industriale',
+    short: 'Economia',
+    sub: 'primo parziale',
+    icon: '📊',
+    units: [u1, u2, u3, u4, u5, u6, u7],
+    formulas: FORMULAS,
+    examPer: [4, 5, 5, 6, 4, 3, 3],
+    outro: 'In fondo al percorso c’è il primo parziale. Ce la fai.',
+  }),
+  makeCourse({
+    id: 'mate',
+    title: 'Metodi Matematici per l’economia',
+    short: 'Matematica',
+    sub: 'funzioni, limiti, derivate, integrali',
+    icon: '∫',
+    units: [m1, m2, m3, m4, m5, m6, m7],
+    formulas: FORMULAS_MATE,
+    examPer: [3, 5, 3, 5, 5, 5, 4],
+    outro: 'In fondo al percorso c’è l’esame di Metodi Matematici. Ce la fai.',
+  }),
+];
+
+export const courseById = (id: string) => COURSES.find((c) => c.id === id) ?? COURSES[0];
+
+/** Tutte le unità di tutti i corsi. */
+export const UNITS: Unit[] = COURSES.flatMap((c) => c.units);
+
+export const ALL_LESSONS: (Lesson & { unit: Unit })[] = COURSES.flatMap((c) => c.lessons);
+
+export const EX_INDEX = new Map<string, { ex: Exercise; unit: Unit; lesson: Lesson; course: Course }>();
+COURSES.forEach((c) => c.units.forEach((u) => u.lessons.forEach((l) => l.exercises.forEach((ex) => EX_INDEX.set(ex.id, { ex, unit: u, lesson: l, course: c })))));
+
+export const ALL_EXERCISES: Exercise[] = [...EX_INDEX.values()].map((v) => v.ex);
+export const ALL_OPEN = COURSES.flatMap((c) => c.open);
+export const ALL_CARDS = COURSES.flatMap((c) => c.cards);
+
+export const unitById = (id: string) => UNITS.find((u) => u.id === id)!;
+export const courseOfUnit = (u: Unit) => COURSES.find((c) => c.units.includes(u)) ?? COURSES[0];
+
+export function totals(c: Course) {
+  return {
+    exercises: c.lessons.reduce((n, l) => n + l.exercises.length, 0),
+    open: c.open.length,
+    cards: c.cards.length,
+    lessons: c.lessons.length,
+    units: c.units.length,
   };
 }

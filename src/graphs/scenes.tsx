@@ -142,9 +142,272 @@ function areaHot(id: string, label: string, pts: [number, number][], color: stri
   };
 }
 
+// ---------- grafici di funzioni (Metodi Matematici) ----------
+
+interface Win {
+  X: (x: number) => number;
+  Y: (y: number) => number;
+  curve: (f: (x: number) => number, a: number, b: number, steps?: number) => string;
+  xa: number;
+  xb: number;
+  ya: number;
+  yb: number;
+}
+
+const PL = 16;
+const PR = 304;
+const PT = 14;
+const PB = 230;
+
+function win(xa: number, xb: number, ya: number, yb: number): Win {
+  const X = (x: number) => PL + ((x - xa) / (xb - xa)) * (PR - PL);
+  const Y = (y: number) => PB - ((y - ya) / (yb - ya)) * (PB - PT);
+  const curve = (f: (x: number) => number, a: number, b: number, steps = 120) => {
+    let d = '';
+    let pen = false;
+    for (let i = 0; i <= steps; i++) {
+      const x = a + ((b - a) * i) / steps;
+      const y = f(x);
+      if (!isFinite(y) || y > yb + 0.5 || y < ya - 0.5) {
+        pen = false;
+        continue;
+      }
+      const yy = Math.max(ya - 0.3, Math.min(yb + 0.3, y));
+      d += `${pen ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(yy).toFixed(1)} `;
+      pen = true;
+    }
+    return d.trim();
+  };
+  return { X, Y, curve, xa, xb, ya, yb };
+}
+
+function Plane({ w, ticks = [] }: { w: Win; ticks?: { x?: number; y?: number; t: string }[] }) {
+  const grid = [];
+  for (let x = Math.ceil(w.xa); x <= Math.floor(w.xb); x++)
+    if (x !== 0) grid.push(<line key={'gx' + x} className="scene-grid" x1={w.X(x)} x2={w.X(x)} y1={PT} y2={PB} />);
+  for (let y = Math.ceil(w.ya); y <= Math.floor(w.yb); y++)
+    if (y !== 0) grid.push(<line key={'gy' + y} className="scene-grid" x1={PL} x2={PR} y1={w.Y(y)} y2={w.Y(y)} />);
+  const ox = w.X(0);
+  const oy = w.Y(0);
+  return (
+    <g>
+      {grid}
+      <path className="scene-axis" d={`M${PL} ${oy} H${PR + 4} M${ox} ${PB} V${PT - 4}`} />
+      <path d={`M${PR + 2} ${oy - 4} L${PR + 10} ${oy} L${PR + 2} ${oy + 4} Z`} fill="var(--ink-2)" />
+      <path d={`M${ox - 4} ${PT - 2} L${ox} ${PT - 10} L${ox + 4} ${PT - 2} Z`} fill="var(--ink-2)" />
+      <text className="scene-lbl" x={PR + 2} y={oy + 16} textAnchor="end">
+        x
+      </text>
+      <text className="scene-lbl" x={ox + 8} y={PT + 2}>
+        y
+      </text>
+      {ticks.map((t, i) =>
+        t.x !== undefined ? (
+          <text key={i} className="scene-lbl" x={w.X(t.x)} y={oy + 18} textAnchor="middle">
+            {t.t}
+          </text>
+        ) : (
+          <text key={i} className="scene-lbl" x={ox - 11} y={w.Y(t.y!) + 4} textAnchor="end">
+            {t.t}
+          </text>
+        ),
+      )}
+    </g>
+  );
+}
+
+const dot = (w: Win, x: number, y: number, hollow = false, color = 'var(--ink)') => (
+  <circle cx={w.X(x)} cy={w.Y(y)} r="5" fill={hollow ? 'var(--card)' : color} stroke={color} strokeWidth="2.5" />
+);
+
+function plotFigure(w: Win, f: (x: number) => number, ticks: { x?: number; y?: number; t: string }[], extra?: ReactNode, a = w.xa, b = w.xb) {
+  return {
+    content: (
+      <g>
+        <Plane w={w} ticks={ticks} />
+        <path d={w.curve(f, a, b)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        {extra}
+      </g>
+    ),
+    hots: [] as HotDef[],
+  };
+}
+
+function dashHot(id: string, label: string, x1: number, y1: number, x2: number, y2: number): HotDef {
+  return {
+    id,
+    label,
+    vis: <line className="vis ln" x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.n} strokeWidth="3.5" strokeDasharray="8 6" strokeLinecap="round" />,
+    hit: <line className="hit" x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="26" stroke="transparent" />,
+  };
+}
+
+function mathScene(id: SceneId): { content: ReactNode; hots: HotDef[]; front?: ReactNode } | null {
+  switch (id) {
+    case 'g-x2': {
+      const w = win(-2.6, 2.6, -1, 5.4);
+      return plotFigure(w, (x) => x * x, [{ x: 1, t: '1' }, { x: 2, t: '2' }, { y: 1, t: '1' }, { y: 4, t: '4' }]);
+    }
+    case 'g-x3': {
+      const w = win(-2.4, 2.4, -4.2, 4.2);
+      return plotFigure(w, (x) => x * x * x, [{ x: 1, t: '1' }, { x: -1, t: '−1' }, { y: 1, t: '1' }]);
+    }
+    case 'g-abs': {
+      const w = win(-3.2, 3.2, -1, 4.2);
+      return plotFigure(w, (x) => Math.abs(x), [{ x: 1, t: '1' }, { x: -1, t: '−1' }, { y: 1, t: '1' }]);
+    }
+    case 'g-sqrt': {
+      const w = win(-1, 7, -1, 3.2);
+      return plotFigure(w, (x) => Math.sqrt(x), [{ x: 1, t: '1' }, { x: 4, t: '4' }, { y: 1, t: '1' }, { y: 2, t: '2' }], dot(w, 0, 0, false, C.d), 0, 7);
+    }
+    case 'g-inv': {
+      const w = win(-4, 4, -4, 4);
+      const f = (x: number) => 1 / x;
+      return {
+        content: (
+          <g>
+            <Plane w={w} ticks={[{ x: 1, t: '1' }, { y: 1, t: '1' }]} />
+            <path d={w.curve(f, 0.2, 4) + ' ' + w.curve(f, -4, -0.2)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+          </g>
+        ),
+        hots: [],
+      };
+    }
+    case 'g-exp': {
+      const w = win(-3.4, 2.4, -1, 6);
+      return plotFigure(w, (x) => Math.exp(x), [{ x: 1, t: '1' }, { y: 1, t: '1' }], dot(w, 0, 1, false, C.d));
+    }
+    case 'g-expd': {
+      const w = win(-2.4, 3.4, -1, 6);
+      return plotFigure(w, (x) => Math.pow(0.5, x), [{ x: 1, t: '1' }, { y: 1, t: '1' }], dot(w, 0, 1, false, C.d));
+    }
+    case 'g-log': {
+      const w = win(-0.8, 7, -3, 2.6);
+      return plotFigure(w, (x) => Math.log(x), [{ x: 1, t: '1' }, { x: 3, t: '3' }, { y: 1, t: '1' }], dot(w, 1, 0, false, C.d), 0.02, 7);
+    }
+    case 'g-logd': {
+      const w = win(-0.8, 7, -2.6, 3);
+      return plotFigure(w, (x) => -Math.log(x) / Math.log(2), [{ x: 1, t: '1' }, { x: 4, t: '4' }, { y: 1, t: '1' }], dot(w, 1, 0, false, C.d), 0.02, 7);
+    }
+    case 'asintoti': {
+      const w = win(-4, 6, -4, 6);
+      const f = (x: number) => (x + 1) / (x - 1);
+      return {
+        content: (
+          <g>
+            <Plane w={w} ticks={[{ x: 1, t: '1' }]} />
+            <path d={w.curve(f, 1.05, 6, 160) + ' ' + w.curve(f, -4, 0.95, 160)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+          </g>
+        ),
+        hots: [dashHot('av', 'Retta verticale x = 1', w.X(1), PT, w.X(1), PB), dashHot('ao', 'Retta orizzontale y = 1', PL, w.Y(1), PR, w.Y(1))],
+      };
+    }
+    case 'discont': {
+      const w = win(-3, 3, -1, 4.6);
+      const a = (x: number) => 0.5 * x + 1.5;
+      const b = (x: number) => 0.5 * x + 3;
+      const band = (id: string, label: string, x: number): HotDef => ({
+        id,
+        label,
+        vis: <line className="vis ln" x1={w.X(x)} y1={PT + 4} x2={w.X(x)} y2={PB} stroke="var(--ink-3)" strokeWidth="4" strokeDasharray="2 6" strokeLinecap="round" />,
+        hit: <rect className="hit" x={w.X(x) - 14} y={PT} width="28" height={PB - PT} />,
+      });
+      return {
+        content: (
+          <g>
+            <Plane w={w} ticks={[{ x: 1, t: '1' }, { x: 2, t: '2' }, { y: 1, t: '1' }]} />
+            <path d={w.curve(a, -3, -1)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+            <path d={w.curve(b, -1, 1.42) + ' ' + w.curve(b, 1.58, 3)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+          </g>
+        ),
+        hots: [band('salto', 'Retta x = −1', -1), band('cont', 'Retta x = −2', -2), band('elim', 'Retta x = 1,5', 1.5)],
+        front: (
+          <g pointerEvents="none">
+            {dot(w, -1, 1, true, C.d)}
+            {dot(w, -1, 2.5, false, C.d)}
+            {dot(w, 1.5, 3.75, true, C.d)}
+            {dot(w, 1.5, 1.6, false, C.d)}
+          </g>
+        ),
+      };
+    }
+    case 'tangente': {
+      const w = win(-0.6, 5.2, -0.8, 6.2);
+      const f = (x: number) => 0.25 * x * x + 0.5;
+      const x0 = 1.5;
+      const x1 = 4;
+      const y0 = f(x0);
+      const y1 = f(x1);
+      const mt = 0.5 * x0;
+      const ms = (y1 - y0) / (x1 - x0);
+      const L = (m: number, xa: number, xb: number): [number, number, number, number] => [w.X(xa), w.Y(y0 + m * (xa - x0)), w.X(xb), w.Y(y0 + m * (xb - x0))];
+      return {
+        content: (
+          <g>
+            <Plane w={w} />
+            <path d={w.curve(f, -0.6, 5.2)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+          </g>
+        ),
+        hots: [lineHot('tan', 'Retta che sfiora il grafico in P', ...L(mt, -0.4, 5), C.r), lineHot('sec', 'Retta che passa per P e Q', ...L(ms, 0.6, 4.9), C.c)],
+        front: (
+          <g>
+            {dot(w, x0, y0)}
+            {dot(w, x1, y1)}
+            <text className="scene-lbl big" x={w.X(x0) - 4} y={w.Y(y0) + 22} textAnchor="middle">
+              P
+            </text>
+            <text className="scene-lbl big" x={w.X(x1) - 14} y={w.Y(y1) - 4} textAnchor="end">
+              Q
+            </text>
+          </g>
+        ),
+      };
+    }
+    case 'studio': {
+      const w = win(-2.6, 2.6, -3.4, 3.4);
+      const f = (x: number) => x * x * x - 3 * x;
+      return {
+        content: (
+          <g>
+            <Plane w={w} ticks={[{ x: 1, t: '1' }, { x: -1, t: '−1' }, { y: 2, t: '2' }, { y: -2, t: '−2' }]} />
+            <path d={w.curve(f, -2.6, 2.6)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" />
+          </g>
+        ),
+        hots: [ptHot('max', 'Punto (−1, 2)', w.X(-1), w.Y(2), C.d), ptHot('flesso', 'Punto (0, 0)', w.X(0), w.Y(0), C.d), ptHot('min', 'Punto (1, −2)', w.X(1), w.Y(-2), C.d)],
+      };
+    }
+    case 'area': {
+      const w = win(-1.7, 1.7, -1.6, 1.6);
+      const f = (x: number) => x * x * x;
+      const region = (a: number, b: number): [number, number][] => {
+        const pts: [number, number][] = [[w.X(a), w.Y(0)]];
+        for (let i = 0; i <= 30; i++) {
+          const x = a + ((b - a) * i) / 30;
+          pts.push([w.X(x), w.Y(f(x))]);
+        }
+        pts.push([w.X(b), w.Y(0)]);
+        return pts;
+      };
+      return {
+        content: (
+          <g>
+            <Plane w={w} ticks={[{ x: 1, t: '1' }, { x: -1, t: '−1' }]} />
+          </g>
+        ),
+        hots: [areaHot('neg', 'Regione tra −1 e 0', region(-1, 0), C.o), areaHot('pos', 'Regione tra 0 e 1', region(0, 1), C.m)],
+        front: <path d={w.curve(f, -1.7, 1.7)} stroke={C.d} strokeWidth="4" fill="none" strokeLinecap="round" pointerEvents="none" />,
+      };
+    }
+    default:
+      return null;
+  }
+}
+
 // ---------- definizioni delle scene ----------
 
 function scene(id: SceneId): { content: ReactNode; hots: HotDef[]; front?: ReactNode } {
+  const m = mathScene(id);
+  if (m) return m;
   switch (id) {
     case 'domanda-offerta': {
       const D: [number, number, number, number] = [px(0.06), py(0.92), px(0.9), py(0.1)];
@@ -585,6 +848,8 @@ function scene(id: SceneId): { content: ReactNode; hots: HotDef[]; front?: React
         hots: [zone('eco', 'Tratto decrescente', 0.04, 0.49), zone('dis', 'Tratto crescente', 0.61, 0.98), ptHot('sem', 'Punto più basso', sem[0], sem[1])],
       };
     }
+    default:
+      return { content: null, hots: [] };
   }
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ALL_LESSONS, EX_INDEX, UNITS } from './data';
+import { EX_INDEX } from './data';
+import { currentCourse } from './data/useCourse';
 import type { Exercise, Lesson, Unit } from './types';
 import { BADGES, type Badge } from './data/badges';
 import { checkStreak, getState, regenHearts, setState, useStore } from './engine/store';
@@ -46,8 +47,9 @@ function awardBadges(): Badge[] {
 /** Sceglie le domande per l'allenamento mirato: prima gli argomenti più deboli. */
 function practiceItems(): Exercise[] {
   const s = getState();
-  const doneLessons = ALL_LESSONS.filter((l) => lessonDone(s, l));
-  const pool = (doneLessons.length ? doneLessons : ALL_LESSONS.slice(0, 2)).flatMap((l) => l.exercises);
+  const lessons = currentCourse().lessons;
+  const doneLessons = lessons.filter((l) => lessonDone(s, l));
+  const pool = (doneLessons.length ? doneLessons : lessons.slice(0, 2)).flatMap((l) => l.exercises);
   const score = (ex: Exercise) => {
     const e = s.ex[ex.id];
     if (!e) return 0.6 + Math.random() * 0.2;
@@ -129,7 +131,10 @@ export default function App() {
       u,
     );
   const startMistakes = () => {
-    const ids = getState().mistakes.slice(-12);
+    const all = getState().mistakes;
+    const cid = currentCourse().id;
+    const mine = all.filter((id) => EX_INDEX.get(id)?.course.id === cid);
+    const ids = (mine.length ? mine : all).slice(-12);
     const items = shuffle(ids.map((id) => EX_INDEX.get(id)?.ex).filter(Boolean) as Exercise[]);
     if (items.length) startSession('review', 'Ripasso errori', items);
   };
@@ -237,5 +242,3 @@ export default function App() {
   );
 }
 
-// evita avvisi su import non usati in alcune build
-void UNITS;

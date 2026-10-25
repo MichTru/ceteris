@@ -1,6 +1,7 @@
 // Interrogazione orale: domanda aperta, risposta libera, confronto con la risposta modello.
 import { useMemo, useState } from 'react';
-import { ALL_OPEN, UNITS } from '../data';
+import { ALL_OPEN } from '../data';
+import { useCourse } from '../data/useCourse';
 import { addXp, setState, useStore } from '../engine/store';
 import { keywordHits, shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
@@ -10,6 +11,7 @@ import { unitStyle } from '../components/UI';
 const OPENERS = ['Mi parli di questo…', 'Prego, mi dica.', 'Domanda:', 'Bene, passiamo a…', 'Ultima cosa:'];
 
 export default function Oral({ onExit }: { onExit: () => void }) {
+  const course = useCourse();
   const oral = useStore((s) => s.oral);
   const [unit, setUnit] = useState('all');
   const [onlyWeak, setOnlyWeak] = useState(false);
@@ -20,7 +22,7 @@ export default function Oral({ onExit }: { onExit: () => void }) {
   const [score, setScore] = useState<number[]>([]);
 
   const pool = useMemo(
-    () => ALL_OPEN.filter((o) => (unit === 'all' || o.unit.id === unit) && (!onlyWeak || (oral[o.id] ?? 0) < 2)),
+    () => course.open.filter((o) => (unit === 'all' || o.unit.id === unit) && (!onlyWeak || (oral[o.id] ?? 0) < 2)),
     [unit, onlyWeak, list === null],
   );
   const q = list?.[i];
@@ -76,7 +78,7 @@ export default function Oral({ onExit }: { onExit: () => void }) {
               <button className="unit-chip" aria-pressed={unit === 'all'} onClick={() => setUnit('all')}>
                 Tutte
               </button>
-              {UNITS.map((u) => (
+              {course.units.map((u) => (
                 <button key={u.id} className="unit-chip" style={{ ['--c' as any]: u.color }} aria-pressed={unit === u.id} onClick={() => setUnit(u.id)}>
                   {u.n}. {u.title}
                 </button>

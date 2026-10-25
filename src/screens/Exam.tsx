@@ -1,7 +1,7 @@
 import { ask } from '../components/Confirm';
 // Simulazione d'esame: 30 domande miste a tempo, voto in trentesimi e punti deboli.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { UNITS } from '../data';
+import { currentCourse, useCourse } from '../data/useCourse';
 import type { Exercise, Unit } from '../types';
 import { ExerciseView, correctText, kindOf, questionText } from '../exercises/Exercises';
 import { addXp, recordAnswer, setState, today } from '../engine/store';
@@ -10,19 +10,22 @@ import { sfx } from '../engine/sound';
 import Mascot from '../components/Mascot';
 import { Bar, Confetti, unitStyle } from '../components/UI';
 
-const PER_UNIT = [4, 5, 5, 6, 4, 3, 3]; // 30 domande, più peso alle unità con più calcoli
 const MINUTES = 45;
 
 function buildExam(): { ex: Exercise; unit: Unit }[] {
   const out: { ex: Exercise; unit: Unit }[] = [];
-  UNITS.forEach((u, k) => {
+  const c = currentCourse();
+  c.units.forEach((u, k) => {
     const all = u.lessons.flatMap((l) => l.exercises);
-    sample(all, PER_UNIT[k]).forEach((ex) => out.push({ ex, unit: u }));
+    sample(all, c.examPer[k] ?? 4).forEach((ex) => out.push({ ex, unit: u }));
   });
   return shuffle(out);
 }
 
 export default function Exam({ onExit }: { onExit: () => void }) {
+  const course = useCourse();
+  const UNITS = course.units;
+  const PER_UNIT = course.examPer;
   const [phase, setPhase] = useState<'intro' | 'run' | 'done'>('intro');
   const [items, setItems] = useState<{ ex: Exercise; unit: Unit }[]>([]);
   const [i, setI] = useState(0);
@@ -67,7 +70,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
     addXp(score * 4 + 20);
     const secs = Math.round((Date.now() - startAt.current) / 1000);
     setState((s) => {
-      s.exams.push({ date: today(), score, total, grade: g });
+      s.exams.push({ date: today(), score, total, grade: g, course: course.id });
       const t = today();
       s.time[t] = (s.time[t] ?? 0) + secs;
     });
@@ -109,7 +112,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
           <Mascot mood="think" size={130} anim="bob" />
           <h1 className="page-title">Simulazione d’esame</h1>
           <p className="page-sub" style={{ maxWidth: 420 }}>
-            30 domande da tutte le 7 unità, {MINUTES} minuti. Nessun aiuto durante la prova: correzione e voto in trentesimi alla fine. Gli errori finiscono nel ripasso.
+            {course.title}: 30 domande da tutte le {UNITS.length} unità, {MINUTES} minuti. Nessun aiuto durante la prova: correzione e voto in trentesimi alla fine. Gli errori finiscono nel ripasso.
           </p>
           <div className="card" style={{ textAlign: 'left', width: '100%' }}>
             {UNITS.map((u, k) => (
@@ -228,7 +231,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
         <div className="ex-kind">
           <span aria-hidden>{kind.ico}</span> Domanda {i + 1} di {items.length} · Unità {it.unit.n}
         </div>
-        {it.ex.type === 'mc' && it.ex.scenario && (
+        {(it.ex.type === 'mc' || it.ex.type === 'num') && it.ex.scenario && (
           <div className="scenario">
             <b>Scenario. </b>
             {it.ex.scenario}

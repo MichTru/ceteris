@@ -9,11 +9,11 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
   const steps = [
     {
       mood: 'wave' as const,
-      text: 'Ciao! Sono Ceteris, il tuo salvadanaio laureando. Ti porto all’esame di Economia e Politica Industriale un passo alla volta.',
+      text: 'Ciao! Sono Ceteris, il tuo salvadanaio laureando. Ti porto ai tuoi esami, Economia e Politica Industriale e Metodi Matematici, un passo alla volta.',
     },
     {
       mood: 'think' as const,
-      text: 'Ogni lezione parte con due schede di teoria prese dai tuoi appunti, poi esercizi: quiz, calcoli, grafici da toccare, curve da spostare.',
+      text: 'Ogni lezione parte con due schede di teoria prese dai tuoi appunti, poi esercizi: quiz, calcoli, grafici da toccare, curve da spostare. Il corso si cambia in cima al percorso.',
     },
     {
       mood: 'happy' as const,

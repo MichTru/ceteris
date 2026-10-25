@@ -1913,3 +1913,36 @@ textarea.answer:focus {
   border-bottom-width: 5px;
   margin-bottom: 0;
 }
+
+/* ---------- selettore del corso ---------- */
+.course-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 5px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 2px solid var(--line);
+}
+.course-switch button {
+  min-height: 44px;
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  font-weight: 900;
+  font-size: 15.5px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.course-switch button.on {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--primary-dark);
+}
+.course-switch button:focus-visible {
+  outline: 3px solid var(--primary-soft);
+  outline-offset: 2px;
+}

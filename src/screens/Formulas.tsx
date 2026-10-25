@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { FORMULAS, UNITS } from '../data';
+import { useCourse } from '../data/useCourse';
 import { norm } from '../engine/utils';
 
 export default function Formulas() {
+  const course = useCourse();
   const [q, setQ] = useState('');
-  const list = FORMULAS.filter((f) => !q || norm(f.name + ' ' + f.expr + ' ' + f.symbols.join(' ')).includes(norm(q)));
-  const units = UNITS.filter((u) => list.some((f) => f.unit === u.n));
+  const list = course.formulas.filter((f) => !q || norm(f.name + ' ' + f.expr + ' ' + f.symbols.join(' ')).includes(norm(q)));
+  const units = course.units.filter((u) => list.some((f) => f.unit === u.n));
   return (
     <div className="screen">
       <h1 className="page-title">Formulario</h1>
-      <p className="page-sub">Tutte le formule del primo parziale, con il significato dei simboli e un esempio dagli appunti.</p>
+      <p className="page-sub">{course.title}: tutte le formule, con il significato dei simboli e un esempio dagli appunti.</p>
       <label className="sr-only" htmlFor="fsearch">
         Cerca una formula
       </label>
-      <input id="fsearch" className="search" placeholder="Cerca: elasticità, HH, costo marginale…" value={q} onChange={(e) => setQ(e.target.value)} />
+      <input id="fsearch" className="search" placeholder={course.id === 'mate' ? 'Cerca: derivata, logaritmo, integrale…' : 'Cerca: elasticità, HH, costo marginale…'} value={q} onChange={(e) => setQ(e.target.value)} />
       {units.map((u) => (
         <section key={u.id}>
           <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

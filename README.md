@@ -1,10 +1,12 @@
-# Ceteris · Economia e Politica Industriale
+# Ceteris
 
-App di studio in stile “lezioni brevi + esercizi + gamification” per preparare il **primo parziale di Economia e Politica Industriale** (Università di Ferrara). Tutti i contenuti sono costruiti sugli appunti del corso.
+App di studio in stile “lezioni brevi + esercizi + gamification” per preparare gli esami di **Economia e Politica Industriale** (primo parziale) e **Metodi Matematici per l’economia** (Università di Ferrara). Tutti i contenuti sono costruiti sugli appunti dei corsi. Il corso si sceglie in cima al percorso o dal profilo: ogni corso ha il suo percorso, ripasso, formulario e simulazione d’esame; XP, serie e traguardi sono in comune.
 
 La mascotte è **Ceteris**, un porcellino-salvadanaio laureando (ceteris paribus 🐷🎓).
 
 ## Cosa c’è dentro
+
+### Economia e Politica Industriale
 
 - **7 unità, 41 lezioni** sul percorso a curva: domanda e offerta, surplus ed elasticità, produzione e costi, strutture di mercato, teorie dell’impresa, varietà dei capitalismi, sistemi di imprese.
 - **405 esercizi** di 8 tipi: scelta multipla, vero/falso, completa la frase, abbinamenti, ordina i passaggi, calcoli numerici, grafici da toccare, curve di domanda e offerta da spostare. Più i casi d’esame (Ministro della Salute, sindaco di Ferrara…).
@@ -14,6 +16,16 @@ La mascotte è **Ceteris**, un porcellino-salvadanaio laureando (ceteris paribus
 - **Formulario** con 26 formule, simboli spiegati ed esempi.
 - **Gamification**: XP, livelli, serie giornaliera, obiettivo giornaliero, cuori, 20 traguardi, suoni (disattivabili), coriandoli.
 - **Statistiche**: XP della settimana, calendario, padronanza per unità e mappa degli argomenti dal più debole al più forte.
+
+### Metodi Matematici per l’economia
+
+- **7 unità, 31 lezioni**: insiemi e funzioni, funzioni elementari (potenze, esponenziali, logaritmi, composte, costi-ricavi-profitto), successioni, limiti e continuità, derivate, studio di funzione e ottimizzazione, integrali.
+- **343 esercizi**, con 115 calcoli numerici verificati a parte, grafici di funzioni da riconoscere e grafici da toccare (asintoti, discontinuità, tangente e secante, massimo/minimo/flesso, aree con segno).
+- **⚠️ Note del prof** sugli errori degli appunti: monotonia di xⁿ con n pari, semiretta aperta, termine generale della progressione aritmetica, linea di produzione conveniente, vertice della tariffa telefonica, n₀ nell’esempio con ε, segni del logaritmo con base < 1, costo fisso dei cappelli.
+- 39 domande d’interrogazione, 83 flashcard, formulario di 27 formule, 7 traguardi dedicati.
+
+### Per entrambi
+
 - Tema chiaro/scuro, installabile sul telefono (PWA), funziona offline dopo la prima apertura, backup dei progressi in un file JSON.
 
 ## Pubblicarla su GitHub Pages (passo per passo)
@@ -43,7 +55,7 @@ npm run build:single   # crea dist-single/ceteris.html, un unico file apribile o
 
 ## Modificare o aggiungere domande
 
-I contenuti stanno in `src/data/u1.ts` … `src/data/u7.ts` (una unità per file). Ogni lezione ha `theory` (schede) ed `exercises`. Basta copiare un esercizio simile e cambiarne il testo, con un `id` nuovo e unico. Esempi:
+I contenuti stanno in `src/data/u1.ts` … `src/data/u7.ts` (Economia) e `src/data/mate/m1.ts` … `m7.ts` (Matematica), una unità per file. I corsi sono definiti in `COURSES` dentro `src/data/index.ts`. Ogni lezione ha `theory` (schede) ed `exercises`. Basta copiare un esercizio simile e cambiarne il testo, con un `id` nuovo e unico. Esempi:
 
 ```ts
 // scelta multipla: answer è la posizione della risposta giusta in options (0 = la prima).
@@ -66,7 +78,7 @@ I contenuti stanno in `src/data/u1.ts` … `src/data/u7.ts` (una unità per file
 
 Altri tipi: `match` (coppie da abbinare), `order` (elementi nell’ordine giusto), `hotspot` (punto da toccare su un grafico in `src/graphs/scenes.tsx`), `shift` (curve da spostare). Si può aggiungere `profNote` a qualsiasi esercizio per mostrare una “Nota del prof”.
 
-Le domande d’interrogazione stanno in `open` (con risposta modello e parole chiave), le flashcard in `cards`, le formule in `src/data/index.ts`.
+Le domande d’interrogazione stanno in `open` (con risposta modello e parole chiave), le flashcard in `cards`, le formule in `src/data/index.ts` (Economia) e `src/data/mate/formulas.ts` (Matematica).
 
 Dopo ogni modifica `npm run validate` controlla che non ci siano errori (id duplicati, risposte fuori posto, buchi che non tornano…).
 

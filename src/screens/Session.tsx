@@ -129,7 +129,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
         b.best = Math.max(b.best, acc);
         s.bosses[unit.id] = b;
         if (passed) {
-          const nextUnit = `u${unit.n + 1}`;
+          const nextUnit = unit.id.replace(/\d+$/, '') + (unit.n + 1);
           if (!s.unlockedUnits.includes(nextUnit)) s.unlockedUnits.push(nextUnit);
         }
         if (acc === 1) s.perfectLessons += 1;
@@ -242,7 +242,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
           <span aria-hidden>{kind.ico}</span> {kind.label}
           {mode === 'review' && <span style={{ marginLeft: 'auto', color: 'var(--ink-3)' }}>Ripasso</span>}
         </div>
-        {ex.type === 'mc' && ex.scenario && (
+        {(ex.type === 'mc' || ex.type === 'num') && ex.scenario && (
           <div className="scenario">
             <b>Scenario. </b>
             {ex.scenario}

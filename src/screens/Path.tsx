@@ -1,6 +1,7 @@
 import { ask } from '../components/Confirm';
 import { Fragment, useEffect, useState } from 'react';
-import { UNITS } from '../data';
+import { COURSES, courseById, courseOfUnit } from '../data';
+import { useCourse } from '../data/useCourse';
 import type { Lesson, Unit } from '../types';
 import { setState, today, useStore, type State } from '../engine/store';
 import { Sheet, TheoryCard, unitStyle } from '../components/UI';
@@ -12,13 +13,13 @@ const PAD = 50;
 
 export function isUnitOpen(s: State, u: Unit) {
   if (u.n === 1 || s.unlockedUnits.includes(u.id)) return true;
-  const prev = UNITS[u.n - 2];
+  const prev = courseOfUnit(u).units[u.n - 2];
   return (s.bosses[prev.id]?.best ?? 0) >= 0.7;
 }
 export const lessonDone = (s: State, l: Lesson) => (s.lessons[l.id]?.done ?? 0) > 0;
 
 export function currentTarget(s: State): { unit: Unit; lesson?: Lesson } | null {
-  for (const u of UNITS) {
+  for (const u of courseById(s.course).units) {
     if (!isUnitOpen(s, u)) continue;
     const l = u.lessons.find((x) => !lessonDone(s, x));
     if (l) return { unit: u, lesson: l };
@@ -36,6 +37,7 @@ export default function Path({ onLesson, onBoss }: Props) {
   const s = useStore((x) => x);
   const [open, setOpen] = useState<string | null>(null);
   const [guide, setGuide] = useState<Unit | null>(null);
+  const course = useCourse();
   const target = currentTarget(s);
   const todayXp = s.days[today()] ?? 0;
 
@@ -55,6 +57,24 @@ export default function Path({ onLesson, onBoss }: Props) {
 
   return (
     <div className="screen" style={{ paddingTop: 16 }}>
+      <div className="course-switch" role="tablist" aria-label="Corso">
+        {COURSES.map((c) => (
+          <button
+            key={c.id}
+            role="tab"
+            aria-selected={c.id === course.id}
+            className={c.id === course.id ? 'on' : ''}
+            onClick={() => {
+              if (c.id === course.id) return;
+              setState((x) => void (x.course = c.id));
+              setOpen(null);
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <span aria-hidden>{c.icon}</span> {c.short}
+          </button>
+        ))}
+      </div>
       <div className="card" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <Mascot mood={todayXp >= s.dailyGoal ? 'party' : 'happy'} size={74} anim="bob" />
         <div style={{ flex: 1 }}>
@@ -67,7 +87,7 @@ export default function Path({ onLesson, onBoss }: Props) {
         </div>
       </div>
 
-      {UNITS.map((u) => {
+      {course.units.map((u) => {
         const uOpen = isUnitOpen(s, u);
         const allDone = u.lessons.every((l) => lessonDone(s, l));
         const bossBest = s.bosses[u.id]?.best ?? 0;
@@ -186,7 +206,7 @@ export default function Path({ onLesson, onBoss }: Props) {
       })}
       <div className="empty-state">
         <Mascot mood="party" size={90} />
-        <p>In fondo al percorso c’è il primo parziale. Ce la fai.</p>
+        <p>{course.outro}</p>
       </div>
 
       {guide && (
