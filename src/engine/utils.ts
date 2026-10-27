@@ -29,7 +29,7 @@ export function norm(s: string) {
 
 /** Legge un numero scritto all'italiana o all'inglese: "0,215", "-1.5", "75.000", "1/3". */
 export function parseNum(raw: string): number | null {
-  let s = raw.trim().replace(/\s/g, '').replace('€', '').replace('%', '');
+  let s = raw.trim().replace(/\s/g, '').replace(/[−–]/g, '-').replace('€', '').replace('%', '');
   if (!s) return null;
   const frac = s.match(/^(-?\d+)\/(\d+)$/);
   if (frac) return Number(frac[1]) / Number(frac[2]);

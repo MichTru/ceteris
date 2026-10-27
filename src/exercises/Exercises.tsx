@@ -1,7 +1,7 @@
 // Componenti per tutti i tipi di esercizio.
 // Ogni componente comunica alla sessione se è pronto (ready) e come verificarsi (check).
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { Dir, Exercise, FillEx, HotspotEx, MatchEx, MCEx, NumEx, OrderEx, ShiftEx, TFEx } from '../types';
+import type { Dir, Exercise, FillEx, HotspotEx, MatchEx, MCEx, NumEx, OrderEx, ShiftEx, Step, StepsEx, TFEx } from '../types';
 import Scene from '../graphs/scenes';
 import { fmt, parseNum, shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
@@ -21,10 +21,12 @@ const KIND: Record<Exercise['type'], { label: string; ico: string }> = {
   num: { label: 'Calcola', ico: '🧮' },
   hotspot: { label: 'Tocca il grafico', ico: '👆' },
   shift: { label: 'Sposta le curve', ico: '↔️' },
+  steps: { label: 'Esercizio guidato', ico: '🪜' },
 };
 
 export function kindOf(ex: Exercise) {
   if (ex.type === 'mc' && ex.scenario) return { label: 'Caso d’esame', ico: '💼' };
+  if (ex.type === 'steps') return { label: ex.scenario ? 'Problema d’esame guidato' : 'Esercizio guidato', ico: '🪜' };
   return KIND[ex.type];
 }
 
@@ -42,9 +44,11 @@ export function correctText(ex: Exercise): string {
     case 'order':
       return ex.items.map((it, i) => `${i + 1}. ${it}`).join('  ');
     case 'num':
-      return `${ex.shown ?? fmt(ex.answer, 4)}${ex.unit ? ' ' + ex.unit : ''}`;
+      return `${ex.shown ?? fmt(ex.answer, 4).replace('-', '−')}${ex.unit ? ' ' + ex.unit : ''}`;
     case 'hotspot':
       return 'Guarda il punto evidenziato in verde';
+    case 'steps':
+      return ex.steps.map((st, i) => `${i + 1}) ${stepAnswer(st)}`).join('  ');
     case 'shift': {
       const m = ex.moves;
       const parts: string[] = [];
@@ -503,7 +507,129 @@ export function ExerciseView({ ex, revealed, onReady }: ExProps<Exercise>) {
       return <HotspotView ex={ex} revealed={revealed} onReady={onReady} />;
     case 'shift':
       return <ShiftView ex={ex} revealed={revealed} onReady={onReady} />;
+    case 'steps':
+      return <StepsView ex={ex} revealed={revealed} onReady={onReady} />;
   }
+}
+
+// ---------------- Esercizio guidato passo per passo ----------------
+export const stepAnswer = (st: Step) =>
+  st.kind === 'mc' ? st.options![st.answer] : `${st.shown ?? fmt(st.answer, 4).replace('-', '−')}${st.unit ? ' ' + st.unit : ''}`;
+
+function StepInput({ st, onDone }: { st: Step; onDone: (ok: boolean, given: string) => void }) {
+  const [val, setVal] = useState('');
+  const [sel, setSel] = useState<number | null>(null);
+  const order = useMemo(() => (st.options ? shuffle(st.options.map((_, i) => i)) : []), [st]);
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (st.kind === 'num' && window.matchMedia('(pointer: fine)').matches) ref.current?.focus();
+  }, [st]);
+  const n = parseNum(val);
+  const ready = st.kind === 'num' ? n !== null : sel !== null;
+  const check = () => {
+    if (!ready) return;
+    if (st.kind === 'num') onDone(Math.abs(n! - st.answer) <= (st.tol ?? 0) + 1e-9, val.trim());
+    else onDone(sel === st.answer, st.options![sel!]);
+  };
+  return (
+    <div>
+      {st.kind === 'num' ? (
+        <div className="num-wrap">
+          <input
+            ref={ref}
+            className="num-input"
+            inputMode="decimal"
+            autoComplete="off"
+            placeholder="?"
+            aria-label="Risultato del passo"
+            value={val}
+            onChange={(e) => setVal(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                check();
+              }
+            }}
+          />
+          {st.unit && <span className="num-unit">{st.unit}</span>}
+        </div>
+      ) : (
+        <div className="options" role="radiogroup">
+          {order.map((oi, k) => (
+            <button
+              key={oi}
+              className="opt"
+              role="radio"
+              aria-checked={sel === oi}
+              aria-pressed={sel === oi}
+              onClick={() => {
+                setSel(oi);
+                sfx.tap();
+              }}
+            >
+              <span className="key">{k + 1}</span>
+              <span>{st.options![oi]}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      <button className="btn small block step-check" disabled={!ready} onClick={check}>
+        Controlla il passo
+      </button>
+    </div>
+  );
+}
+
+export function StepsView({ ex, onReady }: ExProps<StepsEx>) {
+  const [done, setDone] = useState<{ ok: boolean; given: string }[]>([]);
+  const endRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const all = done.length === ex.steps.length;
+    onReady(all, () => done.every((d) => d.ok));
+    if (done.length) endRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [done]);
+  const cur = done.length;
+  return (
+    <div className="steps">
+      {ex.figure && <Scene id={ex.figure} />}
+      {ex.steps.map((st, i) => {
+        if (i > cur) return null;
+        const d = done[i];
+        return (
+          <div key={i} className={`step ${d ? (d.ok ? 'ok' : 'bad') : 'cur'}`}>
+            <div className="step-head">
+              <span className="step-n">{d ? (d.ok ? '✓' : '✕') : i + 1}</span>
+              <span className="step-q">{st.q}</span>
+            </div>
+            {d ? (
+              <div className="step-res">
+                {d.ok ? (
+                  <b>{stepAnswer(st)}</b>
+                ) : (
+                  <>
+                    Hai scritto <s>{d.given}</s> · giusto: <b>{stepAnswer(st)}</b>
+                  </>
+                )}
+                <p>{st.explain}</p>
+              </div>
+            ) : (
+              <StepInput
+                key={i}
+                st={st}
+                onDone={(ok, given) => {
+                  ok ? sfx.correct() : sfx.wrong();
+                  setDone((x) => [...x, { ok, given }]);
+                }}
+              />
+            )}
+          </div>
+        );
+      })}
+      {cur < ex.steps.length - 1 && <p className="step-more">Poi {ex.steps.length - 1 - cur === 1 ? 'un altro passo' : `altri ${ex.steps.length - 1 - cur} passi`}.</p>}
+      <div ref={endRef} />
+    </div>
+  );
 }
 
 /** Testo della domanda (per fill la consegna è fissa). */

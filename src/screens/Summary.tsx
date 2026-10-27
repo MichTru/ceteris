@@ -22,6 +22,8 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
         ? 'Lezione perfetta!'
         : r.mode === 'review'
           ? 'Ripasso fatto!'
+          : r.mode === 'gym'
+            ? 'Allenamento fatto!'
           : 'Lezione completata!';
   const line = failedBoss
     ? 'Ripassa le lezioni dell’unità e riprova: il test è lo stesso tipo di domande.'
@@ -29,7 +31,9 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
       ? 'Nessun errore. Così si prende il 30 e lode.'
       : acc >= 80
         ? 'Ottimo lavoro, sei sulla strada giusta.'
-        : 'Gli errori finiscono nel ripasso: li rivedrai finché non li sai.';
+        : r.mode === 'gym'
+          ? 'Gli esercizi della palestra cambiano ogni volta: rifallo finché i passaggi ti vengono da soli.'
+          : 'Gli errori finiscono nel ripasso: li rivedrai finché non li sai.';
   return (
     <div className="summary">
       {!failedBoss && show && <Confetti />}
@@ -67,7 +71,7 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
         </button>
         {onRetry && (
           <button className="btn ghost block" onClick={onRetry}>
-            Riprova
+            {r.mode === 'gym' ? 'Altri esercizi' : 'Riprova'}
           </button>
         )}
       </div>

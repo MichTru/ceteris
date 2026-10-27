@@ -199,6 +199,78 @@ const m2: Unit = {
         { id: 'm2-5-14', type: 'num', topic: 'Profitto', q: 'C(x) = 3x + 50, prezzo unitario r = 8. Quanto vale il profitto per x = 20?', answer: 50, tol: 0, explain: 'P = (8 − 3) · 20 − 50 = 100 − 50 = 50.' },
       ],
     },
+    {
+      id: 'm2l6',
+      title: 'Esercizi d’esame: funzioni economiche',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Lo schema che si ripete all’esame',
+          points: [
+            '1 · Scrivo **P(x) = R(x) − C(x)** e semplifico.',
+            '2 · **Pareggio**: risolvo P(x) = 0 (formula delle radici) e tengo solo x ≥ 0.',
+            '3 · **Vertice** x_v = −b/(2a): massimo se a < 0, minimo se a > 0.',
+            '4 · **Disequazioni**: con a > 0 la parabola è negativa tra le radici, positiva fuori.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm2-6-1', type: 'steps', topic: 'Profitto', scenario: 'Ricavo R(x) = 2x², costo C(x) = 7x + 4.', q: 'Studia il profitto.',
+          steps: [
+            { q: 'Profitto P(x) = ?', kind: 'mc', answer: 0, options: ['2x² − 7x − 4', '2x² + 7x + 4', '2x² − 7x + 4', '7x + 4 − 2x²'], explain: 'P = R − C = 2x² − 7x − 4.' },
+            { q: 'Discriminante Δ = b² − 4ac = ?', kind: 'num', answer: 81, explain: '49 − 4 · 2 · (−4) = 49 + 32 = 81.' },
+            { q: 'Punto di pareggio (x > 0)?', kind: 'num', answer: 4, explain: 'x = (7 ± 9)/4 ⇒ 4 oppure −1/2. Solo 4 ha senso economico.' },
+            { q: 'Ascissa del vertice?', kind: 'num', answer: 1.75, tol: 0.005, shown: '7/4', explain: 'x_v = 7/(2 · 2) = 7/4.' },
+            { q: 'Ordinata del vertice P(7/4)?', kind: 'num', answer: -10.125, tol: 0.005, shown: '−81/8', explain: '2 · 49/16 − 49/4 − 4 = 49/8 − 98/8 − 32/8 = −81/8.' },
+          ],
+          explain: 'Parabola verso l’alto: profitto negativo fino a 4, positivo dopo; il vertice è un minimo.',
+        },
+        {
+          id: 'm2-6-2', type: 'steps', topic: 'Disequazioni', scenario: 'Tariffa telefonica: spesa mensile T(x) = x² − 80x + 1400, con x minuti.', q: 'Per quali x la spesa è minore di 700 €?',
+          steps: [
+            { q: 'Quale disequazione devo risolvere?', kind: 'mc', answer: 0, options: ['x² − 80x + 700 < 0', 'x² − 80x + 2100 < 0', 'x² − 80x + 700 > 0', 'x² − 80x < 700'], explain: 'Porto 700 a sinistra: 1400 − 700 = 700.' },
+            { q: 'Δ = ?', kind: 'num', answer: 3600, explain: '6400 − 2800 = 3600, √Δ = 60.' },
+            { q: 'Radice più piccola?', kind: 'num', answer: 10, explain: '(80 − 60)/2 = 10.' },
+            { q: 'Radice più grande?', kind: 'num', answer: 70, explain: '(80 + 60)/2 = 70.' },
+            { q: 'Soluzione?', kind: 'mc', answer: 0, options: ['10 < x < 70', 'x < 10 oppure x > 70', 'x > 70', '0 < x < 10'], explain: 'Parabola verso l’alto: negativa tra le radici.' },
+            { q: 'Ordinata del vertice T(40)?', kind: 'num', answer: -200, explain: '1600 − 3200 + 1400 = −200.' },
+          ],
+          explain: 'Spesa sotto 700 € tra 10 e 70 minuti.',
+          profNote: 'Negli appunti il vertice è (40, −80): il valore corretto è T(40) = −200.',
+        },
+        {
+          id: 'm2-6-3', type: 'steps', topic: 'Confronto di costi', scenario: 'Linea 1: C₁ = 300x + 550.000. Linea 2: C₂ = 250x + 650.000.', q: 'Quale linea conviene?',
+          steps: [
+            { q: 'Quantità x* in cui i costi sono uguali?', kind: 'num', answer: 2000, explain: '50x = 100.000 ⇒ x* = 2000.' },
+            { q: 'C₁(3000) = ?', kind: 'num', answer: 1450000, unit: '€', explain: '900.000 + 550.000 = 1.450.000.' },
+            { q: 'C₂(3000) = ?', kind: 'num', answer: 1400000, unit: '€', explain: '750.000 + 650.000 = 1.400.000.' },
+            { q: 'Per x > 2000 conviene…', kind: 'mc', answer: 0, options: ['la linea 2', 'la linea 1', 'indifferente', 'nessuna delle due'], explain: 'Costo unitario più basso (250 < 300): la linea 2 vince oltre x*.' },
+          ],
+          explain: 'Sotto 2000 pezzi conviene la linea 1 (costi fissi più bassi), sopra la linea 2.',
+          profNote: 'Negli appunti la conclusione è invertita: per x > 2000 conviene la linea 2.',
+        },
+        {
+          id: 'm2-6-4', type: 'steps', topic: 'Massimo profitto', scenario: 'R(x) = −4x² + 12x, C(x) = −4x + 6.', q: 'Trova il profitto massimo.',
+          steps: [
+            { q: 'P(x) = ?', kind: 'mc', answer: 0, options: ['−4x² + 16x − 6', '−4x² + 8x + 6', '−4x² + 16x + 6', '4x² − 16x + 6'], explain: '−4x² + 12x − (−4x + 6) = −4x² + 16x − 6.' },
+            { q: 'Ascissa del vertice?', kind: 'num', answer: 2, explain: '−16/(2 · (−4)) = 2.' },
+            { q: 'Profitto massimo P(2)?', kind: 'num', answer: 10, explain: '−16 + 32 − 6 = 10.' },
+            { q: 'Il profitto è positivo tra due radici. La più piccola (2 decimali)?', kind: 'num', answer: 0.419, tol: 0.01, shown: '2 − √10/2 ≈ 0,42', explain: '4x² − 16x + 6 = 0 ⇒ x = (16 ± √160)/8 = 2 ± √10/2 ≈ 0,42 e 3,58.' },
+          ],
+          explain: 'Parabola verso il basso: massimo nel vertice (2, 10).',
+        },
+        {
+          id: 'm2-6-5', type: 'steps', topic: 'Composte', q: 'Trova il dominio di f(x) = log₂(x² − 1).',
+          steps: [
+            { q: 'Quale condizione serve?', kind: 'mc', answer: 0, options: ['x² − 1 > 0', 'x² − 1 ≥ 0', 'x² − 1 ≠ 0', 'x > 0'], explain: 'L’argomento del logaritmo deve essere strettamente positivo.' },
+            { q: 'Radice positiva di x² − 1 = 0?', kind: 'num', answer: 1, explain: 'x² = 1 ⇒ x = ±1.' },
+            { q: 'Dominio?', kind: 'mc', answer: 0, options: ['x < −1 oppure x > 1', '−1 < x < 1', 'x ≥ 1', 'ℝ \\ {−1, 1}'], explain: 'x² − 1 > 0 fuori dalle radici, estremi esclusi.' },
+          ],
+          explain: 'Per le composte: prima le condizioni della funzione esterna sull’argomento interno.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm2-o1', q: 'Descrivi le potenze xⁿ con n pari e n dispari: dominio, codominio, monotonia.', answer: 'Con n pari (x², x⁴) il dominio è ℝ, il codominio [0, +∞), il grafico è simmetrico rispetto all’asse y; è decrescente su (−∞, 0] e crescente su [0, +∞), quindi non iniettiva. Con n dispari (x³) dominio e codominio sono ℝ ed è strettamente crescente, quindi iniettiva e invertibile con la radice n-esima.', keywords: ['pari', 'simmetric', 'decrescente', 'crescente', 'dispari', 'iniettiva'] },

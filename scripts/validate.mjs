@@ -69,6 +69,16 @@ for (const u of UNITS) {
       if (ex.type === 'order' && ex.items.length < 3) errors.push(`${ex.id}: pochi elementi`);
       if (ex.type === 'hotspot' && !(SCENES[ex.scene] ?? []).includes(ex.answer)) errors.push(`${ex.id}: hotspot ${ex.scene}/${ex.answer} non valido`);
       if (ex.type === 'num' && (typeof ex.answer !== 'number' || ex.tol < 0)) errors.push(`${ex.id}: num non valido`);
+      if (ex.type === 'steps') {
+        if (ex.steps.length < 2) errors.push(`${ex.id}: pochi passi`);
+        if (ex.figure && !(ex.figure in SCENES)) errors.push(`${ex.id}: figura sconosciuta`);
+        ex.steps.forEach((st, k) => {
+          if (!st.explain) errors.push(`${ex.id} passo ${k + 1}: manca spiegazione`);
+          if (st.kind === 'mc' && (!st.options || st.answer < 0 || st.answer >= st.options.length || new Set(st.options).size !== st.options.length))
+            errors.push(`${ex.id} passo ${k + 1}: opzioni non valide`);
+          if (st.kind === 'num' && !Number.isFinite(st.answer)) errors.push(`${ex.id} passo ${k + 1}: numero non valido`);
+        });
+      }
     }
   }
   for (const o of u.open) {

@@ -9,7 +9,7 @@ import { addXp, gainHeart, getState, loseHeart, recordAnswer, setState, useStore
 import { sfx } from '../engine/sound';
 import { EX_INDEX } from '../data';
 
-export type SessionMode = 'lesson' | 'boss' | 'review' | 'practice';
+export type SessionMode = 'lesson' | 'boss' | 'review' | 'practice' | 'gym';
 
 export interface SessionResult {
   mode: SessionMode;
@@ -64,8 +64,10 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
     setResult(ok);
     const first = !stats.current.seen.has(ex.id);
     stats.current.seen.add(ex.id);
-    if (first) recordAnswer(ex.id, ok);
-    else if (ok) recordAnswer(ex.id, true);
+    if (mode !== 'gym') {
+      if (first) recordAnswer(ex.id, ok);
+      else if (ok) recordAnswer(ex.id, true);
+    }
     if (ok) {
       sfx.correct();
       setPhrase(PRAISE[Math.floor(Math.random() * PRAISE.length)]);
@@ -73,7 +75,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
       setCombo(c);
       stats.current.maxCombo = Math.max(stats.current.maxCombo, c);
       if (first) stats.current.firstCorrect += 1;
-      const gain = mode === 'review' || mode === 'practice' ? 5 : 10;
+      const gain = mode === 'review' || mode === 'practice' || mode === 'gym' ? 5 : 10;
       const bonus = c >= 5 ? 2 : 0;
       stats.current.xp += gain + bonus;
       addXp(gain + bonus);
@@ -84,7 +86,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
       setCombo(0);
       if (usesHearts) loseHeart();
       // nelle lezioni e nel ripasso l'esercizio sbagliato torna in fondo una volta
-      if ((mode === 'lesson' || mode === 'review' || mode === 'practice') && !stats.current.retried.has(ex.id)) {
+      if ((mode === 'lesson' || mode === 'review' || mode === 'practice' || mode === 'gym') && !stats.current.retried.has(ex.id)) {
         stats.current.retried.add(ex.id);
         setQueue((q) => [...q, ex]);
       }
@@ -217,7 +219,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
   if (!ex) return null;
   const kind = kindOf(ex);
   const ok = result === true;
-  const showCorrect = result === false && ex.type !== 'hotspot' && ex.type !== 'match';
+  const showCorrect = result === false && ex.type !== 'hotspot' && ex.type !== 'match' && ex.type !== 'steps';
 
   return (
     <div className="session" style={unitStyle(u)}>
@@ -240,9 +242,9 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
       <div className="session-body" key={ex.id + idx}>
         <div className="ex-kind">
           <span aria-hidden>{kind.ico}</span> {kind.label}
-          {mode === 'review' && <span style={{ marginLeft: 'auto', color: 'var(--ink-3)' }}>Ripasso</span>}
+          {(mode === 'review' || mode === 'gym') && <span style={{ marginLeft: 'auto', color: 'var(--ink-3)' }}>{mode === 'gym' ? 'Palestra' : 'Ripasso'}</span>}
         </div>
-        {(ex.type === 'mc' || ex.type === 'num') && ex.scenario && (
+        {(ex.type === 'mc' || ex.type === 'num' || ex.type === 'steps') && ex.scenario && (
           <div className="scenario">
             <b>Scenario. </b>
             {ex.scenario}
@@ -254,7 +256,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
       {result === null ? (
         <div className="session-foot">
           <button className="btn ok block" disabled={!ready} onClick={check}>
-            Verifica
+            {ex.type === 'steps' && !ready ? 'Completa i passi qui sopra' : 'Verifica'}
           </button>
         </div>
       ) : (

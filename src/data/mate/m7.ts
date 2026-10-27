@@ -140,6 +140,62 @@ const m7: Unit = {
         { id: 'm7-4-14', type: 'num', topic: 'Integrale definito', q: '∫₀³ (2x + 1) dx = ?', answer: 12, tol: 0, explain: '[x² + x]₀³ = 9 + 3 = 12.' },
       ],
     },
+    {
+      id: 'm7l5',
+      title: 'Esercizi d’esame: integrali',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Metodo',
+          points: [
+            '**Primitiva con condizione**: integro, poi uso il dato (es. C(50) = 200) per trovare la costante.',
+            '**Integrale definito**: primitiva F, poi F(b) − F(a).',
+            '**Area**: spezzo negli zeri di f e sommo i valori assoluti.',
+            '**Per parti**: f si semplifica derivando, g′ si integra facilmente.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm7-5-1', type: 'steps', topic: 'Costo totale', scenario: 'Cappelli: costo marginale C′(x) = 3,20 − 0,001x, con C(50) = 200 €.', q: 'Ricostruisci il costo totale.',
+          steps: [
+            { q: 'Primitiva generale?', kind: 'mc', answer: 0, options: ['3,2x − 0,0005x² + k', '3,2x − 0,001x² + k', '−0,001 + k', '3,2 − 0,0005x² + k'], explain: '∫ 0,001x dx = 0,0005x².' },
+            { q: 'Costo fisso k = ?', kind: 'num', answer: 41.25, tol: 0.001, unit: '€', explain: '160 − 1,25 + k = 200 ⇒ k = 41,25.' },
+            { q: 'C(100) = ?', kind: 'num', answer: 356.25, tol: 0.001, unit: '€', explain: '320 − 5 + 41,25 = 356,25.' },
+          ],
+          explain: 'C(x) = 3,2x − 0,0005x² + 41,25.',
+          profNote: 'Negli appunti la costante è calcolata come 41,25 ma la funzione finale riporta 41,42: il valore giusto è 41,25.',
+        },
+        {
+          id: 'm7-5-2', type: 'steps', topic: 'Primitive', q: 'Trova la primitiva G di g(x) = x/√(3x² + 1) con G(1) = 3.',
+          steps: [
+            { q: 'Primitiva generale?', kind: 'mc', answer: 0, options: ['⅓√(3x² + 1) + c', '√(3x² + 1) + c', '3√(3x² + 1) + c', '⅙(3x² + 1)² + c'], explain: 'Derivando ⅓√(3x² + 1) ottengo ⅓ · 6x/(2√(3x² + 1)) = x/√(3x² + 1).' },
+            { q: 'c = ?', kind: 'num', answer: 7 / 3, tol: 0.005, shown: '7/3', explain: '⅓ · √4 + c = 3 ⇒ c = 3 − ⅔ = 7/3.' },
+            { q: 'G(0) = ?', kind: 'num', answer: 8 / 3, tol: 0.005, shown: '8/3', explain: '⅓ · 1 + 7/3 = 8/3.' },
+          ],
+          explain: 'G(x) = ⅓√(3x² + 1) + 7/3.',
+        },
+        {
+          id: 'm7-5-3', type: 'steps', topic: 'Integrale e area', q: 'f(x) = x³ su [−1, 1].', figure: 'area',
+          steps: [
+            { q: '∫₋₁⁰ x³ dx = ?', kind: 'num', answer: -0.25, tol: 0.005, shown: '−1/4', explain: '[x⁴/4]₋₁⁰ = 0 − ¼.' },
+            { q: '∫₀¹ x³ dx = ?', kind: 'num', answer: 0.25, tol: 0.005, shown: '1/4', explain: '¼ − 0.' },
+            { q: '∫₋₁¹ x³ dx = ?', kind: 'num', answer: 0, explain: '−¼ + ¼ = 0.' },
+            { q: 'Area totale?', kind: 'num', answer: 0.5, tol: 0.005, shown: '1/2', explain: '|−¼| + ¼ = ½.' },
+          ],
+          explain: 'Integrale con segno ≠ area geometrica.',
+        },
+        {
+          id: 'm7-5-4', type: 'steps', topic: 'Per parti', q: 'Calcola ∫₀¹ x·eˣ dx.',
+          steps: [
+            { q: 'Scelta per l’integrazione per parti?', kind: 'mc', answer: 0, options: ['f = x, g′ = eˣ', 'f = eˣ, g′ = x', 'f = x·eˣ, g′ = 1', 'Non serve: è immediato'], explain: 'Derivando x diventa 1.' },
+            { q: 'Primitiva?', kind: 'mc', answer: 0, options: ['eˣ(x − 1)', 'x·eˣ', 'eˣ(x + 1)', '½x²·eˣ'], explain: 'x·eˣ − ∫ eˣ dx = eˣ(x − 1).' },
+            { q: 'Valore dell’integrale?', kind: 'num', answer: 1, explain: '[eˣ(x − 1)]₀¹ = 0 − (−1) = 1.' },
+          ],
+          explain: 'Per parti, poi teorema fondamentale.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm7-o1', q: 'Che cos’è una primitiva? Perché due primitive differiscono per una costante?', answer: 'F è primitiva di f se F′ = f. Se F è primitiva lo è anche F + c, perché la derivata di una costante è zero; viceversa due primitive hanno differenza con derivata nulla, quindi costante. L’integrale indefinito ∫ f dx = F + c è l’insieme di tutte le primitive. Una condizione come G(1) = 3 fissa c.', keywords: ['F′ = f', 'costante', 'derivata', 'zero', 'integrale indefinito', 'condizione'] },

@@ -16,7 +16,8 @@ function buildExam(): { ex: Exercise; unit: Unit }[] {
   const out: { ex: Exercise; unit: Unit }[] = [];
   const c = currentCourse();
   c.units.forEach((u, k) => {
-    const all = u.lessons.flatMap((l) => l.exercises);
+    // gli esercizi guidati mostrano la soluzione passo per passo: fuori dalla simulazione
+    const all = u.lessons.flatMap((l) => l.exercises).filter((e) => e.type !== 'steps');
     sample(all, c.examPer[k] ?? 4).forEach((ex) => out.push({ ex, unit: u }));
   });
   return shuffle(out);

@@ -182,6 +182,74 @@ const m4: Unit = {
         { id: 'm4-5-7', type: 'tf', topic: 'Teoremi', q: 'x³ + x − 1 ha almeno uno zero tra 0 e 1.', answer: true, explain: 'f(0) = −1 < 0 e f(1) = 1 > 0, f è continua: teorema degli zeri.' },
       ],
     },
+    {
+      id: 'm4l6',
+      title: 'Esercizi d’esame: limiti e asintoti',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Ricerca degli asintoti',
+          points: [
+            '1 · **Dominio**: i punti esclusi sono i candidati asintoti verticali.',
+            '2 · **Verticali**: limite nei punti esclusi; se è ∞ c’è l’asintoto.',
+            '3 · **Orizzontali**: limite per x → ±∞; se è finito, y = L.',
+            '4 · **Obliqui** solo se f → ∞: m = lim f/x, q = lim (f − mx).',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm4-6-1', type: 'steps', topic: 'Asintoti', q: 'Trova tutti gli asintoti di f(x) = (x² + 1)/x.',
+          steps: [
+            { q: 'Dominio?', kind: 'mc', answer: 0, options: ['ℝ \\ {0}', 'ℝ', '(0, +∞)', 'ℝ \\ {−1}'], explain: 'Il denominatore si annulla in 0.' },
+            { q: 'Asintoto verticale: x = ?', kind: 'num', answer: 0, explain: 'lim (x → 0⁺) = +∞: x = 0 è asintoto verticale.' },
+            { q: 'C’è l’asintoto orizzontale?', kind: 'mc', answer: 0, options: ['No: f → ±∞ per x → ±∞', 'Sì: y = 1', 'Sì: y = 0', 'Sì: y = x'], explain: 'Grado 2 sopra, 1 sotto: f diverge.' },
+            { q: 'm = lim f(x)/x = ?', kind: 'num', answer: 1, explain: '(x² + 1)/x² → 1.' },
+            { q: 'q = lim [f(x) − x] = ?', kind: 'num', answer: 0, explain: '(x² + 1)/x − x = 1/x → 0.' },
+          ],
+          explain: 'Asintoti: x = 0 e y = x.',
+        },
+        {
+          id: 'm4-6-2', type: 'steps', topic: 'Asintoti', q: 'Studia f(x) = (2x + 1)/(x − 1).',
+          steps: [
+            { q: 'Asintoto verticale: x = ?', kind: 'num', answer: 1, explain: 'x − 1 = 0 ⇒ x = 1, e il numeratore lì vale 3 ≠ 0.' },
+            { q: 'lim (x → 1⁺) f(x) = ?', kind: 'mc', answer: 0, options: ['+∞', '−∞', '3', '2'], explain: 'Numeratore → 3 > 0, denominatore → 0⁺: 3/0⁺ = +∞.' },
+            { q: 'lim (x → 1⁻) f(x) = ?', kind: 'mc', answer: 0, options: ['−∞', '+∞', '3', '0'], explain: 'Denominatore → 0⁻: 3/0⁻ = −∞.' },
+            { q: 'Asintoto orizzontale: y = ?', kind: 'num', answer: 2, explain: 'Stesso grado: 2/1.' },
+          ],
+          explain: 'Asintoti x = 1 e y = 2, niente obliquo.',
+        },
+        {
+          id: 'm4-6-3', type: 'steps', topic: 'Discontinuità', q: 'f(x) = x + 1 per x < 0 e f(x) = x + 4 per x ≥ 0. Studia la continuità in 0.',
+          steps: [
+            { q: 'Limite sinistro in 0?', kind: 'num', answer: 1, explain: 'Uso il pezzo x + 1: → 1.' },
+            { q: 'Limite destro in 0?', kind: 'num', answer: 4, explain: 'Uso il pezzo x + 4: → 4.' },
+            { q: 'Ampiezza del salto S = L⁺ − L⁻?', kind: 'num', answer: 3, explain: '4 − 1 = 3.' },
+            { q: 'Tipo di discontinuità?', kind: 'mc', answer: 0, options: ['Prima specie (salto)', 'Seconda specie', 'Terza specie (eliminabile)', 'Nessuna: è continua'], explain: 'Limiti finiti ma diversi.' },
+          ],
+          explain: 'Per i pezzi si calcolano sempre i due limiti laterali.',
+        },
+        {
+          id: 'm4-6-4', type: 'steps', topic: 'Discontinuità', q: 'Studia f(x) = (x² − 4)/(x − 2) in x = 2.',
+          steps: [
+            { q: 'Sostituendo x = 2 ottengo…', kind: 'mc', answer: 0, options: ['La forma indeterminata 0/0', '4/0, quindi ∞', '0', '2'], explain: '4 − 4 = 0 sopra e 2 − 2 = 0 sotto.' },
+            { q: 'lim (x → 2) f(x) = ?', kind: 'num', answer: 4, explain: '(x − 2)(x + 2)/(x − 2) = x + 2 → 4.' },
+            { q: 'Tipo di discontinuità?', kind: 'mc', answer: 0, options: ['Terza specie (eliminabile)', 'Prima specie', 'Seconda specie', 'Asintoto verticale'], explain: 'Il limite esiste finito ma f(2) non è definita.' },
+            { q: 'Quale valore f(2) la rende continua?', kind: 'num', answer: 4, explain: 'Si pone f(2) uguale al limite.' },
+          ],
+          explain: 'Un punto escluso dal dominio non è sempre un asintoto: qui è solo un buco.',
+        },
+        {
+          id: 'm4-6-5', type: 'steps', topic: 'Limiti ∞/∞', q: 'Calcola lim (x → +∞) (4x² − x)/(2x² + 7).',
+          steps: [
+            { q: 'Che forma si ottiene sostituendo?', kind: 'mc', answer: 0, options: ['∞/∞', '0/0', '∞ − ∞', '1^∞'], explain: 'Entrambi i polinomi divergono.' },
+            { q: 'Raccolgo x²: il limite è il rapporto di…', kind: 'mc', answer: 0, options: ['coefficienti direttivi 4 e 2', 'termini noti 0 e 7', 'coefficienti di x', 'gradi 2 e 2'], explain: '(4 − 1/x)/(2 + 7/x²) → 4/2.' },
+            { q: 'Risultato?', kind: 'num', answer: 2, explain: '4/2 = 2.' },
+          ],
+          explain: 'Gradi uguali: rapporto dei coefficienti direttivi.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm4-o1', q: 'Che cosa sono il limite destro, il limite sinistro e quando esiste il limite?', answer: 'Il limite destro (x → x₀⁺) guarda i valori di f per x più grandi di x₀, il sinistro (x → x₀⁻) per x più piccoli. Il limite esiste solo se destro e sinistro esistono e coincidono. Il valore f(x₀) non conta. Esempio: 1/x in 0 ha limite destro +∞ e sinistro −∞, quindi il limite non esiste.', keywords: ['destro', 'sinistro', 'coincid', 'f(x₀)', '1/x'] },

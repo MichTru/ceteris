@@ -117,6 +117,63 @@ const m3: Unit = {
         { id: 'm3-3-12', type: 'match', topic: 'Classificazione', q: 'Abbina ogni successione al suo comportamento', pairs: [['1/n', 'Converge a 0'], ['n²', 'Diverge a +∞'], ['(−1)ⁿ', 'Irregolare'], ['−n', 'Diverge a −∞']], explain: 'Convergenti, divergenti e irregolari sono le tre possibilità.' },
       ],
     },
+    {
+      id: 'm3l4',
+      title: 'Esercizi guidati: successioni',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Metodo',
+          points: [
+            '**Termine n-esimo**: sostituisco n nella formula, o applico la ricorrenza passo per passo.',
+            '**Interesse**: semplice C(1 + nr), composto C(1 + r)ⁿ.',
+            '**Limite**: confronto i gradi di n come per i polinomi.',
+            '**Con ε**: risolvo |s_n − S| < ε e prendo il primo n che la soddisfa.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm3-4-1', type: 'steps', topic: 'Interesse', scenario: 'Capitale 1000 €, tasso 5% annuo, 3 anni.', q: 'Confronta interesse semplice e composto.',
+          steps: [
+            { q: 'Montante con interesse semplice?', kind: 'num', answer: 1150, unit: '€', explain: '1000 · (1 + 3 · 0,05) = 1150.' },
+            { q: 'Montante con interesse composto (2 decimali)?', kind: 'num', answer: 1157.625, tol: 0.01, shown: '1157,63', unit: '€', explain: '1000 · 1,05³ = 1157,625.' },
+            { q: 'Differenza tra composto e semplice (2 decimali)?', kind: 'num', answer: 7.625, tol: 0.01, shown: '7,63', unit: '€', explain: 'Nel composto anche gli interessi producono interessi.' },
+            { q: 'Che progressione segue il montante semplice?', kind: 'mc', answer: 0, options: ['Aritmetica, ragione 50 €', 'Geometrica, ragione 1,05', 'Aritmetica, ragione 5 €', 'Geometrica, ragione 50'], explain: 'Ogni anno si aggiunge C · r = 50 €.' },
+          ],
+          explain: 'Semplice ↔ aritmetica, composto ↔ geometrica.',
+        },
+        {
+          id: 'm3-4-2', type: 'steps', topic: 'Successioni', q: 'Studia s_n = (n − 3)/(n + 1).',
+          steps: [
+            { q: 's₁ = ?', kind: 'num', answer: -0.5, tol: 0.005, shown: '−1/2', explain: '(1 − 3)/(1 + 1) = −2/2.' },
+            { q: 's₃ = ?', kind: 'num', answer: 0, explain: '(3 − 3)/4 = 0.' },
+            { q: 'Quando s_n > 0?', kind: 'mc', answer: 0, options: ['Definitivamente, per n > 3', 'Per ogni n', 'Mai', 'Solo per n < 3'], explain: 'Il denominatore è sempre positivo; il numeratore per n > 3.' },
+            { q: 'lim s_n = ?', kind: 'num', answer: 1, explain: 'Stesso grado: rapporto dei coefficienti 1/1.' },
+          ],
+          explain: 'Una successione può essere negativa all’inizio e positiva definitivamente.',
+        },
+        {
+          id: 'm3-4-3', type: 'steps', topic: 'Definizione con ε', q: 's_n = 1/n converge a 0. Verificalo con ε = 1/100.',
+          steps: [
+            { q: 'Quale disequazione risolvo?', kind: 'mc', answer: 0, options: ['1/n < 1/100', '1/n > 1/100', 'n < 1/100', '1/n = 1/100'], explain: '|s_n − 0| = 1/n < ε.' },
+            { q: 'Primo indice n₀ valido?', kind: 'num', answer: 101, explain: '1/n < 1/100 ⇔ n > 100: il primo è 101 (con 100 si ha l’uguaglianza).' },
+            { q: 'Il limite è raggiunto…', kind: 'mc', answer: 0, options: ['per eccesso (0⁺)', 'per difetto (0⁻)', 'in modo oscillante', 'mai'], explain: 'I termini sono tutti positivi: si avvicinano a 0 dall’alto.' },
+          ],
+          explain: 'Stesso ragionamento dell’esempio degli appunti con ε = 1/10, dove n₀ = 11.',
+          profNote: 'Negli appunti con ε = 1/10 si conclude n₀ = 10, ma serve n > 10: il primo indice è 11.',
+        },
+        {
+          id: 'm3-4-4', type: 'steps', topic: 'Progressione aritmetica', q: 'Progressione aritmetica con primo termine 4 e ragione 3.',
+          steps: [
+            { q: 's₁₀ = ?', kind: 'num', answer: 31, explain: '4 + 9 · 3 = 31.' },
+            { q: 'Quale termine vale 52? n = ?', kind: 'num', answer: 17, explain: '4 + 3(n − 1) = 52 ⇒ n − 1 = 16 ⇒ n = 17.' },
+            { q: 'La successione è…', kind: 'mc', answer: 0, options: ['strettamente crescente e divergente', 'convergente a 3', 'irregolare', 'decrescente'], explain: 'd = 3 > 0: cresce senza limite.' },
+          ],
+          explain: 'Termine generale a + (n − 1)d.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm3-o1', q: 'Che cos’è una successione? Come si può definire?', answer: 'È una funzione s : ℕ₊ → ℝ che associa a ogni naturale n un reale s_n. Si può dare con il termine generale (es. s_n = 1/n) oppure per ricorrenza, dando il primo termine e la regola che lega s_{n+1} a s_n (es. s₁ = 2, s_{n+1} = 3s_n).', keywords: ['funzione', 'naturali', 'reali', 'termine generale', 'ricorrenza'] },

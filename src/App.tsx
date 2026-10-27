@@ -14,6 +14,8 @@ import Review, { type ReviewKind } from './screens/Review';
 import Flashcards from './screens/Flashcards';
 import Oral from './screens/Oral';
 import Exam from './screens/Exam';
+import Gym from './screens/Gym';
+import { gymSet } from './engine/gen';
 import Formulas from './screens/Formulas';
 import Stats from './screens/Stats';
 import Profile from './screens/Profile';
@@ -21,11 +23,12 @@ import Onboarding from './screens/Onboarding';
 
 type Route =
   | { name: 'tab' }
-  | { name: 'session'; mode: SessionMode; title: string; unit?: Unit; lesson?: Lesson; items: Exercise[]; key: number }
+  | { name: 'session'; mode: SessionMode; title: string; unit?: Unit; lesson?: Lesson; items: Exercise[]; key: number; gym?: string }
   | { name: 'summary'; r: SessionResult; badges: Badge[]; retry?: () => void }
   | { name: 'flash' }
   | { name: 'oral' }
-  | { name: 'exam' };
+  | { name: 'exam' }
+  | { name: 'gym' };
 
 const TABS: Tab[] = ['path', 'review', 'formulas', 'stats', 'profile'];
 const tabFromHash = (): Tab => {
@@ -110,13 +113,13 @@ export default function App() {
     else setRoute({ name: 'tab' });
   };
 
-  const startSession = (mode: SessionMode, title: string, items: Exercise[], unit?: Unit, lesson?: Lesson) => {
+  const startSession = (mode: SessionMode, title: string, items: Exercise[], unit?: Unit, lesson?: Lesson, gym?: string) => {
     const s = getState();
     if ((mode === 'lesson' || mode === 'boss') && !s.relaxed && s.hearts <= 0) {
       setNoHearts(true);
       return;
     }
-    setRoute({ name: 'session', mode, title, unit, lesson, items, key: Date.now() });
+    setRoute({ name: 'session', mode, title, unit, lesson, items, key: Date.now(), gym });
   };
 
   const startLesson = (u: Unit, l: Lesson) => startSession('lesson', l.title, shuffle(l.exercises).slice(0, 12), u, l);
@@ -145,6 +148,7 @@ export default function App() {
     if (k === 'flash') setRoute({ name: 'flash' });
     if (k === 'oral') setRoute({ name: 'oral' });
     if (k === 'exam') setRoute({ name: 'exam' });
+    if (k === 'gym') setRoute({ name: 'gym' });
   };
 
   if (!onboarded) return <Onboarding onDone={() => goTab('path')} />;
@@ -167,7 +171,13 @@ export default function App() {
         }}
         onFinish={(res) => {
           const badges = awardBadges();
-          const retry = r.mode === 'boss' && !res.passed && r.unit ? () => startBoss(r.unit!) : undefined;
+          const gymTopic = r.gym;
+          const retry =
+            r.mode === 'boss' && !res.passed && r.unit
+              ? () => startBoss(r.unit!)
+              : gymTopic
+                ? () => startSession('gym', r.title, gymSet(gymTopic), undefined, undefined, gymTopic)
+                : undefined;
           setRoute({ name: 'summary', r: res, badges, retry });
         }}
       />
@@ -184,6 +194,8 @@ export default function App() {
     );
   if (route.name === 'flash') return <Flashcards onExit={() => { awardBadges(); closeOverlay(); }} />;
   if (route.name === 'oral') return <Oral onExit={() => { awardBadges(); closeOverlay(); }} />;
+  if (route.name === 'gym')
+    return <Gym onExit={closeOverlay} onPick={(id, title) => startSession('gym', title, gymSet(id), undefined, undefined, id)} />;
   if (route.name === 'exam') return <Exam onExit={() => { awardBadges(); closeOverlay(); }} />;
 
   return (

@@ -179,6 +179,75 @@ const m6: Unit = {
         { id: 'm6-5-9', type: 'num', topic: 'Massimo profitto', q: 'P(x) = −2x² + 120x − 1000. Profitto massimo?', answer: 800, tol: 0, explain: 'P′ = −4x + 120 = 0 ⇒ x = 30; P(30) = −1800 + 3600 − 1000 = 800.' },
       ],
     },
+    {
+      id: 'm6l6',
+      title: 'Esercizi d’esame: studio di funzione',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Scaletta per massimi, minimi e flessi',
+          points: [
+            '1 · **Dominio**. 2 · **f′(x)** e soluzioni di f′ = 0.',
+            '3 · **f″** nei punti stazionari: > 0 minimo, < 0 massimo.',
+            '4 · **f″ = 0** e cambio di segno: flessi.',
+            'Su **[a, b]** confronto anche i valori agli estremi.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm6-6-1', type: 'steps', topic: 'Massimi e minimi', q: 'Studia f(x) = x³ − 3x.', figure: 'studio',
+          steps: [
+            { q: 'f′(x) = 0 per x = ± ? (scrivi il valore positivo)', kind: 'num', answer: 1, explain: '3x² − 3 = 0 ⇒ x = ±1.' },
+            { q: 'f″(−1) = ?', kind: 'num', answer: -6, explain: 'f″ = 6x ⇒ −6 < 0: massimo.' },
+            { q: 'Valore del massimo f(−1)?', kind: 'num', answer: 2, explain: '−1 + 3 = 2.' },
+            { q: 'Valore del minimo f(1)?', kind: 'num', answer: -2, explain: '1 − 3 = −2.' },
+            { q: 'Ascissa del flesso?', kind: 'num', answer: 0, explain: 'f″ = 6x = 0 ⇒ x = 0.' },
+          ],
+          explain: 'Massimo (−1, 2), minimo (1, −2), flesso (0, 0).',
+        },
+        {
+          id: 'm6-6-2', type: 'steps', topic: 'Estremi assoluti', q: 'Stessa f(x) = x³ − 3x, ma su [−2, 3]: massimo e minimo assoluti.',
+          steps: [
+            { q: 'f(−2) = ?', kind: 'num', answer: -2, explain: '−8 + 6 = −2.' },
+            { q: 'f(3) = ?', kind: 'num', answer: 18, explain: '27 − 9 = 18.' },
+            { q: 'Massimo assoluto?', kind: 'num', answer: 18, explain: 'Confronto 2 (max locale) e 18: vince l’estremo destro.' },
+            { q: 'Minimo assoluto?', kind: 'num', answer: -2, explain: 'f(−2) = f(1) = −2.' },
+          ],
+          explain: 'Il massimo locale non è per forza quello assoluto.',
+        },
+        {
+          id: 'm6-6-3', type: 'steps', topic: 'Costo medio', scenario: 'Magliette: C(x) = 2000 + 10x + 0,2x².', q: 'Trova la produzione che minimizza il costo medio.',
+          steps: [
+            { q: 'CM(x) = ?', kind: 'mc', answer: 0, options: ['2000/x + 10 + 0,2x', '10 + 0,4x', '2000 + 10 + 0,2x', '2000x + 10 + 0,2'], explain: 'Divido C per x.' },
+            { q: 'CM′(x) = 0 per x = ?', kind: 'num', answer: 100, explain: '−2000/x² + 0,2 = 0 ⇒ x² = 10.000.' },
+            { q: 'Costo medio minimo?', kind: 'num', answer: 50, unit: '€', explain: '20 + 10 + 20 = 50.' },
+            { q: 'C′(100) = ?', kind: 'num', answer: 50, unit: '€', explain: '10 + 0,4 · 100 = 50: uguale al costo medio.' },
+          ],
+          explain: 'Nel minimo del costo medio: C′(x₀) = C(x₀)/x₀.',
+        },
+        {
+          id: 'm6-6-4', type: 'steps', topic: 'Flessi', q: 'Studia la concavità di f(x) = ½x² + log(x − 1).',
+          steps: [
+            { q: 'Dominio?', kind: 'mc', answer: 0, options: ['x > 1', 'x ≥ 1', 'ℝ', 'x > 0'], explain: 'Argomento del log positivo: x − 1 > 0.' },
+            { q: 'f″(x) = ?', kind: 'mc', answer: 0, options: ['1 − 1/(x − 1)²', '1 + 1/(x − 1)²', 'x + 1/(x − 1)', '1/(x − 1)'], explain: 'f′ = x + 1/(x − 1), f″ = 1 − 1/(x − 1)².' },
+            { q: 'f″ = 0 per x = ?', kind: 'num', answer: 2, explain: '(x − 1)² = 1 ⇒ x = 2 (x = 0 è fuori dominio).' },
+            { q: 'f(2) = ?', kind: 'num', answer: 2, explain: '½ · 4 + log 1 = 2.' },
+            { q: 'Su (1, 2) la funzione è…', kind: 'mc', answer: 0, options: ['concava', 'convessa', 'costante', 'non definita'], explain: 'Lì 1/(x − 1)² > 1, quindi f″ < 0.' },
+          ],
+          explain: 'Flesso in (2, 2): concava prima, convessa dopo.',
+        },
+        {
+          id: 'm6-6-5', type: 'steps', topic: 'Massimo profitto', scenario: 'R(x) = 40x, C(x) = 100 + 4x + 0,5x².', q: 'Massimizza il profitto.',
+          steps: [
+            { q: 'R′(x) = C′(x) per x = ?', kind: 'num', answer: 36, explain: '40 = 4 + x ⇒ x = 36.' },
+            { q: 'P″(x) = ?', kind: 'num', answer: -1, explain: 'P = 36x − 0,5x² − 100 ⇒ P″ = −1 < 0: massimo.' },
+            { q: 'Profitto massimo?', kind: 'num', answer: 548, unit: '€', explain: '1296 − 648 − 100 = 548.' },
+          ],
+          explain: 'Massimo profitto dove ricavo marginale = costo marginale.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm6-o1', q: 'Enuncia il teorema di Fermat e spiega perché non vale il viceversa.', answer: 'Se x₀ è un punto di massimo o minimo locale interno al dominio e f è derivabile in x₀, allora f′(x₀) = 0 (punto stazionario, tangente orizzontale). Il viceversa è falso: x³ ha f′(0) = 0 ma in 0 c’è un flesso orizzontale. Inoltre gli estremi possono trovarsi nei punti non derivabili o agli estremi dell’intervallo.', keywords: ['estremo locale', 'interno', 'derivabile', 'f′(x₀) = 0', 'viceversa', 'x³'] },

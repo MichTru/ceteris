@@ -180,6 +180,71 @@ const m5: Unit = {
         { id: 'm5-5-12', type: 'tf', topic: 'De l’Hôpital', q: 'Per x · ln x con x → 0⁺ (forma 0 · ∞) si può usare direttamente De l’Hôpital senza riscrivere.', answer: false, explain: 'Bisogna prima trasformarlo in quoziente: ln x / (1/x).' },
       ],
     },
+    {
+      id: 'm5l6',
+      title: 'Esercizi guidati: derivate',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Retta tangente in 3 passi',
+          points: [
+            '1 · Calcolo **f(x₀)**: il punto di tangenza.',
+            '2 · Calcolo **f′(x₀)**: la pendenza.',
+            '3 · Scrivo **y = f′(x₀)(x − x₀) + f(x₀)** e semplifico.',
+            'Per De l’Hôpital: controllo la forma (0/0 o ∞/∞), derivo sopra e sotto separatamente.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm5-6-1', type: 'steps', topic: 'Retta tangente', q: 'Tangente a f(x) = x² nel punto x₀ = 3.',
+          steps: [
+            { q: 'f(3) = ?', kind: 'num', answer: 9, explain: 'Punto di tangenza (3, 9).' },
+            { q: 'f′(3) = ?', kind: 'num', answer: 6, explain: 'f′ = 2x ⇒ 6.' },
+            { q: 'Tangente y = 6x + q: q = ?', kind: 'num', answer: -9, explain: 'y = 6(x − 3) + 9 = 6x − 9.' },
+          ],
+          explain: 'Tangente y = 6x − 9.',
+        },
+        {
+          id: 'm5-6-2', type: 'steps', topic: 'Retta tangente', q: 'Tangente a f(x) = ln x nel punto x₀ = 1.',
+          steps: [
+            { q: 'f(1) = ?', kind: 'num', answer: 0, explain: 'ln 1 = 0.' },
+            { q: 'f′(1) = ?', kind: 'num', answer: 1, explain: 'f′ = 1/x ⇒ 1.' },
+            { q: 'Equazione della tangente?', kind: 'mc', answer: 0, options: ['y = x − 1', 'y = x', 'y = x + 1', 'y = 1/x'], explain: 'y = 1 · (x − 1) + 0.' },
+          ],
+          explain: 'Tangente y = x − 1.',
+        },
+        {
+          id: 'm5-6-3', type: 'steps', topic: 'De l’Hôpital', q: 'Calcola lim (x → 0) (∛(8 + x) − 2)/x (esempio degli appunti).',
+          steps: [
+            { q: 'Forma?', kind: 'mc', answer: 0, options: ['0/0', '∞/∞', '2/0', '0 · ∞'], explain: '∛8 − 2 = 0 e x → 0.' },
+            { q: 'Derivata del numeratore?', kind: 'mc', answer: 0, options: ['⅓(8 + x)^(−⅔)', '3(8 + x)²', '⅓(8 + x)^(⅔)', '1/(2√(8 + x))'], explain: '(∛u)′ = ⅓u^(−⅔).' },
+            { q: 'Valore della derivata del numeratore in 0?', kind: 'num', answer: 1 / 12, tol: 0.002, shown: '1/12', explain: '8^(−⅔) = 1/4 ⇒ ⅓ · ¼ = 1/12.' },
+            { q: 'Limite?', kind: 'num', answer: 1 / 12, tol: 0.002, shown: '1/12', explain: 'La derivata del denominatore è 1: (1/12)/1.' },
+          ],
+          explain: 'Derivo sopra e sotto separatamente, poi sostituisco.',
+        },
+        {
+          id: 'm5-6-4', type: 'steps', topic: 'De l’Hôpital', q: 'Calcola lim (x → 0⁺) x · ln x.',
+          steps: [
+            { q: 'Forma?', kind: 'mc', answer: 0, options: ['0 · (−∞)', '0/0', '∞/∞', '1^∞'], explain: 'x → 0 e ln x → −∞.' },
+            { q: 'Come la riscrivo?', kind: 'mc', answer: 0, options: ['ln x / (1/x)', 'x / ln x', '(x ln x)′', 'ln(x²)'], explain: 'Così diventa ∞/∞.' },
+            { q: 'Rapporto delle derivate?', kind: 'mc', answer: 0, options: ['(1/x)/(−1/x²) = −x', '(1/x)/(1/x) = 1', 'ln x / x', '−1/x'], explain: '(ln x)′ = 1/x, (1/x)′ = −1/x².' },
+            { q: 'Limite?', kind: 'num', answer: 0, explain: '−x → 0.' },
+          ],
+          explain: 'Con 0 · ∞ prima si riscrive come quoziente.',
+        },
+        {
+          id: 'm5-6-5', type: 'steps', topic: 'Marginali', scenario: 'Magliette: C(x) = 2000 + 10x + 0,2x².', q: 'Confronta costo marginale e tasso medio.',
+          steps: [
+            { q: 'C′(x) = ?', kind: 'mc', answer: 0, options: ['10 + 0,4x', '10 + 0,2x', '2000 + 10x', '0,4x'], explain: 'La costante sparisce, (0,2x²)′ = 0,4x.' },
+            { q: 'C′(100) = ?', kind: 'num', answer: 50, unit: '€', explain: '10 + 40 = 50.' },
+            { q: 'Tasso medio tra 100 e 110: [C(110) − C(100)]/10 = ?', kind: 'num', answer: 52, unit: '€', explain: 'C(110) = 2000 + 1100 + 2420 = 5520, C(100) = 5000 ⇒ 520/10 = 52.' },
+          ],
+          explain: 'Il tasso medio si avvicina a C′ quando l’intervallo si restringe.',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm5-o1', q: 'Definisci la derivata e spiega il suo significato geometrico.', answer: 'f′(x₀) = lim (h → 0) [f(x₀ + h) − f(x₀)]/h, cioè il limite del rapporto incrementale, se esiste finito. Il rapporto incrementale è la pendenza della secante tra due punti; al limite diventa la pendenza della retta tangente in x₀, di equazione y = f′(x₀)(x − x₀) + f(x₀).', keywords: ['rapporto incrementale', 'limite', 'h → 0', 'secante', 'tangente', 'pendenza'] },

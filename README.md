@@ -19,9 +19,11 @@ La mascotte è **Ceteris**, un porcellino-salvadanaio laureando (ceteris paribus
 
 ### Metodi Matematici per l’economia
 
-- **7 unità, 31 lezioni**: insiemi e funzioni, funzioni elementari (potenze, esponenziali, logaritmi, composte, costi-ricavi-profitto), successioni, limiti e continuità, derivate, studio di funzione e ottimizzazione, integrali.
-- **343 esercizi**, con 115 calcoli numerici verificati a parte, grafici di funzioni da riconoscere e grafici da toccare (asintoti, discontinuità, tangente e secante, massimo/minimo/flesso, aree con segno).
+- **7 unità, 38 lezioni**: insiemi e funzioni, funzioni elementari (potenze, esponenziali, logaritmi, composte, costi-ricavi-profitto), successioni, limiti e continuità, derivate, studio di funzione e ottimizzazione, integrali.
+- **374 esercizi**, con 115 calcoli numerici verificati a parte, grafici di funzioni da riconoscere e grafici da toccare (asintoti, discontinuità, tangente e secante, massimo/minimo/flesso, aree con segno).
 - **⚠️ Note del prof** sugli errori degli appunti: monotonia di xⁿ con n pari, semiretta aperta, termine generale della progressione aritmetica, linea di produzione conveniente, vertice della tariffa telefonica, n₀ nell’esempio con ε, segni del logaritmo con base < 1, costo fisso dei cappelli.
+- **Esercizi guidati passo per passo** (31, uno per lezione finale di ogni unità): i problemi d’esame degli appunti spezzati in passaggi, con correzione e spiegazione a ogni passo.
+- **Palestra** (nel Ripasso): esercizi e problemi guidati generati con numeri sempre nuovi su 10 argomenti (domini, esponenziali e logaritmi, rette e inversa, successioni, limiti e asintoti, derivate, retta tangente, massimi/minimi/flessi, integrali, problemi economici) o misti. Non finiscono mai. Il codice è in `src/engine/gen.ts`.
 - 39 domande d’interrogazione, 83 flashcard, formulario di 27 formule, 7 traguardi dedicati.
 
 ### Per entrambi

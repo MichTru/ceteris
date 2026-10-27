@@ -2,7 +2,7 @@ import { useCourse } from '../data/useCourse';
 import { useStore } from '../engine/store';
 import { isDue } from '../engine/srs';
 
-export type ReviewKind = 'mistakes' | 'flash' | 'oral' | 'exam' | 'practice';
+export type ReviewKind = 'mistakes' | 'flash' | 'oral' | 'exam' | 'practice' | 'gym';
 
 export default function Review({ onOpen }: { onOpen: (k: ReviewKind) => void }) {
   const course = useCourse();
@@ -16,6 +16,9 @@ export default function Review({ onOpen }: { onOpen: (k: ReviewKind) => void }) 
   const mine = exams.filter((e) => (e.course ?? 'econ') === course.id);
   const last = mine[mine.length - 1];
   const tiles: { k: ReviewKind; ico: string; bg: string; title: string; desc: string; badge?: string }[] = [
+    ...(course.id === 'mate'
+      ? [{ k: 'gym' as const, ico: '🏋️', bg: '#e8e7ff', title: 'Palestra di esercizi', desc: 'Esercizi e problemi guidati con numeri sempre nuovi, su ogni argomento.', badge: '∞' }]
+      : []),
     {
       k: 'mistakes',
       ico: '🩹',

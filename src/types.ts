@@ -114,7 +114,29 @@ export interface ShiftEx extends ExBase {
   moves: { D?: Dir; O?: Dir };
 }
 
-export type Exercise = MCEx | TFEx | FillEx | MatchEx | OrderEx | NumEx | HotspotEx | ShiftEx;
+/** Un passo di un esercizio guidato: risposta numerica o a scelta. */
+export interface Step {
+  q: string;
+  kind: 'num' | 'mc';
+  /** Per num il valore, per mc l'indice dell'opzione giusta (di solito 0). */
+  answer: number;
+  tol?: number;
+  options?: string[];
+  shown?: string;
+  unit?: string;
+  explain: string;
+}
+
+/** Problema d'esame svolto passo per passo: si applica la teoria un pezzo alla volta. */
+export interface StepsEx extends ExBase {
+  type: 'steps';
+  q: string;
+  scenario?: string;
+  figure?: SceneId;
+  steps: Step[];
+}
+
+export type Exercise = MCEx | TFEx | FillEx | MatchEx | OrderEx | NumEx | HotspotEx | ShiftEx | StepsEx;
 
 export interface OpenQ {
   id: string;

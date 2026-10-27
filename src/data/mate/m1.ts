@@ -143,6 +143,56 @@ const m1: Unit = {
         { id: 'm1-4-9', type: 'num', topic: 'Inversa', q: 'f(x) = 2x − 1 con dominio [0, +∞). Il dominio di f⁻¹ è [k, +∞): quanto vale k?', answer: -1, tol: 0, explain: 'Dominio di f⁻¹ = codominio di f = [−1, +∞).' },
       ],
     },
+    {
+      id: 'm1l5',
+      title: 'Esercizi guidati: funzioni e inversa',
+      icon: '🪜',
+      theory: [
+        {
+          title: 'Come si affronta l’esercizio',
+          points: [
+            '**Valore**: sostituisco x nella formula. **Zero**: pongo f(x) = 0 e ricavo x.',
+            '**Inversa**: controllo che f sia iniettiva, scrivo y = f(x), ricavo x, rinomino.',
+            '**Dominio e codominio dell’inversa**: si scambiano con quelli di f.',
+            '**Monotonia**: segno del rapporto incrementale su più intervalli.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          id: 'm1-5-1', type: 'steps', topic: 'Inversa', q: 'Data f(x) = 3x − 6 su ℝ, rispondi passo per passo.',
+          steps: [
+            { q: 'f(0) = ?', kind: 'num', answer: -6, explain: '3 · 0 − 6 = −6: il grafico taglia l’asse y in (0, −6).' },
+            { q: 'Dove si annulla f? x = ?', kind: 'num', answer: 2, explain: '3x − 6 = 0 ⇒ x = 2.' },
+            { q: 'Qual è l’inversa?', kind: 'mc', answer: 0, options: ['f⁻¹(x) = (x + 6)/3', 'f⁻¹(x) = (x − 6)/3', 'f⁻¹(x) = 3x + 6', 'f⁻¹(x) = 1/(3x − 6)'], explain: 'y = 3x − 6 ⇒ x = (y + 6)/3, poi rinomino y in x.' },
+            { q: 'f⁻¹(9) = ?', kind: 'num', answer: 5, explain: '(9 + 6)/3 = 5. Verifica: f(5) = 9.' },
+            { q: 'Coefficiente angolare dell’inversa?', kind: 'num', answer: 1 / 3, tol: 0.005, shown: '1/3', explain: 'L’inversa di mx + q ha pendenza 1/m = 1/3.' },
+          ],
+          explain: 'Inversa f⁻¹(x) = x/3 + 2: retta simmetrica di f rispetto a y = x.',
+        },
+        {
+          id: 'm1-5-2', type: 'steps', topic: 'Inversa', q: 'f(x) = 2x − 1 con dominio [0, +∞) (esempio degli appunti).',
+          steps: [
+            { q: 'Il codominio è [k, +∞). k = ?', kind: 'num', answer: -1, explain: 'f è crescente: il valore più piccolo è f(0) = −1.' },
+            { q: 'f è invertibile su questo dominio?', kind: 'mc', answer: 0, options: ['Sì: è strettamente crescente, quindi iniettiva', 'No: non è iniettiva', 'Solo se il dominio è ℝ', 'No: il codominio è negativo'], explain: 'Strettamente monotona ⇒ iniettiva ⇒ invertibile.' },
+            { q: 'Il dominio di f⁻¹ è [h, +∞). h = ?', kind: 'num', answer: -1, explain: 'Dominio di f⁻¹ = codominio di f = [−1, +∞).' },
+            { q: 'f⁻¹(5) = ?', kind: 'num', answer: 3, explain: 'f⁻¹(x) = (x + 1)/2 ⇒ (5 + 1)/2 = 3.' },
+          ],
+          explain: 'Dominio e codominio si scambiano: f⁻¹ : [−1, +∞) → [0, +∞).',
+        },
+        {
+          id: 'm1-5-3', type: 'steps', topic: 'Monotonia', q: 'Studia la monotonia di f(x) = x² con il rapporto incrementale.',
+          steps: [
+            { q: 'Rapporto incrementale tra x₁ = 1 e x₂ = 3?', kind: 'num', answer: 4, explain: '(9 − 1)/(3 − 1) = 4 > 0: a destra dello 0 cresce.' },
+            { q: 'Rapporto incrementale tra x₁ = −3 e x₂ = −1?', kind: 'num', answer: -4, explain: '(1 − 9)/(−1 + 3) = −4 < 0: a sinistra dello 0 decresce.' },
+            { q: 'Che cosa concludi?', kind: 'mc', answer: 0, options: ['Decresce su (−∞, 0], cresce su [0, +∞)', 'Cresce su (−∞, 0], decresce su [0, +∞)', 'È crescente su tutto ℝ', 'È costante'], explain: 'È proprio il punto in cui gli appunti sbagliano: la monotonia corretta è questa.' },
+            { q: 'x² è iniettiva su ℝ?', kind: 'mc', answer: 0, options: ['No: f(−2) = f(2)', 'Sì: è una funzione', 'Sì: è sempre positiva', 'Sì: è continua'], explain: 'Due input diversi con lo stesso output: non iniettiva.' },
+          ],
+          explain: 'Il segno del rapporto incrementale dice dove la funzione sale e dove scende.',
+          profNote: 'Negli appunti per xⁿ con n pari la monotonia è scritta al contrario: decrescente su (−∞, 0], crescente su [0, +∞).',
+        },
+      ],
+    },
   ],
   open: [
     { id: 'm1-o1', q: 'Descrivi gli insiemi numerici ℕ, ℤ, ℚ, ℝ e la differenza tra razionali e irrazionali.', answer: 'ℕ sono i naturali {0, 1, 2…}, ℤ gli interi relativi, ℚ i razionali (rapporti n/m con m ≠ 0), ℝ i reali che contengono razionali e irrazionali; ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ. I razionali hanno decimali finiti o periodici, gli irrazionali decimali illimitati non periodici. Gli irrazionali possono essere algebrici (√2) o trascendenti (π, e).', keywords: ['naturali', 'interi', 'razionali', 'periodic', 'irrazionali', 'trascendenti'] },
