@@ -46,6 +46,8 @@ export interface State {
   oral: Record<string, number>; // id domanda aperta -> ultimo voto (0 da rifare, 1 quasi, 2 perfetta)
   exams: ExamResult[];
   badges: Record<string, string>; // id -> data
+  /** Capitoli di teoria letti fino in fondo: id unità -> data. */
+  read: Record<string, string>;
   sound: boolean;
   theme: 'auto' | 'light' | 'dark';
   relaxed: boolean;
@@ -97,6 +99,7 @@ const fresh = (): State => ({
   oral: {},
   exams: [],
   badges: {},
+  read: {},
   sound: true,
   theme: 'auto',
   relaxed: false,

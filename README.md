@@ -28,6 +28,7 @@ La mascotte è **Ceteris**, un porcellino-salvadanaio laureando (ceteris paribus
 
 ### Per entrambi
 
+- **Studia**: per ogni unità un capitolo di teoria completo da leggere senza libro (spiegazioni, definizioni, schemi a passaggi e ad albero, tabelle di confronto, grafici, esempi svolti, trappole d’esame e riassunto finale), più il formulario. Si apre anche dall’icona 📖 di ogni unità nel percorso. I capitoli stanno in `src/data/study/`.
 - Tema chiaro/scuro, installabile sul telefono (PWA), funziona offline dopo la prima apertura, backup dei progressi in un file JSON.
 
 ## Pubblicarla su GitHub Pages (passo per passo)

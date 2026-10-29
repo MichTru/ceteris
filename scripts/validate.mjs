@@ -10,6 +10,9 @@ const dir = mkdtempSync(join(tmpdir(), 'val-'));
 const out = join(dir, 'data.mjs');
 await build({ entryPoints: ['src/data/index.ts'], bundle: true, format: 'esm', platform: 'node', outfile: out, logLevel: 'error' });
 const { UNITS, COURSES } = await import(pathToFileURL(out).href);
+const out2 = join(dir, 'study.mjs');
+await build({ entryPoints: ['src/data/study/index.ts'], bundle: true, format: 'esm', platform: 'node', outfile: out2, logLevel: 'error' });
+const { CHAPTERS } = await import(pathToFileURL(out2).href);
 rmSync(dir, { recursive: true, force: true });
 
 const SCENES = {
@@ -92,6 +95,24 @@ for (const u of UNITS) {
   }
   console.log(`${u.id} ${u.title}: ${u.lessons.length} lezioni, ${n} esercizi, ${u.open.length} aperte, ${u.cards.length} flashcard`);
 }
+// capitoli di teoria
+let words = 0;
+for (const u of UNITS) {
+  const ch = CHAPTERS[u.id];
+  if (!ch) { errors.push(`${u.id}: manca il capitolo di teoria`); continue; }
+  const txt = JSON.stringify(ch);
+  const w = txt.split(/\s+/).length;
+  words += w;
+  for (const sec of ch.sections) {
+    if (!sec.blocks.length) errors.push(`${u.id} ${sec.title}: sezione vuota`);
+    for (const b of sec.blocks) {
+      if (b.t === 'figure' && !(b.scene in SCENES)) errors.push(`${u.id}: figura ${b.scene} sconosciuta`);
+      if (b.t === 'table') b.rows.forEach((r, i) => r.length !== b.head.length && errors.push(`${u.id} ${sec.title}: riga ${i + 1} con ${r.length} colonne invece di ${b.head.length}`));
+    }
+  }
+  console.log(`  capitolo ${u.id}: ${ch.sections.length} sezioni, circa ${w} parole`);
+}
+console.log('Teoria: circa', words, 'parole');
 console.log('Totale esercizi:', total, byType);
 if (errors.length) {
   console.error('\nERRORI:\n' + errors.join('\n'));

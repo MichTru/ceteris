@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { useCourse } from '../data/useCourse';
 import { norm } from '../engine/utils';
 
-export default function Formulas() {
+export default function Formulas({ embedded }: { embedded?: boolean }) {
   const course = useCourse();
   const [q, setQ] = useState('');
   const list = course.formulas.filter((f) => !q || norm(f.name + ' ' + f.expr + ' ' + f.symbols.join(' ')).includes(norm(q)));
   const units = course.units.filter((u) => list.some((f) => f.unit === u.n));
   return (
-    <div className="screen">
-      <h1 className="page-title">Formulario</h1>
-      <p className="page-sub">{course.title}: tutte le formule, con il significato dei simboli e un esempio dagli appunti.</p>
+    <div className={embedded ? undefined : 'screen'}>
+      {!embedded && <h1 className="page-title">Formulario</h1>}
       <label className="sr-only" htmlFor="fsearch">
         Cerca una formula
       </label>

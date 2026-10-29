@@ -1,0 +1,168 @@
+import type { Chapter } from '../../types';
+
+const c: Chapter = {
+  unit: 'u4',
+  intro:
+    'La stessa regola R’ = C’ dà risultati molto diversi a seconda del mercato in cui l’impresa si trova. In questo capitolo vediamo le quattro strutture di mercato (concorrenza perfetta, monopolio, oligopolio, concorrenza monopolistica), le barriere che le separano, i modelli di duopolio e gli strumenti per misurare quanto un mercato è concentrato.',
+  sections: [
+    {
+      title: 'Struttura di mercato e barriere',
+      blocks: [
+        { t: 'def', term: 'Struttura di mercato', text: 'Insieme delle caratteristiche di un mercato (numero di concorrenti, differenze tra i prodotti, barriere…) che determinano il comportamento e le performance di acquirenti e venditori.' },
+        { t: 'def', term: 'Potere di mercato', text: 'Capacità dell’impresa di fissare un prezzo più alto dei propri costi medi e marginali.' },
+        { t: 'table', head: ['Struttura', 'Numero di imprese', 'Prodotto', 'Barriere', 'Potere di mercato'], rows: [
+          ['Concorrenza perfetta', 'Moltissime, piccole', 'Identico', 'Nessuna', 'Nullo (price-taker)'],
+          ['Concorrenza monopolistica', 'Molte', 'Simile ma differenziato', 'Nessuna', 'Piccolo'],
+          ['Oligopolio', 'Poche, interdipendenti', 'Simile', 'Alte', 'Elevato'],
+          ['Monopolio', 'Una', 'Unico', 'Insormontabili', 'Massimo (price-maker)'],
+        ] },
+        { t: 'def', term: 'Barriere all’entrata', text: 'Extra costi o svantaggi che un nuovo entrante sopporta rispetto alle imprese già presenti (incumbent). Il costo del capannone non è una barriera: lo hanno sostenuto anche gli incumbent.' },
+        { t: 'table', head: ['Barriera all’entrata', 'Esempio'], rows: [
+          ['Economie di scala', 'Bisogna entrare con impianti grandi o accettare costi alti; i primi produttori di auto hanno percorso la curva in fretta'],
+          ['Proprietà esclusiva dei fattori', 'De Beers con il 90% delle miniere di diamanti; il terreno panoramico in vetta'],
+          ['Differenziazione di prodotto', 'Samsung ha dovuto investire moltissimo in pubblicità e prezzi bassi contro l’iPhone'],
+          ['Costi di riconversione (switching costs)', 'La tastiera QWERTY: nessuno vuole reimparare'],
+          ['Esternalità di rete', 'Facebook vale perché ci sono già gli amici; il primo Apple incompatibile con Microsoft'],
+          ['Barriere legali', 'Brevetti, licenze dei taxi decise dal comune'],
+          ['Fabbisogno di capitali', 'Chi è già nel settore ottiene finanziamenti più facilmente'],
+          ['Altri vantaggi', 'Ubicazione, lingua, cultura, religione (prosciutti in un paese islamico)'],
+        ] },
+        { t: 'def', term: 'Barriere all’uscita', text: 'Alti costi (opportunità) e non recuperabili (sunk costs) che le imprese devono sostenere per uscire dal mercato. Licenziare o vendere il capannone non lo sono: li sostiene chiunque chiuda.' },
+        { t: 'list', items: ['Impianti specializzati con alti costi di riconversione (la macchina per gli abiti a piastrine di Ferré).', 'Costi fissi di uscita: contratti con clausole costose, obblighi di assistenza e ricambi.', 'Interdipendenze strategiche con altre attività (un contratto di 5 anni).', 'Barriere emotive (i nipoti della Ferrero).', 'Ostacoli politici e sociali (sindacati, proteste per i posti di lavoro).'] },
+        { t: 'key', items: ['Le barriere all’uscita funzionano anche da **barriere all’entrata**: rendono gli incumbent più aggressivi e li spingono a usare prezzi predatori o prezzi limite.'] },
+      ],
+    },
+    {
+      title: 'La concorrenza perfetta',
+      blocks: [
+        { t: 'p', text: 'Nella realtà è praticamente inesistente: basta che manchi una caratteristica e non lo è più. Si studia perché rappresenta l’**ottimo teorico** (massimizza la somma dei surplus) ed è il **termine di paragone** per tutte le altre strutture.' },
+        { t: 'list', ordered: true, items: ['Tante imprese piccole e tanti consumatori: nessuno influenza il prezzo (**price-taker**). Non significa che tutti producano la stessa quantità.', 'Prodotto **standardizzato**: identico, o con differenze irrilevanti come il colore.', '**Simmetria tecnologica**: tutti possono accedere alle stesse tecnologie, nessun brevetto esclusivo.', '**Informazione perfetta** degli acquirenti.', 'Nessuna barriera all’entrata o all’uscita (e quindi nessun incentivo alla collusione).'] },
+        { t: 'example', title: 'Il mais', steps: ['Tutti portiamo il mais al consorzio.', 'Il prezzo dipende dalla domanda e dall’offerta mondiale.', 'Che io dia il mais alle galline o lo venda, l’offerta mondiale non cambia: sono price-taker.'] },
+        { t: 'h', text: 'La singola impresa' },
+        { t: 'list', items: ['La domanda della singola impresa è **orizzontale** al prezzo di mercato, diversa dalla domanda del mercato.', 'Con prezzo costante, ogni unità aggiunge lo stesso ricavo: **P = R’**.', 'L’impresa sceglie la quantità dove R’ = C’.', '**Curva di offerta**: coincide con l’asse y sotto il minimo del CMT (non conviene produrre) e con la curva **C’ sopra il minimo del CMT**: è una spezzata.'] },
+        { t: 'table', head: ['Situazione', 'Cosa succede', 'Equilibrio di lungo?'], rows: [
+          ['P sopra il minimo del CMT', 'Extraprofitti (P − CM per ogni unità): entrano nuove imprese e il prezzo scende', 'No'],
+          ['P sotto il minimo del CMT', 'Perdite, minimizzate dove R’ = C’: si esce o si diventa più efficienti', 'No'],
+          ['P = minimo del CMT', 'Profitti nulli (normali): si coprono tutti i costi opportunità', 'Sì'],
+        ] },
+        { t: 'figure', scene: 'conc-perfetta-lp', caption: 'Equilibrio di lungo periodo: P = R’ = C’ nel minimo del CMT.' },
+        { t: 'warn', text: 'La condizione di massimo profitto è sempre **R’ = C’**. Solo in concorrenza perfetta, dove **P = R’**, si può scrivere anche **C’ = P**. “Profitti nulli” non significa lavorare gratis: i costi opportunità sono coperti.' },
+        { t: 'p', text: 'Si chiama “perfetta” perché la presenza di moltissimi concorrenti porta il prezzo al livello più basso possibile e la quantità al livello più alto: per i neoclassici è la soluzione ideale.' },
+      ],
+    },
+    {
+      title: 'Il monopolio',
+      blocks: [
+        { t: 'list', items: ['L’offerta è in mano a **un’unica impresa**: impresa e settore coincidono.', 'Barriere all’ingresso elevatissime e insormontabili (mercato **non contendibile**).', 'Pluralità di consumatori.'] },
+        { t: 'p', text: 'Il monopolista è **price-maker**, ma non fissa prezzi stellari: nessuno comprerebbe. La domanda del mercato coincide con la sua ed è decrescente: cerca il mix prezzo-quantità che massimizza il profitto.' },
+        { t: 'flow', title: 'Come fissa il prezzo il monopolista', items: ['Trova la quantità dove R’ = C’', 'Proietta quella quantità sulla curva di domanda', 'Lì legge il prezzo più alto che i consumatori pagano', 'Profitto extra = (prezzo − costo medio) × quantità'] },
+        { t: 'figure', scene: 'monopolio', caption: 'Monopolio: quantità minore e prezzo maggiore rispetto alla concorrenza, con perdita secca.' },
+        { t: 'def', term: 'Perdita secca', text: 'Perdita di benessere che non va né ai consumatori né al produttore: rispetto alla concorrenza perfetta si scambia meno a un prezzo più alto e il sistema è più povero. È il motivo per cui i neoclassici condannano il monopolio.' },
+        { t: 'table', head: ['Tipo di monopolio', 'Origine', 'Esempio'], rows: [
+          ['Legale', 'Autorizzazione del governo, brevetto, copyright (temporaneo)', 'Concessioni pubbliche'],
+          ['Tecnologico', 'Vantaggio tecnologico o controllo esclusivo di una risorsa', 'Intel, De Beers'],
+          ['Naturale', 'Economie di scala così forti che una sola impresa produce a costi minori di due o più', 'Reti'],
+        ] },
+        { t: 'def', term: 'Subadditività dei costi', text: 'Nel monopolio naturale produrre un milione di tonnellate tutte insieme costa meno della somma dei costi per produrne le singole frazioni.' },
+        { t: 'h', text: 'Intervento dello Stato' },
+        { t: 'p', text: 'Il monopolio causa **inefficienza allocativa** (perdita secca), trasferisce surplus dai consumatori all’impresa e spreca risorse in **rent seeking**. Lo Stato può:' },
+        { t: 'list', ordered: true, items: ['**Stimolare la concorrenza**: l’antitrust divide l’impresa in imprese più piccole.', '**Regolare il prezzo**: fissa un prezzo massimo (difficile, perché non conosce i costi dell’impresa).', '**Nazionalizzare**: l’impresa diventa pubblica e lo Stato conosce i costi (Trenitalia).'] },
+        { t: 'table', head: ['Rent creation', 'Rent seeking'], rows: [
+          ['Si diventa monopolisti essendo più innovativi', 'Si spende per ottenere il monopolio dal potere pubblico (fino alla corruzione), invece che per essere i migliori'],
+        ] },
+      ],
+    },
+    {
+      title: 'L’oligopolio: Cournot e Stackelberg',
+      blocks: [
+        { t: 'p', text: 'Poche imprese offrono prodotti simili e, soprattutto, sono **interdipendenti**: sanno che le loro scelte provocheranno reazioni dei rivali. “Poche” non è un numero: è un gruppo in cui più o meno ci si conosce tutti. È come giocare a scacchi.' },
+        { t: 'def', term: 'Variazioni congetturali', text: 'Le ipotesi che un’impresa fa sulle reazioni dei rivali alle proprie scelte (se aumento l’output del 20%, cosa farà il rivale?).' },
+        { t: 'p', text: 'Le imprese sono davanti a un dilemma: competere o **colludere** (accordarsi, in modo esplicito o implicito, per ridurre la concorrenza). Si studiano modelli **non collusivi** (Cournot, Stackelberg, Bertrand) e **collusivi** (cartelli).' },
+        { t: 'h', text: 'Il duopolio di Cournot' },
+        { t: 'list', items: ['Due imprese, A e B, con prodotto identico e potere di mercato.', 'Barriere all’ingresso insormontabili.', 'Costi marginali nulli: C’ = 0, la curva coincide con l’asse x.', 'Domanda lineare; ognuna sceglie l’output che massimizza il profitto (R’ = C’).', '**Variazione congetturale nulla**: ognuna crede che l’altra non reagirà.'] },
+        { t: 'example', title: 'I round di Cournot (mercato = 1)', steps: ['Round 1: A si comporta da monopolista e produce 1/2. B vede un mercato residuo di 1/2 e ne produce la metà: 1/4.', 'Round 2: A ha un mercato di 1 − 1/4 = 3/4 e produce 3/8. B ha 1 − 3/8 = 5/8 e produce 5/16.', 'Round 3: A ha 1 − 5/16 = 11/16 e produce 11/32. B ha 1 − 11/32 = 21/32 e produce 21/64.', 'A produce sempre meno, B sempre di più.'], result: 'Equilibrio di Cournot-Nash: qA = qB = 1/3, totale 2/3 (monopolio 1/2, concorrenza perfetta 1).' },
+        { t: 'figure', scene: 'cournot', caption: 'Funzioni di reazione: si incrociano nell’equilibrio di Cournot-Nash.' },
+        { t: 'p', text: 'Le **funzioni di reazione** indicano l’output ottimale di un’impresa per ogni output dell’altra. FRB parte da 1/2 (il massimo che B produrrebbe se A non esistesse); FRA parte da 1.' },
+        { t: 'table', head: ['Pro del modello di Cournot', 'Contro'], rows: [
+          ['Primo uso della matematica per un problema economico', 'La variazione congetturale nulla è poco realistica'],
+          ['Equilibrio intermedio tra monopolio e concorrenza perfetta', 'A ogni round l’ipotesi si rivela falsa ma le imprese non imparano'],
+          ['Termine di paragone per altri modelli', 'Ignora la possibilità di cooperare o colludere'],
+        ] },
+        { t: 'h', text: 'Il duopolio di Stackelberg' },
+        { t: 'p', text: 'Stesse ipotesi, ma la variazione congetturale nulla cade per **una** delle due imprese: la **leader** conosce la funzione di reazione del rivale. È il **vantaggio del pioniere**: chi entra per primo sceglie per primo.' },
+        { t: 'list', items: ['Un solo round: la leader produce **1/2** (come un monopolista), la follower si adegua sulla propria funzione di reazione e produce **1/4**. Totale **3/4**.', 'La leader non cambia più l’output: sa che cadrebbe nell’equilibrio di Cournot.', 'Se entrambe volessero fare le leader (punto P-W): sovrapproduzione, il prezzo crolla finché una delle due riduce l’output.'] },
+      ],
+    },
+    {
+      title: 'Bertrand, cartelli e teoria dei giochi',
+      blocks: [
+        { t: 'h', text: 'Il duopolio di Bertrand' },
+        { t: 'p', text: 'Le imprese scelgono il **prezzo**, non la quantità. Ipotesi: imprese identiche con costo marginale costante, variazione congetturale nulla sui prezzi, nessun costo di transazione per i clienti, informazione perfetta: con lo stesso prodotto si compra da chi costa meno.' },
+        { t: 'flow', items: ['A fissa il prezzo di monopolio', 'B fissa un prezzo appena più basso e prende tutti i clienti', 'A risponde abbassando ancora', 'Si continua finché il prezzo copre solo i costi', 'p = C’: si dividono il mercato, qA = qB = Qc/2'] },
+        { t: 'key', items: ['Bastano **due imprese** per ottenere il risultato della concorrenza perfetta.', 'Alzare il prezzo fa perdere tutti i clienti; abbassarlo fa produrre in perdita.', 'Proprio questo risultato poco realistico spinge a studiare i modelli collusivi.'] },
+        { t: 'h', text: 'I cartelli' },
+        { t: 'def', term: 'Cartello', text: 'Accordo formale o informale tra imprese per tenere prezzi più alti o quantità più basse rispetto alla concorrenza, ottenendo un risultato simile al monopolio. È illegale.' },
+        { t: 'list', items: ['Poche imprese.', 'Imprese simili per costi, quote e prodotto (le piccole hanno più incentivo a “scartellare”).', 'Ordini piccoli e frequenti (un ordine grande tenta a rompere l’accordo).', 'L’accordo non attira nuovi concorrenti.', 'Agenti di vendita comuni o associazioni di categoria che scoprono le deviazioni.', 'Punizioni attese inferiori ai guadagni.', 'Meccanismi per prevenire le deviazioni (quote fisse, clausola “nazione privilegiata”, “prezzo più basso garantito”).'] },
+        { t: 'example', title: 'L’OPEC', steps: ['Anni ’70, crisi energetica: il prezzo del petrolio sale alle stelle.', 'Ci si aspetterebbe più produzione; invece i paesi produttori si accordano per tagliarla.', 'Vendendo meno a un prezzo più alto guadagnano di più.'] },
+        { t: 'p', text: 'Senza accordo ogni oligopolista bilancia l’**effetto quantità** (un’unità in più aumenta i ricavi) e l’**effetto prezzo** (fa scendere il prezzo di tutte le unità). Si arriva all’**equilibrio di Nash**.' },
+        { t: 'h', text: 'Il dilemma del prigioniero' },
+        { t: 'table', head: ['', 'Toni tace', 'Toni confessa'], rows: [
+          ['Gigi tace', '1 anno a testa', 'Gigi 20 anni, Toni libero'],
+          ['Gigi confessa', 'Gigi libero, Toni 20 anni', '5 anni a testa'],
+        ] },
+        { t: 'p', text: 'Qualunque cosa faccia l’altro, a ciascuno conviene confessare: è la **strategia dominante**. Il risultato (5 anni a testa) è peggiore della cooperazione (1 anno), ma è quello razionale.' },
+        { t: 'def', term: 'Equilibrio di Nash', text: 'Situazione in cui ogni giocatore fa la scelta migliore per sé qualunque sia la scelta degli altri.' },
+        { t: 'p', text: 'Nell’oligopolio: se entrambe tengono bassa la produzione (30.000 tonnellate) guadagnano bene, ma chi tradisce e produce 40.000 guadagna di più. Alla fine nessuno taglia l’offerta. Per questo i cartelli spesso si **autodistruggono**, anche se alcuni durano e l’antitrust li vieta.' },
+      ],
+    },
+    {
+      title: 'La concorrenza monopolistica',
+      blocks: [
+        { t: 'p', text: 'Nonostante il nome è **più simile alla concorrenza perfetta** che al monopolio: nessuna barriera, informazione fluida, offerta frammentata. La differenza è che i prodotti sono **simili ma non identici**.' },
+        { t: 'list', items: ['Differenze di caratteristiche: olio di oliva e olio di girasole.', 'Prodotti identici ma in **posizione diversa**: la mozzarella sotto casa a 4 € contro l’Ipercoop a 2 € (ma devo prendere l’auto e fare la fila). Pago di più per ragioni di costo opportunità, ma se costasse 25 € andrei altrove.'] },
+        { t: 'p', text: 'Ogni impresa ha un piccolo vantaggio (i clienti vicini) e fissa il prezzo come un monopolista, con R’ = C’. Ma senza barriere gli extraprofitti attirano nuovi concorrenti.' },
+        { t: 'figure', scene: 'conc-monopolistica', caption: 'Equilibrio di lungo: il CMT è tangente alla domanda, non nel suo minimo.' },
+        { t: 'key', items: ['In equilibrio: **profitti nulli** (P = CM) come in concorrenza perfetta.', 'Ma il punto **non è il minimo del CMT**: c’è **capacità produttiva in eccesso**, che spiega le strategie aggressive per guadagnare quote.', 'C’è una piccola perdita secca, considerata tollerabile: è il prezzo della varietà dei prodotti.', 'Si riconosce perché la curva del **CMT è tangente alla curva di domanda**.'] },
+      ],
+    },
+    {
+      title: 'Concentrazione e paradigma S-C-P',
+      blocks: [
+        { t: 'p', text: 'Per capire in che struttura siamo si misura la **concentrazione**: meno imprese ci sono, più il potere di mercato è concentrato. Prima però bisogna definire il **mercato rilevante**.' },
+        { t: 'table', head: ['Definizione', 'Criterio', 'Esempi'], rows: [
+          ['Geografica', 'Stesso mercato se un aumento di prezzo in un luogo sposta la domanda verso l’altro', 'Bar a Ferrara e a Modena: no. Negozio a Ferrara e in Malesia: sì, grazie all’e-commerce'],
+          ['Di prodotto', 'Stesso mercato se sono sostituti stretti; si usa l’elasticità incrociata (zero = mercati diversi, positiva = stesso mercato)', 'Décolleté rossa e azzurra: sì. Borsa D&G e borsa qualsiasi: no (bisogni diversi)'],
+        ] },
+        { t: 'def', term: 'Test SSNIP (monopolista ipotetico)', text: 'Small but Significant Non-transitory Increase in Price. Se un ipotetico monopolista alzasse il prezzo del 5-10%, i suoi profitti salirebbero? Se sì, quello è un mercato; se i clienti passano a un altro prodotto o area, il mercato va allargato.' },
+        { t: 'example', title: 'L’errore del cellophane (USA, 1956)', steps: ['La Du Pont era accusata di monopolio del materiale da imballaggio.', 'La Corte Suprema la assolse includendo nel mercato anche la carta.', 'Ma i clienti preferivano il cellophane anche quando il prezzo saliva: era davvero monopolista.'], result: 'Un mercato definito troppo ampio nasconde un monopolio.' },
+        { t: 'h', text: 'Le misure di concentrazione' },
+        { t: 'formula', expr: 'CN = S1 + S2 + … + Sn', note: 'somma delle quote delle prime n imprese, in ordine decrescente' },
+        { t: 'formula', expr: 'HH = S1² + S2² + … + SN²', note: 'somma dei quadrati delle quote di tutte le imprese; massimo 1 (monopolio), minimo 1/N' },
+        { t: 'table', head: ['Indice', 'Pro', 'Contro'], rows: [
+          ['CN', 'Pochi dati, facile da calcolare', 'Non dice nulla delle imprese dopo le prime n'],
+          ['HH', 'Considera tutte le imprese; il quadrato fa pesare le grandi', 'Servono le quote di tutti'],
+        ] },
+        { t: 'example', title: 'Calcolare C4 e HH', steps: ['Lampadine: le prime 4 imprese fatturano 600 + 400 + 200 + 100 = 1.300 milioni su 2.000.', 'C4 = 1.300 / 2.000 = 65%.', 'Quote 0,50; 0,20; 0,15; 0,10; 0,05: HH = 0,25 + 0,04 + 0,0225 + 0,01 + 0,0025 = 0,325.', 'Cinque imprese con 0,20 ciascuna: HH = 5 × 0,04 = 0,20 = 1/N, il minimo.'] },
+        { t: 'h', text: 'Determinanti della concentrazione' },
+        { t: 'list', items: ['Economie di scala.', 'Barriere all’entrata.', 'Capacità specifiche dell’impresa migliore.', '**Ciclo di vita del prodotto**: alta in introduzione, cala nello sviluppo, stabile nella maturità, risale nel declino quando chi non guadagna esce.'] },
+        { t: 'h', text: 'Il paradigma Struttura-Comportamenti-Performance' },
+        { t: 'p', text: 'Nasce dall’insoddisfazione per la visione neoclassica (solo la concorrenza perfetta è efficiente, il monopolio è da evitare): è un approccio **empirico** che parte dai casi reali.' },
+        { t: 'flow', items: ['Condizioni di base: domanda e offerta', 'Struttura: numero e dimensione di imprese e acquirenti, barriere', 'Comportamenti: prezzi, pubblicità, design, marchio', 'Performance: non solo il profitto', 'Feedback: chi ha performance migliori cambia domanda, offerta e struttura (Apple)'] },
+        { t: 'p', text: 'Per i neoclassici la struttura determinava direttamente la performance e i comportamenti erano automatici. Nella realtà le **scelte strategiche** contano, e il governo può intervenire su ciascun blocco.' },
+      ],
+    },
+  ],
+  summary: [
+    'Barriere all’entrata: extra costi per chi entra. All’uscita: costi non recuperabili per chi esce.',
+    'Concorrenza perfetta: 5 caratteristiche; P = R’ = C’ = min CMT nel lungo periodo; profitti normali.',
+    'Solo in concorrenza perfetta il massimo profitto si scrive C’ = P.',
+    'Monopolio: R’ = C’, prezzo letto sulla domanda, perdita secca; legale, tecnologico, naturale.',
+    'Cournot: 1/3 + 1/3 = 2/3. Stackelberg: 1/2 + 1/4 = 3/4. Bertrand: p = C’, Qc/2 a testa.',
+    'Cartelli instabili: dilemma del prigioniero ed equilibrio di Nash.',
+    'Concorrenza monopolistica: CMT tangente alla domanda, profitti nulli, capacità in eccesso.',
+    'CN = somma delle prime n quote; HH = somma dei quadrati, tra 1/N e 1.',
+    'Test SSNIP ed errore del cellophane; paradigma S-C-P con feedback.',
+  ],
+};
+
+export default c;

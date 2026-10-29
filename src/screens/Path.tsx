@@ -4,7 +4,7 @@ import { COURSES, courseById, courseOfUnit } from '../data';
 import { useCourse } from '../data/useCourse';
 import type { Lesson, Unit } from '../types';
 import { setState, today, useStore, type State } from '../engine/store';
-import { Sheet, TheoryCard, unitStyle } from '../components/UI';
+import { unitStyle } from '../components/UI';
 import Mascot from '../components/Mascot';
 
 const OFFS = [0, 62, 92, 62, 0, -62, -92, -62];
@@ -31,12 +31,12 @@ export function currentTarget(s: State): { unit: Unit; lesson?: Lesson } | null 
 interface Props {
   onLesson: (u: Unit, l: Lesson) => void;
   onBoss: (u: Unit) => void;
+  onGuide: (u: Unit) => void;
 }
 
-export default function Path({ onLesson, onBoss }: Props) {
+export default function Path({ onLesson, onBoss, onGuide }: Props) {
   const s = useStore((x) => x);
   const [open, setOpen] = useState<string | null>(null);
-  const [guide, setGuide] = useState<Unit | null>(null);
   const course = useCourse();
   const target = currentTarget(s);
   const todayXp = s.days[today()] ?? 0;
@@ -113,7 +113,7 @@ export default function Path({ onLesson, onBoss }: Props) {
                 <h2>{u.title}</h2>
                 <div className="u-sub">{u.subtitle}</div>
               </div>
-              <button className="guide" onClick={() => setGuide(u)} aria-label={`Teoria dell’unità ${u.n}`} title="Teoria dell’unità">
+              <button className="guide" onClick={() => onGuide(u)} aria-label={`Teoria dell’unità ${u.n}`} title="Teoria dell’unità">
                 📖
               </button>
             </div>
@@ -209,13 +209,6 @@ export default function Path({ onLesson, onBoss }: Props) {
         <p>{course.outro}</p>
       </div>
 
-      {guide && (
-        <Sheet title={`Unità ${guide.n}: teoria`} onClose={() => setGuide(null)} style={unitStyle(guide)}>
-          <div className="stack">
-            {guide.lessons.flatMap((l) => l.theory.map((t, i) => <TheoryCard key={l.id + i} t={t} />))}
-          </div>
-        </Sheet>
-      )}
     </div>
   );
 }

@@ -179,3 +179,44 @@ export interface Formula {
   example: string;
   unit: number;
 }
+
+// ---------- Teoria completa (capitoli di studio) ----------
+
+export type Block =
+  /** Paragrafo; **grassetto** per i termini chiave. */
+  | { t: 'p'; text: string }
+  /** Sottotitolo dentro una sezione. */
+  | { t: 'h'; text: string }
+  | { t: 'list'; items: string[]; ordered?: boolean }
+  /** Definizione da sapere a memoria. */
+  | { t: 'def'; term: string; text: string }
+  /** Formula in evidenza. */
+  | { t: 'formula'; expr: string; note?: string }
+  /** Esempio svolto passo per passo. */
+  | { t: 'example'; title: string; steps: string[]; result?: string }
+  /** Attenzione: errore tipico o trappola d'esame. */
+  | { t: 'warn'; text: string }
+  /** Punti da ricordare. */
+  | { t: 'key'; items: string[] }
+  /** Schema a passaggi in sequenza (causa → effetto, procedura). */
+  | { t: 'flow'; title?: string; items: string[] }
+  /** Schema ad albero: concetto e sue ramificazioni. */
+  | { t: 'tree'; root: string; children: { label: string; sub?: string[] }[] }
+  /** Tabella di confronto. */
+  | { t: 'table'; head: string[]; rows: string[][] }
+  /** Grafico. */
+  | { t: 'figure'; scene: SceneId; caption: string };
+
+export interface StudySection {
+  title: string;
+  blocks: Block[];
+}
+
+export interface Chapter {
+  /** Id dell'unità a cui si riferisce. */
+  unit: string;
+  intro: string;
+  sections: StudySection[];
+  /** Riassunto finale per il ripasso veloce. */
+  summary: string[];
+}

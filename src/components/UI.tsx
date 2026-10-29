@@ -78,11 +78,11 @@ export function TopBar({ onHearts }: { onHearts?: () => void }) {
   );
 }
 
-export type Tab = 'path' | 'review' | 'formulas' | 'stats' | 'profile';
+export type Tab = 'path' | 'study' | 'review' | 'stats' | 'profile';
 const TABS: [Tab, string, string][] = [
   ['path', '🗺️', 'Percorso'],
+  ['study', '📖', 'Studia'],
   ['review', '🔁', 'Ripasso'],
-  ['formulas', '∑', 'Formule'],
   ['stats', '📈', 'Progressi'],
   ['profile', '🐷', 'Profilo'],
 ];
@@ -93,7 +93,7 @@ export function BottomNav({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void })
       <div className="bottomnav-inner">
         {TABS.map(([id, ico, label]) => (
           <button key={id} className="navbtn" aria-current={tab === id ? 'page' : undefined} onClick={() => onTab(id)}>
-            <span className="nav-ico" aria-hidden style={id === 'formulas' ? { fontFamily: 'serif', fontWeight: 900 } : undefined}>
+            <span className="nav-ico" aria-hidden >
               {ico}
             </span>
             {label}

@@ -132,7 +132,7 @@ export default function Profile() {
       <h2 className="section-title">Cosa c’è nell’app</h2>
       <div className="card" style={{ lineHeight: 1.6, fontSize: 15 }}>
         <p>
-          {course.title}: {t.units} unità e {t.lessons} lezioni costruite sugli appunti: {t.exercises} esercizi, {t.open} domande da interrogazione, {t.cards} flashcard e il formulario.
+          {course.title}: {t.units} unità con il loro capitolo di teoria e {t.lessons} lezioni costruite sugli appunti: {t.exercises} esercizi, {t.open} domande da interrogazione, {t.cards} flashcard e il formulario.
         </p>
         <p style={{ marginTop: 8 }}>
           Dove negli appunti c’è un errore o un refuso, dopo la risposta compare il riquadro <b>⚠️ Nota del prof</b> con la versione corretta.

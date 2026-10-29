@@ -16,7 +16,8 @@ import Oral from './screens/Oral';
 import Exam from './screens/Exam';
 import Gym from './screens/Gym';
 import { gymSet } from './engine/gen';
-import Formulas from './screens/Formulas';
+import Study from './screens/Study';
+import Chapter from './screens/Chapter';
 import Stats from './screens/Stats';
 import Profile from './screens/Profile';
 import Onboarding from './screens/Onboarding';
@@ -28,9 +29,10 @@ type Route =
   | { name: 'flash' }
   | { name: 'oral' }
   | { name: 'exam' }
-  | { name: 'gym' };
+  | { name: 'gym' }
+  | { name: 'chapter'; unit: Unit };
 
-const TABS: Tab[] = ['path', 'review', 'formulas', 'stats', 'profile'];
+const TABS: Tab[] = ['path', 'study', 'review', 'stats', 'profile'];
 const tabFromHash = (): Tab => {
   const h = location.hash.replace('#', '') as Tab;
   return TABS.includes(h) ? h : 'path';
@@ -194,6 +196,16 @@ export default function App() {
     );
   if (route.name === 'flash') return <Flashcards onExit={() => { awardBadges(); closeOverlay(); }} />;
   if (route.name === 'oral') return <Oral onExit={() => { awardBadges(); closeOverlay(); }} />;
+  if (route.name === 'chapter') {
+    const u = route.unit;
+    return (
+      <Chapter
+        unit={u}
+        onExit={closeOverlay}
+        onPractice={() => startSession('practice', `Esercizi · ${u.title}`, sample(u.lessons.flatMap((l) => l.exercises), 10), u)}
+      />
+    );
+  }
   if (route.name === 'gym')
     return <Gym onExit={closeOverlay} onPick={(id, title) => startSession('gym', title, gymSet(id), undefined, undefined, id)} />;
   if (route.name === 'exam') return <Exam onExit={() => { awardBadges(); closeOverlay(); }} />;
@@ -202,9 +214,9 @@ export default function App() {
     <div className="app">
       <TopBar onHearts={() => setHearts(true)} />
       <main key={tab}>
-        {tab === 'path' && <Path onLesson={startLesson} onBoss={startBoss} />}
+        {tab === 'path' && <Path onLesson={startLesson} onBoss={startBoss} onGuide={(u) => setRoute({ name: 'chapter', unit: u })} />}
         {tab === 'review' && <Review onOpen={openReview} />}
-        {tab === 'formulas' && <Formulas />}
+        {tab === 'study' && <Study onOpen={(u) => setRoute({ name: 'chapter', unit: u })} />}
         {tab === 'stats' && <Stats />}
         {tab === 'profile' && <Profile />}
       </main>
