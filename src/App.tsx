@@ -5,7 +5,8 @@ import type { Exercise, Lesson, Unit } from './types';
 import { BADGES, type Badge } from './data/badges';
 import { checkStreak, getState, regenHearts, setState, useStore } from './engine/store';
 import { sample, shuffle } from './engine/utils';
-import { BottomNav, HeartsInfo, Sheet, TopBar, type Tab } from './components/UI';
+import { BottomNav, HeartsInfo, Sheet, SideNav, TopBar, type Tab } from './components/UI';
+import Rail from './components/Rail';
 import Mascot from './components/Mascot';
 import Path, { lessonDone } from './screens/Path';
 import Session, { type SessionMode, type SessionResult } from './screens/Session';
@@ -212,6 +213,8 @@ export default function App() {
 
   return (
     <div className="app">
+      <SideNav tab={tab} onTab={goTab} />
+      <div className="app-main">
       <TopBar onHearts={() => setHearts(true)} />
       <main key={tab}>
         {tab === 'path' && <Path onLesson={startLesson} onBoss={startBoss} onGuide={(u) => setRoute({ name: 'chapter', unit: u })} />}
@@ -220,6 +223,8 @@ export default function App() {
         {tab === 'stats' && <Stats />}
         {tab === 'profile' && <Profile />}
       </main>
+      </div>
+      <Rail onHearts={() => setHearts(true)} onLesson={startLesson} onBoss={startBoss} />
       <BottomNav tab={tab} onTab={goTab} />
       {hearts && (
         <HeartsInfo

@@ -26,7 +26,7 @@ export default function Study({ onOpen }: { onOpen: (u: Unit) => void }) {
       {view === 'formulas' ? (
         <Formulas embedded />
       ) : (
-        <div className="stack">
+        <div className="stack tiles-grid">
           {course.units.map((u) => {
             const ch = CHAPTERS[u.id];
             if (!ch) return null;

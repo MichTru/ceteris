@@ -36,7 +36,7 @@ export default function Review({ onOpen }: { onOpen: (k: ReviewKind) => void }) 
     <div className="screen">
       <h1 className="page-title">Ripasso</h1>
       <p className="page-sub">{course.title}: qui si consolida quello che hai imparato nel percorso.</p>
-      <div className="stack">
+      <div className="stack tiles-grid">
         {tiles.map((t) => (
           <button key={t.k} className="tile" onClick={() => onOpen(t.k)} disabled={t.k === 'mistakes' && !mistakes}>
             <span className="tile-ico" style={{ background: t.bg }} aria-hidden>

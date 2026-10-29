@@ -104,6 +104,26 @@ export function BottomNav({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void })
   );
 }
 
+/** Barra laterale di navigazione: compare al posto della barra in basso su pc e tablet orizzontale. */
+export function SideNav({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void }) {
+  return (
+    <nav className="sidenav" aria-label="Navigazione">
+      <div className="sidenav-brand">
+        <Mascot size={44} />
+        <span>Ceteris</span>
+      </div>
+      {TABS.map(([id, ico, label]) => (
+        <button key={id} className="sidebtn" aria-current={tab === id ? 'page' : undefined} onClick={() => onTab(id)}>
+          <span className="nav-ico" aria-hidden>
+            {ico}
+          </span>
+          {label}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 export function Sheet({ title, onClose, children, style }: { title: string; onClose: () => void; children: ReactNode; style?: CSSProperties }) {
   useEffect(() => {
     const h = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
