@@ -14,8 +14,21 @@ import m5 from './mate/m5';
 import m6 from './mate/m6';
 import m7 from './mate/m7';
 import { FORMULAS_MATE } from './mate/formulas';
+import d1 from './dir/d1';
+import d2 from './dir/d2';
+import d3 from './dir/d3';
+import d4 from './dir/d4';
+import d5 from './dir/d5';
+import d6 from './dir/d6';
+import d7 from './dir/d7';
+import d8 from './dir/d8';
+import d9 from './dir/d9';
+import d10 from './dir/d10';
+import d11 from './dir/d11';
+import d12 from './dir/d12';
+import { ARTICOLI_DIR } from './dir/articoli';
 
-export type CourseId = 'econ' | 'mate';
+export type CourseId = 'econ' | 'mate' | 'dir';
 
 export const FORMULAS: Formula[] = [
   { id: 'f1', unit: 2, name: 'Surplus del consumatore', expr: 'SC = Σ (disponibilità a pagare − P)', symbols: ['Area sopra P* e sotto la domanda'], example: 'Libro a 30 $: (35−30) + (45−30) + (59−30) = 49 $' },
@@ -57,6 +70,8 @@ export interface Course {
   open: (OpenQ & { unit: Unit })[];
   cards: (Flashcard & { unit: Unit })[];
   formulas: Formula[];
+  /** Nome della raccolta di riferimento (formulario o articoli). */
+  refLabel: string;
   /** Domande per unità nella simulazione d'esame (30 in totale). */
   examPer: number[];
   /** Frase finale in fondo al percorso. */
@@ -81,6 +96,7 @@ export const COURSES: Course[] = [
     icon: '📊',
     units: [u1, u2, u3, u4, u5, u6, u7],
     formulas: FORMULAS,
+    refLabel: 'Formulario',
     examPer: [4, 5, 5, 6, 4, 3, 3],
     outro: 'In fondo al percorso c’è il primo parziale. Ce la fai.',
   }),
@@ -92,8 +108,21 @@ export const COURSES: Course[] = [
     icon: '∫',
     units: [m1, m2, m3, m4, m5, m6, m7],
     formulas: FORMULAS_MATE,
+    refLabel: 'Formulario',
     examPer: [3, 5, 3, 5, 5, 5, 4],
     outro: 'In fondo al percorso c’è l’esame di Metodi Matematici. Ce la fai.',
+  }),
+  makeCourse({
+    id: 'dir',
+    title: 'Diritto Commerciale',
+    short: 'Diritto',
+    sub: 'impresa, crisi, società',
+    icon: '⚖️',
+    units: [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12],
+    formulas: ARTICOLI_DIR,
+    refLabel: 'Articoli',
+    examPer: [2, 2, 2, 3, 2, 3, 2, 3, 3, 4, 2, 2],
+    outro: 'In fondo al percorso c’è l’esame di Diritto Commerciale. Ce la fai.',
   }),
 ];
 

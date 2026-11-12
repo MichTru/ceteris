@@ -9,7 +9,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
   const steps = [
     {
       mood: 'wave' as const,
-      text: 'Ciao! Sono Ceteris, il tuo salvadanaio laureando. Ti porto ai tuoi esami, Economia e Politica Industriale e Metodi Matematici, un passo alla volta.',
+      text: 'Ciao! Sono Ceteris, il tuo salvadanaio laureando. Ti porto ai tuoi esami, Economia e Politica Industriale, Metodi Matematici e Diritto Commerciale, un passo alla volta.',
     },
     {
       mood: 'think' as const,

@@ -18,7 +18,7 @@ export interface ExamResult {
   score: number;
   total: number;
   grade: string;
-  course?: 'econ' | 'mate';
+  course?: 'econ' | 'mate' | 'dir';
 }
 
 export interface State {
@@ -55,7 +55,7 @@ export interface State {
   bestCombo: number;
   onboarded: boolean;
   /** Corso attivo. */
-  course: 'econ' | 'mate';
+  course: 'econ' | 'mate' | 'dir';
 }
 
 export const today = (d = new Date()) => {

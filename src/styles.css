@@ -1914,10 +1914,15 @@ textarea.answer:focus {
   margin-bottom: 0;
 }
 
+.goal-grid.courses {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 /* ---------- selettore del corso ---------- */
 .course-switch {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 6px;
   padding: 5px;
   margin-bottom: 14px;
@@ -1927,6 +1932,8 @@ textarea.answer:focus {
 }
 .course-switch button {
   min-height: 44px;
+  padding: 4px 6px;
+  line-height: 1.15;
   border: none;
   border-radius: 11px;
   background: transparent;
@@ -2704,7 +2711,7 @@ textarea.answer:focus {
   }
   .rail-courses {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 8px;
   }
   .rail-courses button {

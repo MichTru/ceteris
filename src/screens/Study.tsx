@@ -1,4 +1,4 @@
-// Studia: capitoli di teoria completi per ogni unità e formulario del corso.
+// Studia: capitoli di teoria completi per ogni unità e formulario (o articoli) del corso.
 import { useState } from 'react';
 import { useCourse } from '../data/useCourse';
 import { CHAPTERS } from '../data/study';
@@ -20,7 +20,7 @@ export default function Study({ onOpen }: { onOpen: (u: Unit) => void }) {
           Teoria
         </button>
         <button role="tab" aria-selected={view === 'formulas'} className={view === 'formulas' ? 'on' : ''} onClick={() => setView('formulas')}>
-          Formulario
+          {course.refLabel}
         </button>
       </div>
       {view === 'formulas' ? (

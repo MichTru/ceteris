@@ -47,4 +47,12 @@ export const BADGES: Badge[] = [
   { id: 'm-opt', name: 'Punto stazionario', desc: 'Completa l’unità 6 di Matematica', icon: '⛰️', test: (s) => unitDone(s, 'm6') },
   { id: 'm-int', name: 'Integrale definito', desc: 'Completa l’unità 7 di Matematica', icon: '∫', test: (s) => unitDone(s, 'm7') },
   { id: 'm-all', name: 'Matematica da 30', desc: 'Completa tutte e 7 le unità di Matematica', icon: '🧮', test: (s) => COURSES[1].units.every((u) => unitDone(s, u.id)) },
+  // Diritto Commerciale
+  { id: 'd-first', name: 'Art. 2082', desc: 'Completa la prima lezione di Diritto Commerciale', icon: '📜', test: (s) => Object.keys(s.lessons).some((k) => /^d\d+l/.test(k)) },
+  { id: 'd-azienda', name: 'Cessione d’azienda', desc: 'Completa l’unità 3 di Diritto', icon: '🏭', test: (s) => unitDone(s, 'd3') },
+  { id: 'd-crisi', name: 'Curatrice', desc: 'Completa l’unità 6 di Diritto', icon: '⚖️', test: (s) => unitDone(s, 'd6') },
+  { id: 'd-revoca', name: 'Revocatoria', desc: 'Rispondi bene a 5 esercizi sulle revocatorie', icon: '↩️', test: (s) => topicOk(s, 'd6-3', 5) },
+  { id: 'd-snc', name: 'Socia illimitata', desc: 'Completa l’unità 8 di Diritto', icon: '🤝', test: (s) => unitDone(s, 'd8') },
+  { id: 'd-spa', name: 'Consiglio di amministrazione', desc: 'Completa l’unità 10 di Diritto', icon: '🏛️', test: (s) => unitDone(s, 'd10') },
+  { id: 'd-all', name: 'Diritto da 30 e lode', desc: 'Completa tutte e 12 le unità di Diritto', icon: '👩‍⚖️', test: (s) => COURSES[2].units.every((u) => unitDone(s, u.id)) },
 ];

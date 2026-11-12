@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useCourse } from '../data/useCourse';
 import { norm } from '../engine/utils';
+import type { CourseId } from '../data';
+
+const PLACEHOLDER: Record<CourseId, string> = {
+  econ: 'Cerca: elasticità, HH, costo marginale…',
+  mate: 'Cerca: derivata, logaritmo, integrale…',
+  dir: 'Cerca: 2082, fallimento, recesso…',
+};
 
 export default function Formulas({ embedded }: { embedded?: boolean }) {
   const course = useCourse();
@@ -9,11 +16,11 @@ export default function Formulas({ embedded }: { embedded?: boolean }) {
   const units = course.units.filter((u) => list.some((f) => f.unit === u.n));
   return (
     <div className={embedded ? undefined : 'screen'}>
-      {!embedded && <h1 className="page-title">Formulario</h1>}
+      {!embedded && <h1 className="page-title">{course.refLabel}</h1>}
       <label className="sr-only" htmlFor="fsearch">
-        Cerca una formula
+        Cerca
       </label>
-      <input id="fsearch" className="search" placeholder={course.id === 'mate' ? 'Cerca: derivata, logaritmo, integrale…' : 'Cerca: elasticità, HH, costo marginale…'} value={q} onChange={(e) => setQ(e.target.value)} />
+      <input id="fsearch" className="search" placeholder={PLACEHOLDER[course.id]} value={q} onChange={(e) => setQ(e.target.value)} />
       {units.map((u) => (
         <section key={u.id}>
           <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -38,7 +45,7 @@ export default function Formulas({ embedded }: { embedded?: boolean }) {
             ))}
         </section>
       ))}
-      {!list.length && <p className="empty-state">Nessuna formula trovata per “{q}”.</p>}
+      {!list.length && <p className="empty-state">Nessun risultato per “{q}”.</p>}
     </div>
   );
 }

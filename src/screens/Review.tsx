@@ -27,7 +27,7 @@ export default function Review({ onOpen }: { onOpen: (k: ReviewKind) => void }) 
       desc: mistakes ? 'Le domande che hai sbagliato. Ogni risposta giusta ti ridà un cuore.' : 'Nessun errore da ripassare. Ottimo!',
       badge: String(mistakes),
     },
-    { k: 'flash', ico: '🃏', bg: '#e8e7ff', title: 'Flashcard', desc: 'Concetti e formule con ripetizione spaziata.', badge: `${due} da fare` },
+    { k: 'flash', ico: '🃏', bg: '#e8e7ff', title: 'Flashcard', desc: 'Concetti chiave con ripetizione spaziata.', badge: `${due} da fare` },
     { k: 'oral', ico: '🎤', bg: '#dcf7ec', title: 'Interrogazione', desc: 'Domande aperte come all’orale: rispondi, poi confronta.', badge: `${oralPerfect}/${course.open.length}` },
     { k: 'exam', ico: '📝', bg: '#fff1d6', title: 'Simulazione d’esame', desc: '30 domande miste a tempo, con voto in trentesimi.', badge: last ? `ultimo ${last.grade}` : undefined },
     { k: 'practice', ico: '🎯', bg: '#dff3fc', title: 'Allenamento mirato', desc: '10 domande sui tuoi argomenti più deboli.' },
