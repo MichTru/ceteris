@@ -98,6 +98,10 @@ export default function Profile() {
         </div>
       </div>
 
+      <button className="btn ghost block" style={{ marginTop: 14 }} onClick={() => setState((x) => void (x.onboarded = false))}>
+        Rivedi l’intro
+      </button>
+
       <h2 className="section-title">Backup dei progressi</h2>
       <div className="card">
         <p style={{ color: 'var(--ink-2)', fontSize: 14.5, lineHeight: 1.5, marginBottom: 12 }}>
