@@ -7,7 +7,7 @@ import Scene from '../graphs/scenes';
 import { bumpDaily, setState, today } from '../engine/store';
 import Mascot from '../components/Mascot';
 
-function BlockView({ b }: { b: Block }) {
+export function BlockView({ b }: { b: Block }) {
   switch (b.t) {
     case 'p':
       return (

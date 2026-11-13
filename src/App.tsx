@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { EX_INDEX } from './data';
+import { courseById, EX_INDEX } from './data';
 import { currentCourse } from './data/useCourse';
 import type { Exercise, Lesson, Unit } from './types';
 import { BADGES, type Badge } from './data/badges';
@@ -23,6 +23,7 @@ import Chapter from './screens/Chapter';
 import Stats from './screens/Stats';
 import Profile from './screens/Profile';
 import Onboarding from './screens/Onboarding';
+import Maps from './screens/Maps';
 
 type Route =
   | { name: 'tab' }
@@ -32,7 +33,8 @@ type Route =
   | { name: 'oral' }
   | { name: 'exam' }
   | { name: 'gym' }
-  | { name: 'chapter'; unit: Unit };
+  | { name: 'chapter'; unit: Unit }
+  | { name: 'maps'; unit?: Unit };
 
 const TABS: Tab[] = ['path', 'study', 'review', 'stats', 'profile'];
 // collegamenti diretti, usati dalle scorciatoie dell'icona
@@ -226,6 +228,7 @@ export default function App() {
       />
     );
   }
+  if (route.name === 'maps') return <Maps course={courseById(getState().course)} unit={route.unit} onExit={closeOverlay} />;
   if (route.name === 'gym')
     return <Gym onExit={closeOverlay} onPick={(id, title) => startSession('gym', title, gymSet(id), undefined, undefined, id)} />;
   if (route.name === 'exam') return <Exam onExit={() => { awardBadges(); closeOverlay(); }} />;
@@ -238,7 +241,7 @@ export default function App() {
       <main key={tab}>
         {tab === 'path' && <Path onLesson={startLesson} onBoss={startBoss} onGuide={(u) => setRoute({ name: 'chapter', unit: u })} />}
         {tab === 'review' && <Review onOpen={openReview} />}
-        {tab === 'study' && <Study onOpen={(u) => setRoute({ name: 'chapter', unit: u })} />}
+        {tab === 'study' && <Study onOpen={(u) => setRoute({ name: 'chapter', unit: u })} onMap={(u) => setRoute({ name: 'maps', unit: u })} />}
         {tab === 'stats' && <Stats />}
         {tab === 'profile' && <Profile />}
       </main>
