@@ -6,7 +6,7 @@ import { addXp, setState, useStore } from '../engine/store';
 import { keywordHits, shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
 import Mascot from '../components/Mascot';
-import { unitStyle } from '../components/UI';
+import { unitStyle, Stage } from '../components/UI';
 
 const OPENERS = ['Mi parli di questo…', 'Prego, mi dica.', 'Domanda:', 'Bene, passiamo a…', 'Ultima cosa:'];
 
@@ -58,55 +58,55 @@ export default function Oral({ onExit }: { onExit: () => void }) {
   };
 
   return (
-    <div className="session" style={q ? unitStyle(q.unit) : undefined}>
+    <div className={`session ${!list || !q ? 'intro-mode tone-night' : ''}`} style={q ? unitStyle(q.unit) : undefined}>
       <div className="session-head">
         <button className="iconbtn" onClick={onExit} aria-label="Esci">
           ✕
         </button>
-        <div className="progress">
-          <i style={{ width: list ? `${(i / list.length) * 100}%` : '0%', background: 'var(--ok)' }} />
-        </div>
+        {list && q && (
+          <div className="progress">
+            <i style={{ width: `${(i / list.length) * 100}%`, background: 'var(--unit)' }} />
+          </div>
+        )}
       </div>
       <div className="session-body">
         {!list && (
           <>
-            <h1 className="page-title" style={{ paddingTop: 4 }}>
-              Interrogazione
-            </h1>
-            <p className="page-sub">5 domande aperte come all’esame. Rispondi con parole tue (anche a voce, poi scrivi i punti chiave), poi confronta con la risposta modello e valutati.</p>
+            <Stage title="Interrogazione" sub="5 domande aperte come all’esame. Rispondi con parole tue, poi confronta con la risposta modello." mood="think">
+              <div className="intro-stat">
+                <b>{pool.length}</b> domande disponibili
+              </div>
+            </Stage>
+            <div className="course-switch" role="tablist" aria-label="Quali domande">
+              <button role="tab" aria-selected={!onlyWeak} className={!onlyWeak ? 'on' : ''} onClick={() => setOnlyWeak(false)}>
+                Tutte
+              </button>
+              <button role="tab" aria-selected={onlyWeak} className={onlyWeak ? 'on' : ''} onClick={() => setOnlyWeak(true)}>
+                Non ancora perfette
+              </button>
+            </div>
             <div className="unit-chips" role="group" aria-label="Unità">
               <button className="unit-chip" aria-pressed={unit === 'all'} onClick={() => setUnit('all')}>
-                Tutte
+                Tutte le unità
               </button>
               {course.units.map((u) => (
                 <button key={u.id} className="unit-chip" style={{ ['--c' as any]: u.color }} aria-pressed={unit === u.id} onClick={() => setUnit(u.id)}>
-                  {u.n}. {u.title}
+                  {u.title}
                 </button>
               ))}
-            </div>
-            <div className="unit-chips">
-              <button className="unit-chip" aria-pressed={!onlyWeak} onClick={() => setOnlyWeak(false)}>
-                Tutte le domande
-              </button>
-              <button className="unit-chip" aria-pressed={onlyWeak} onClick={() => setOnlyWeak(true)}>
-                Solo quelle non ancora perfette
-              </button>
-            </div>
-            <div className="empty-state">
-              <Mascot mood="read" size={110} anim="bob" />
-              <p>{pool.length} domande disponibili.</p>
             </div>
           </>
         )}
         {list && q && (
           <>
-            <div className="speech" style={{ marginBottom: 14 }}>
-              <Mascot mood="think" size={64} />
-              <div className="bubble">
-                <div style={{ color: 'var(--ink-3)', fontSize: 13, fontWeight: 800 }}>
-                  {OPENERS[i % OPENERS.length]} · Unità {q.unit.n}
-                </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, lineHeight: 1.25, marginTop: 2 }}>{q.q}</div>
+            <div className="oral-q">
+              <span className="oral-mascot" aria-hidden>
+                <Mascot mood={shown ? 'read' : 'think'} size={84} />
+              </span>
+              <div className="oral-bubble">
+                <span className="oral-open">{OPENERS[i % OPENERS.length]}</span>
+                <h2>{q.q}</h2>
+                <span className="oral-unit">{q.unit.title}</span>
               </div>
             </div>
             <label className="sr-only" htmlFor="ans">
@@ -139,12 +139,7 @@ export default function Oral({ onExit }: { onExit: () => void }) {
           </>
         )}
         {list && !q && (
-          <div className="empty-state" style={{ marginTop: 20 }}>
-            <Mascot mood="done" size={130} anim="jump" />
-            <p style={{ marginTop: 10 }}>Voto stimato dell’interrogazione</p>
-            <div className="grade-big">{finalGrade()}</div>
-            <p style={{ marginTop: 10 }}>È un’autovalutazione: conta quanto sei stata onesta con te stessa.</p>
-          </div>
+          <Stage title={finalGrade()} sub="Voto stimato dell’interrogazione. È un’autovalutazione: conta quanto sei stata onesta con te stessa." mood="done" />
         )}
       </div>
       <div className="session-foot">

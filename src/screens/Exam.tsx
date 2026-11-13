@@ -7,8 +7,7 @@ import { ExerciseView, correctText, kindOf, questionText } from '../exercises/Ex
 import { addXp, recordAnswer, setState, today } from '../engine/store';
 import { sample, shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
-import Mascot from '../components/Mascot';
-import { Bar, Confetti, unitStyle } from '../components/UI';
+import { Bar, Confetti, unitStyle, Stage } from '../components/UI';
 
 const MINUTES = 45;
 
@@ -103,19 +102,25 @@ export default function Exam({ onExit }: { onExit: () => void }) {
 
   if (phase === 'intro')
     return (
-      <div className="session">
+      <div className="session intro-mode tone-violet">
         <div className="session-head">
           <button className="iconbtn" onClick={onExit} aria-label="Esci">
             ✕
           </button>
         </div>
-        <div className="session-body" style={{ textAlign: 'center', alignItems: 'center' }}>
-          <Mascot mood="think" size={130} anim="bob" />
-          <h1 className="page-title">Simulazione d’esame</h1>
-          <p className="page-sub" style={{ maxWidth: 420 }}>
-            {course.title}: 30 domande da tutte le {UNITS.length} unità, {MINUTES} minuti. Nessun aiuto durante la prova: correzione e voto in trentesimi alla fine. Gli errori finiscono nel ripasso.
-          </p>
-          <div className="card" style={{ textAlign: 'left', width: '100%' }}>
+        <div className="session-body">
+          <Stage title="Simulazione d’esame" sub={`${course.title}: domande da tutte le ${UNITS.length} unità, senza aiuti. Voto in trentesimi alla fine.`} mood="think">
+            <div className="intro-facts">
+              <span>
+                <b>30</b> domande
+              </span>
+              <span>
+                <b>{MINUTES}</b> minuti
+              </span>
+            </div>
+          </Stage>
+          <h2 className="section-title">Domande per unità</h2>
+          <div className="card exam-units">
             {UNITS.map((u, k) => (
               <div key={u.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', fontSize: 15 }}>
                 <span>
@@ -148,7 +153,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
     const wrong = items.map((it, k) => ({ ...it, ok: answers[k] })).filter((x) => !x.ok);
     const pass = score / total >= 0.6;
     return (
-      <div className="session">
+      <div className={`session intro-mode ${pass ? 'tone-violet' : 'tone-night'}`}>
         {pass && <Confetti />}
         <div className="session-head">
           <button className="iconbtn" onClick={onExit} aria-label="Esci">
@@ -156,17 +161,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
           </button>
         </div>
         <div className="session-body">
-          <div style={{ textAlign: 'center' }}>
-            <Mascot mood={pass ? 'grad' : 'sad'} size={110} anim={pass ? 'jump' : undefined} />
-            <p style={{ color: 'var(--ink-2)', marginTop: 6 }}>Voto stimato</p>
-            <div className="grade-big" style={{ color: pass ? 'var(--ok)' : 'var(--bad)', fontSize: g.length > 6 ? 52 : undefined }}>
-              {g}
-            </div>
-            {!pass && <p style={{ fontWeight: 900, color: 'var(--bad)' }}>Non sufficiente: serve almeno 18</p>}
-            <p style={{ marginTop: 6, fontWeight: 800 }}>
-              {score} risposte giuste su {total}
-            </p>
-          </div>
+          <Stage title={g} sub={pass ? `Voto stimato: ${score} risposte giuste su ${total}.` : `Non sufficiente, serve almeno 18: ${score} risposte giuste su ${total}.`} mood={pass ? 'grad' : 'sad'} />
           <h2 className="section-title">Per unità</h2>
           <div className="card">
             {byUnit.map((b) => (
@@ -225,7 +220,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
           <i style={{ width: `${(i / items.length) * 100}%`, background: 'var(--primary)' }} />
         </div>
         <span className={`timer ${left < 300 ? 'low' : ''}`} aria-label="Tempo rimasto">
-          ⏱ {mm}:{ss}
+          {mm}:{ss}
         </span>
       </div>
       <div className="session-body" key={it.ex.id}>

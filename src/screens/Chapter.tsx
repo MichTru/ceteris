@@ -5,6 +5,7 @@ import { CHAPTERS } from '../data/study';
 import { Rich, unitStyle } from '../components/UI';
 import Scene from '../graphs/scenes';
 import { setState, today } from '../engine/store';
+import Mascot from '../components/Mascot';
 
 function BlockView({ b }: { b: Block }) {
   switch (b.t) {
@@ -165,6 +166,7 @@ function BlockView({ b }: { b: Block }) {
 export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onExit: () => void; onPractice: () => void }) {
   const ch = CHAPTERS[unit.id];
   const [active, setActive] = useState(0);
+  const [pct, setPct] = useState(0);
   const endRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -195,6 +197,8 @@ export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onEx
         if (s.getBoundingClientRect().top < 140) k = i;
       });
       setActive(k);
+      const max = document.documentElement.scrollHeight - innerHeight;
+      setPct(max > 0 ? Math.min(1, scrollY / max) : 0);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -220,7 +224,18 @@ export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onEx
           <span>Unità {unit.n}</span>
           <b>{unit.title}</b>
         </div>
+        <i className="read-bar" style={{ transform: `scaleX(${pct})` }} aria-hidden />
       </div>
+      <header className="ch-cover">
+        <span className="ch-num" aria-hidden>
+          {unit.n}
+        </span>
+        <h1>{unit.title}</h1>
+        <p>{ch.intro}</p>
+        <span className="ch-mascot" aria-hidden>
+          <Mascot mood="read" size={130} />
+        </span>
+      </header>
       <nav className="study-nav" ref={navRef} aria-label="Sezioni">
         {ch.sections.map((s, i) => (
           <button key={i} aria-current={i === active} onClick={() => go(i)}>
@@ -229,7 +244,6 @@ export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onEx
         ))}
       </nav>
       <main className="study-body">
-        <p className="study-intro">{ch.intro}</p>
         {ch.sections.map((s, i) => (
           <section key={i} id={`sec-${i}`} className="study-sec">
             <h2>{s.title}</h2>
@@ -248,9 +262,12 @@ export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onEx
             ))}
           </ul>
         </section>
-        <button className="btn unit block" onClick={onPractice}>
-          Esercitati su questa unità
-        </button>
+        <div className="ch-end">
+          <Mascot mood="done" size={120} />
+          <button className="btn unit block" onClick={onPractice}>
+            Esercitati su questa unità
+          </button>
+        </div>
       </main>
     </div>
   );
