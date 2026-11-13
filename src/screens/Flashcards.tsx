@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ALL_CARDS } from '../data';
 import { useCourse } from '../data/useCourse';
-import { addXp, setState, useStore } from '../engine/store';
+import { addXp, bumpDaily, setState, useStore } from '../engine/store';
 import { isDue, sm2 } from '../engine/srs';
 import { shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
@@ -42,6 +42,7 @@ export default function Flashcards({ onExit }: { onExit: () => void }) {
       s.srs[c.id] = sm2(s.srs[c.id], q);
     });
     addXp(2);
+    bumpDaily((d) => void (d.cards += 1));
     sfx.tap();
     setDoneCount((n) => n + 1);
     if (q === 5) setKnown((n) => n + 1);

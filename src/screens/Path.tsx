@@ -6,6 +6,7 @@ import type { Lesson, Unit } from '../types';
 import { setState, today, useStore, type State } from '../engine/store';
 import { Icon, Stage, unitStyle } from '../components/UI';
 import Mascot from '../components/Mascot';
+import { ExamCard, Missions } from '../components/Today';
 
 const OFFS = [0, 62, 92, 62, 0, -62, -92, -62];
 const ROW = 104;
@@ -104,6 +105,11 @@ export default function Path({ onLesson, onBoss, onGuide }: Props) {
           </button>
         )}
       </Stage>
+
+      <div className="today-row">
+        <ExamCard />
+        <Missions />
+      </div>
 
       {course.units.map((u) => {
         const uOpen = isUnitOpen(s, u);

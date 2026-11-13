@@ -21,6 +21,18 @@ export interface ExamResult {
   course?: 'econ' | 'mate' | 'dir';
 }
 
+/** Contatori del giorno per le missioni. */
+export interface Daily {
+  date: string;
+  lessons: number;
+  perfect: number;
+  cards: number;
+  oral: number;
+  read: string[];
+  combo: number;
+  claimed: boolean;
+}
+
 export interface State {
   version: 1;
   name: string;
@@ -53,6 +65,11 @@ export interface State {
   relaxed: boolean;
   /** Numero sul bollino dell'icona: carte da ripassare oggi. */
   badge: boolean;
+  /** Data dell'esame per corso (YYYY-MM-DD). */
+  examDates: Partial<Record<'econ' | 'mate' | 'dir', string>>;
+  daily: Daily;
+  /** Domande dell'interrogazione lette ad alta voce. */
+  voice: boolean;
   perfectLessons: number;
   bestCombo: number;
   onboarded: boolean;
@@ -80,6 +97,20 @@ export const dayDiff = (a: string, b: string) => {
   return Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / 86400000);
 };
 
+export const freshDaily = (): Daily => ({ date: today(), lessons: 0, perfect: 0, cards: 0, oral: 0, read: [], combo: 0, claimed: false });
+
+/** Contatori di oggi (si azzerano al cambio di giorno). */
+export const dailyOf = (s: State): Daily => (s.daily && s.daily.date === today() ? s.daily : freshDaily());
+
+/** Aggiorna i contatori delle missioni. */
+export function bumpDaily(fn: (d: Daily) => void) {
+  setState((s) => {
+    const d = dailyOf(s);
+    fn(d);
+    s.daily = d;
+  });
+}
+
 const fresh = (): State => ({
   version: 1,
   name: 'Chiara',
@@ -106,6 +137,9 @@ const fresh = (): State => ({
   theme: 'auto',
   relaxed: false,
   badge: false,
+  examDates: {},
+  daily: freshDaily(),
+  voice: true,
   perfectLessons: 0,
   bestCombo: 0,
   onboarded: false,

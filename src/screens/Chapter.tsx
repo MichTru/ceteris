@@ -4,7 +4,7 @@ import type { Block, Unit } from '../types';
 import { CHAPTERS } from '../data/study';
 import { Rich, unitStyle } from '../components/UI';
 import Scene from '../graphs/scenes';
-import { setState, today } from '../engine/store';
+import { bumpDaily, setState, today } from '../engine/store';
 import Mascot from '../components/Mascot';
 
 function BlockView({ b }: { b: Block }) {
@@ -179,10 +179,14 @@ export default function Chapter({ unit, onExit, onPractice }: { unit: Unit; onEx
     const el = endRef.current;
     if (!el || !('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver((es) => {
-      if (es.some((e) => e.isIntersecting))
+      if (es.some((e) => e.isIntersecting)) {
         setState((s) => {
           if (!s.read[unit.id]) s.read[unit.id] = today();
         });
+        bumpDaily((d) => {
+          if (!d.read.includes(unit.id)) d.read.push(unit.id);
+        });
+      }
     });
     io.observe(el);
     return () => io.disconnect();

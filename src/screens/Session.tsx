@@ -5,7 +5,7 @@ import type { Exercise, Theory, Unit } from '../types';
 import { ExerciseView, correctText, kindOf, questionText } from '../exercises/Exercises';
 import { TheoryCard, unitStyle } from '../components/UI';
 import Mascot from '../components/Mascot';
-import { addXp, gainHeart, getState, loseHeart, recordAnswer, setState, useStore } from '../engine/store';
+import { addXp, bumpDaily, gainHeart, getState, loseHeart, recordAnswer, setState, useStore } from '../engine/store';
 import { sfx } from '../engine/sound';
 import { EX_INDEX } from '../data';
 
@@ -139,6 +139,13 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
       const t = new Date();
       const k = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
       s.time[k] = (s.time[k] ?? 0) + seconds;
+    });
+    bumpDaily((d) => {
+      if (mode === 'lesson' || mode === 'boss') {
+        d.lessons += 1;
+        if (acc === 1) d.perfect += 1;
+      }
+      d.combo = Math.max(d.combo, stats.current.maxCombo);
     });
     sfx.complete();
     onFinish({ mode, correct, total: unique, xp: stats.current.xp + bonus, seconds, maxCombo: stats.current.maxCombo, unit, lessonId, passed });
