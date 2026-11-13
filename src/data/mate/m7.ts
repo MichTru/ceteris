@@ -209,7 +209,7 @@ const m7: Unit = {
     { id: 'm7-c3', front: '∫ 1/x dx', back: 'ln|x| + c.' },
     { id: 'm7-c4', front: '∫ eˣ dx', back: 'eˣ + c.' },
     { id: 'm7-c5', front: '∫ f′/f dx', back: 'ln|f| + c.' },
-    { id: 'm7-c6', front: 'Per parti', back: '∫ f·g′ = f·g − ∫ f′·g.' },
+    { id: 'm7-c6', front: 'Integrazione per parti', back: '∫ f·g′ = f·g − ∫ f′·g.' },
     { id: 'm7-c7', front: '∫ x eˣ dx', back: 'eˣ(x − 1) + c.' },
     { id: 'm7-c8', front: '∫ ln x dx', back: 'x ln x − x + c.' },
     { id: 'm7-c9', front: 'Costo totale da marginale', back: 'C = ∫ C′ dx; la costante è il costo fisso.' },

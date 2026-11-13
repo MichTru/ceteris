@@ -270,7 +270,7 @@ const m4: Unit = {
     { id: 'm4-c9', front: 'Continuità in x₀', back: 'f(x₀) esiste, il limite esiste finito, sono uguali.' },
     { id: 'm4-c10', front: 'Discontinuità 1ª specie', back: 'Salto: limiti finiti diversi, S = L⁺ − L⁻.' },
     { id: 'm4-c11', front: 'Discontinuità 3ª specie', back: 'Eliminabile: limite finito ≠ f(x₀).' },
-    { id: 'm4-c12', front: 'Weierstrass', back: 'Continua su [a, b] chiuso e limitato ⇒ max e min assoluti.' },
+    { id: 'm4-c12', front: 'Teorema di Weierstrass', back: 'Continua su [a, b] chiuso e limitato ⇒ max e min assoluti.' },
     { id: 'm4-c13', front: 'Teorema degli zeri', back: 'Continua su [a, b], f(a)·f(b) < 0 ⇒ ∃c: f(c) = 0.' },
   ],
 };

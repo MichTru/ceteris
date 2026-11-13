@@ -625,10 +625,10 @@ const u2: Unit = {
     { id: 'u2-c12', front: 'Elasticità al reddito', back: 'ΔQ% / ΔY%. Positiva = normale, negativa = inferiore.' },
     { id: 'u2-c13', front: 'Elasticità incrociata', back: 'ΔQ1% / ΔP2%. + sostituti, − complementari, 0 indipendenti.' },
     { id: 'u2-c14', front: 'Elasticità dell’offerta ε', back: 'ΔQs% / ΔP%. Sempre positiva; più rigida nel breve periodo.' },
-    { id: 'u2-c15', front: 'Metro di New York', back: '1,25 → 1,50 $ (+20%), passeggeri −4,3%: η = −0,215, ricavo ↑.' },
-    { id: 'u2-c16', front: 'San Valentino', back: 'Salgono di più i prezzi dei fiori: offerta rigida, non si stoccano.' },
-    { id: 'u2-c17', front: 'Mucca pazza', back: 'Domanda bovina crolla, prezzo ↓; prezzi di suino e pollo ↑.' },
-    { id: 'u2-c18', front: 'Droga: arrestare spacciatori', back: 'Offerta ↓ con domanda rigida: prezzo ↑ molto, rischio più criminalità.' },
+    { id: 'u2-c15', front: 'Metro di New York: biglietto più caro', back: '1,25 → 1,50 $ (+20%), passeggeri −4,3%: η = −0,215, ricavo ↑.' },
+    { id: 'u2-c16', front: 'San Valentino: perché salgono i prezzi dei fiori', back: 'Salgono di più i prezzi dei fiori: offerta rigida, non si stoccano.' },
+    { id: 'u2-c17', front: 'Mucca pazza: effetti sui mercati della carne', back: 'Domanda bovina crolla, prezzo ↓; prezzi di suino e pollo ↑.' },
+    { id: 'u2-c18', front: 'Droga: effetto dell’arresto degli spacciatori', back: 'Offerta ↓ con domanda rigida: prezzo ↑ molto, rischio più criminalità.' },
   ],
 };
 

@@ -227,14 +227,14 @@ const d7: Unit = {
     { id: 'd7-c3', front: 'Proposte concorrenti', back: 'Creditori con ≥ 10% se il debitore non assicura 40% (30% in continuità).' },
     { id: 'd7-c4', front: 'Concordato in bianco', back: '60-120 giorni per proposta e piano; blocco immediato delle azioni.' },
     { id: 'd7-c5', front: 'Spossessamento attenuato', back: 'Straordinaria amministrazione solo con autorizzazione del giudice delegato.' },
-    { id: 'd7-c6', front: 'Maggioranza nel concordato', back: 'Maggioranza dei crediti ammessi e, con classi, nel maggior numero di classi.' },
+    { id: 'd7-c6', front: 'Maggioranza per approvare il concordato', back: 'Maggioranza dei crediti ammessi e, con classi, nel maggior numero di classi.' },
     { id: 'd7-c7', front: 'Cram down', back: 'Omologazione nonostante le opposizioni, se la proposta conviene rispetto al fallimento.' },
     { id: 'd7-c8', front: 'Concordato fallimentare', back: 'Fallito: dopo un anno dalla sentenza, entro due anni dall’esecutività del passivo; silenzio-assenso.' },
-    { id: 'd7-c9', front: 'Art. 182-bis l.f.', back: '60% dei crediti, omologazione, estranei pagati entro 120 giorni.' },
+    { id: 'd7-c9', front: 'Accordo di ristrutturazione dei debiti (art. 182-bis l.f.)', back: '60% dei crediti, omologazione, estranei pagati entro 120 giorni.' },
     { id: 'd7-c10', front: 'Accordo agevolato (CCII)', back: '30% dei crediti, rinunciando a moratoria e misure protettive.' },
     { id: 'd7-c11', front: 'Liquidazione giudiziale', back: 'Nome del fallimento nel Codice della crisi (dal 15 luglio 2022).' },
     { id: 'd7-c12', front: 'Concordato liquidatorio (CCII)', back: 'Risorse esterne che aumentano di almeno il 10% il soddisfacimento.' },
-    { id: 'd7-c13', front: 'Incapiente meritevole', back: 'Esdebitazione; paga se entro 4 anni ha utilità per almeno il 10%.' },
+    { id: 'd7-c13', front: 'Debitore incapiente meritevole', back: 'Esdebitazione; paga se entro 4 anni ha utilità per almeno il 10%.' },
   ],
 };
 

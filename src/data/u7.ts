@@ -529,7 +529,7 @@ const u7: Unit = {
     { id: 'u7-c2', front: 'Fiducia', back: 'Aspettativa di comportamento corretto della controparte.' },
     { id: 'u7-c3', front: 'Reputazione', back: 'Informazioni trasmissibili sulla storia di comportamento corretto.' },
     { id: 'u7-c4', front: 'Cluster', back: 'Imprese e attività complementari specializzate in un’area: il luogo è spazio fisico.' },
-    { id: 'u7-c5', front: 'Distretto (Becattini, 1989)', back: 'Entità socio-territoriale: comunità di persone + popolazione di imprese.' },
+    { id: 'u7-c5', front: 'Distretto industriale (Becattini, 1989)', back: 'Entità socio-territoriale: comunità di persone + popolazione di imprese.' },
     { id: 'u7-c6', front: 'Efficienza collettiva', back: 'Economie esterne + azione collettiva.' },
     { id: 'u7-c7', front: 'Origini delle economie esterne', back: 'Lavoro specializzato, input locali, flussi di conoscenza.' },
     { id: 'u7-c8', front: 'Economie esterne pecuniarie / tecnologiche', back: 'Risparmi di costo / condivisione di conoscenza.' },

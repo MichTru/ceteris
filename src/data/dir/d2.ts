@@ -170,18 +170,18 @@ const d2: Unit = {
     { id: 'd2-o7', q: 'Cosa distingue lo statuto generale dell’imprenditore dallo statuto dell’imprenditore commerciale?', answer: 'Lo statuto generale vale per ogni imprenditore: azienda, segni distintivi, concorrenza sleale, consorzi. Lo statuto dell’imprenditore commerciale non piccolo aggiunge iscrizione nella sezione ordinaria con efficacia dichiarativa, rappresentanza commerciale, scritture contabili e procedure concorsuali.', keywords: ['azienda', 'segni distintivi', 'concorrenza', 'scritture', 'concorsuali'] },
   ],
   cards: [
-    { id: 'd2-c1', front: 'Art. 2193 c.c.', back: 'Efficacia dichiarativa: fatti iscritti opponibili; non iscritti inopponibili salvo prova della conoscenza.' },
+    { id: 'd2-c1', front: 'Efficacia dichiarativa del registro (art. 2193)', back: 'Efficacia dichiarativa: fatti iscritti opponibili; non iscritti inopponibili salvo prova della conoscenza.' },
     { id: 'd2-c2', front: 'Efficacia costitutiva', back: 'Società di capitali e cooperative nascono con l’iscrizione (art. 2331).' },
     { id: 'd2-c3', front: 'Sezione speciale', back: 'Agricoli, piccoli, artigiani, società semplici: pubblicità notizia (dichiarativa per gli agricoli).' },
     { id: 'd2-c4', front: 'Tipicità del registro', back: 'Si iscrivono solo gli atti previsti dalla legge.' },
     { id: 'd2-c5', front: 'Institore (art. 2203)', back: 'Preposto all’impresa, a una sede secondaria o a un ramo.' },
     { id: 'd2-c6', front: 'Poteri dell’institore (art. 2204)', back: 'Tutti gli atti pertinenti all’impresa, no immobili senza autorizzazione; rappresentanza processuale.' },
-    { id: 'd2-c7', front: 'Art. 2208 c.c.', back: 'Institore che non spende il nome: obbligato lui, ma per atti pertinenti risponde anche l’imprenditore.' },
+    { id: 'd2-c7', front: 'Institore che non spende il nome (art. 2208)', back: 'Institore che non spende il nome: obbligato lui, ma per atti pertinenti risponde anche l’imprenditore.' },
     { id: 'd2-c8', front: 'Procuratore (art. 2209)', back: 'Atti di un ambito funzionale; niente rappresentanza processuale.' },
     { id: 'd2-c9', front: 'Commesso (art. 2210)', back: 'Atti ordinari delle operazioni affidate; niente sconti o dilazioni non d’uso.' },
-    { id: 'd2-c10', front: 'Art. 2086 c. 2', back: 'Assetti organizzativi, amministrativi e contabili adeguati, anche per rilevare la crisi.' },
-    { id: 'd2-c11', front: 'Art. 2214 c.c.', back: 'Libro giornale, libro degli inventari, altre scritture; esonero del piccolo imprenditore.' },
-    { id: 'd2-c12', front: 'Conservazione scritture', back: 'Dieci anni (art. 2220).' },
+    { id: 'd2-c10', front: 'Assetti adeguati (art. 2086 c. 2)', back: 'Assetti organizzativi, amministrativi e contabili adeguati, anche per rilevare la crisi.' },
+    { id: 'd2-c11', front: 'Scritture contabili obbligatorie (art. 2214)', back: 'Libro giornale, libro degli inventari, altre scritture; esonero del piccolo imprenditore.' },
+    { id: 'd2-c12', front: 'Conservazione delle scritture contabili', back: 'Dieci anni (art. 2220).' },
   ],
 };
 

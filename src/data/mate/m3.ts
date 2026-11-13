@@ -189,9 +189,9 @@ const m3: Unit = {
     { id: 'm3-c4', front: 'Interesse semplice', back: 'S_n = C(1 + n·r).' },
     { id: 'm3-c5', front: 'Interesse composto', back: 'S_n = C(1 + r)ⁿ.' },
     { id: 'm3-c6', front: 'Definitivamente', back: 'Per ogni n ≥ n₀, da un certo indice in poi.' },
-    { id: 'm3-c7', front: 'lim s_n = S', back: '∀ε > 0 ∃n₀: |s_n − S| < ε per ogni n > n₀.' },
+    { id: 'm3-c7', front: 'Definizione di lim s_n = S', back: '∀ε > 0 ∃n₀: |s_n − S| < ε per ogni n > n₀.' },
     { id: 'm3-c8', front: 'Per eccesso / per difetto', back: '1/n → 0⁺ (dall’alto); 1 − 1/n → 1⁻ (dal basso).' },
-    { id: 'm3-c9', front: 'Irregolare', back: 'Senza limite, es. (−1)ⁿ.' },
+    { id: 'm3-c9', front: 'Successione irregolare', back: 'Senza limite, es. (−1)ⁿ.' },
     { id: 'm3-c10', front: 'qⁿ → 0 quando?', back: 'Per −1 < q < 1.' },
   ],
 };
