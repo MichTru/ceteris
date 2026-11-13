@@ -3,12 +3,13 @@ import { EX_INDEX } from './data';
 import { currentCourse } from './data/useCourse';
 import type { Exercise, Lesson, Unit } from './types';
 import { BADGES, type Badge } from './data/badges';
-import { checkStreak, getState, regenHearts, setState, useStore } from './engine/store';
+import { checkStreak, getState, regenHearts, setState, today, useStore } from './engine/store';
 import { sample, shuffle } from './engine/utils';
 import { BottomNav, HeartsInfo, Sheet, SideNav, TopBar, type Tab, TONE } from './components/UI';
 import Rail from './components/Rail';
 import Mascot from './components/Mascot';
-import Path, { lessonDone } from './screens/Path';
+import Path, { currentTarget, lessonDone } from './screens/Path';
+import { syncBadge } from './engine/appbadge';
 import Session, { type SessionMode, type SessionResult } from './screens/Session';
 import Summary from './screens/Summary';
 import Review, { type ReviewKind } from './screens/Review';
@@ -34,6 +35,9 @@ type Route =
   | { name: 'chapter'; unit: Unit };
 
 const TABS: Tab[] = ['path', 'study', 'review', 'stats', 'profile'];
+// collegamenti diretti, usati dalle scorciatoie dell'icona
+const DEEP = ['flash', 'oral', 'next'] as const;
+
 const tabFromHash = (): Tab => {
   const h = location.hash.replace('#', '') as Tab;
   return TABS.includes(h) ? h : 'path';
@@ -81,10 +85,25 @@ export default function App() {
     regenHearts();
     const t = setInterval(regenHearts, 60000);
     const onHash = () => setTab(tabFromHash());
+    const deep = location.hash.slice(1) as (typeof DEEP)[number];
+    if (DEEP.includes(deep) && getState().onboarded) {
+      history.replaceState(null, '', '#path');
+      if (deep === 'flash') setRoute({ name: 'flash' });
+      if (deep === 'oral') setRoute({ name: 'oral' });
+      if (deep === 'next') {
+        const tg = currentTarget(getState());
+        if (tg?.lesson) startLesson(tg.unit, tg.lesson);
+        else if (tg) startBoss(tg.unit);
+      }
+    }
+    syncBadge();
+    const onVis = () => document.visibilityState === 'hidden' && syncBadge();
+    document.addEventListener('visibilitychange', onVis);
     window.addEventListener('hashchange', onHash);
     return () => {
       clearInterval(t);
       window.removeEventListener('hashchange', onHash);
+      document.removeEventListener('visibilitychange', onVis);
     };
   }, []);
 

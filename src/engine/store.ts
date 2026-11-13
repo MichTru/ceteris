@@ -51,6 +51,8 @@ export interface State {
   sound: boolean;
   theme: 'auto' | 'light' | 'dark';
   relaxed: boolean;
+  /** Numero sul bollino dell'icona: carte da ripassare oggi. */
+  badge: boolean;
   perfectLessons: number;
   bestCombo: number;
   onboarded: boolean;
@@ -103,6 +105,7 @@ const fresh = (): State => ({
   sound: true,
   theme: 'auto',
   relaxed: false,
+  badge: false,
   perfectLessons: 0,
   bestCombo: 0,
   onboarded: false,

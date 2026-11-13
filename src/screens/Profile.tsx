@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { exportState, importState, resetState, setState, useStore } from '../engine/store';
 import { COURSES, totals } from '../data';
 import { useCourse } from '../data/useCourse';
+import { syncBadge } from '../engine/appbadge';
 
 const GOALS: [number, string][] = [
   [20, 'Tranquilla · 20 XP'],
@@ -77,6 +78,15 @@ export default function Profile() {
       <div className="card" style={{ padding: '4px 16px' }}>
         {toggle('Suoni', 'Effetti sonori per risposte e lezioni', s.sound, (v) => setState((x) => void (x.sound = v)))}
         {toggle('Modalità rilassata', 'Cuori infiniti: gli errori non bloccano le lezioni', s.relaxed, (v) => setState((x) => void (x.relaxed = v)))}
+        {'setAppBadge' in navigator &&
+          toggle('Numero sull’icona', 'Le carte da ripassare oggi, sul bollino dell’app', s.badge, async (v) => {
+            if (v && 'Notification' in window && Notification.permission !== 'granted') {
+              const p = await Notification.requestPermission().catch(() => 'denied' as NotificationPermission);
+              if (p !== 'granted') return;
+            }
+            setState((x) => void (x.badge = v));
+            syncBadge();
+          })}
         <div className="row">
           <div className="rl">
             Tema
