@@ -5990,3 +5990,65 @@ textarea.answer {
   font-style: normal;
   font-weight: 600;
 }
+
+/* apertura a ogni avvio */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #7445e6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 0.55s cubic-bezier(0.7, 0, 0.3, 1), border-radius 0.55s ease;
+  will-change: transform;
+}
+.splash.out {
+  transform: translateY(-105%);
+  border-radius: 0 0 48px 48px;
+}
+.splash-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 18vh;
+}
+.splash-logo {
+  margin-top: 0;
+}
+.splash-hello {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-top: 10px;
+  animation: fade-up 0.5s 0.75s ease both;
+}
+.splash .logo-i i.il-dot {
+  animation:
+    dot-drop 0.8s 0.4s cubic-bezier(0.3, 1.25, 0.5, 1) both,
+    dot-hop 5s 2.4s ease-in-out infinite;
+}
+.splash-mascot {
+  position: absolute;
+  left: 50%;
+  bottom: -46px;
+  transform: translateX(-50%);
+  animation: splash-peek 0.8s 0.55s var(--spring) both;
+}
+.splash-mascot .mascot {
+  filter: drop-shadow(0 18px 24px rgba(22, 22, 58, 0.35));
+}
+@keyframes splash-peek {
+  from {
+    transform: translateX(-50%) translateY(120px) scale(0.85);
+    opacity: 0;
+  }
+}
+.splash.out .splash-mascot .mascot {
+  animation: wiggle 0.5s ease both;
+}
