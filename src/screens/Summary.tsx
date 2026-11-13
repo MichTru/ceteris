@@ -10,9 +10,27 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
   const ss = String(r.seconds % 60).padStart(2, '0');
   const failedBoss = r.mode === 'boss' && !r.passed;
   const [show, setShow] = useState(false);
+  const [xp, setXp] = useState(0);
   useEffect(() => {
     const t = setTimeout(() => setShow(true), 150);
-    return () => clearTimeout(t);
+    // gli XP salgono fino al totale
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !r.xp) {
+      setXp(r.xp);
+      return () => clearTimeout(t);
+    }
+    const t0 = performance.now() + 450;
+    let raf = 0;
+    const tick = (now: number) => {
+      const k = Math.min(1, Math.max(0, (now - t0) / 900));
+      setXp(Math.round(r.xp * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      clearTimeout(t);
+      cancelAnimationFrame(raf);
+    };
   }, []);
   const title = failedBoss
     ? 'Quasi! Serve il 70%'
@@ -35,25 +53,25 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
           ? 'Gli esercizi della palestra cambiano ogni volta: rifallo finché i passaggi ti vengono da soli.'
           : 'Gli errori finiscono nel ripasso: li rivedrai finché non li sai.';
   return (
-    <div className="summary">
+    <div className={`summary stage-full ${failedBoss ? 'night' : ''}`}>
       {!failedBoss && show && <Confetti />}
-      <Mascot mood={failedBoss ? 'sad' : 'party'} size={150} anim={failedBoss ? undefined : 'jump'} />
-      <h1 style={failedBoss ? { color: 'var(--bad)' } : undefined}>{title}</h1>
-      <p style={{ color: 'var(--ink-2)', marginTop: 6, maxWidth: 360 }}>{line}</p>
-      <div className="sum-grid">
-        <div className="sum-box" style={{ ['--c' as any]: 'var(--gold)' }}>
-          <div className="t">XP</div>
-          <div className="v">+{r.xp}</div>
+      <Mascot mood={failedBoss ? 'sad' : acc === 100 ? 'love' : 'party'} size={170} anim={failedBoss ? undefined : 'jump'} />
+      <h1>{title}</h1>
+      <p className="summary-line">{line}</p>
+      <div className="stickers">
+        <div className="sticker sun" style={{ ['--d' as any]: '0.35s', ['--r' as any]: '-4deg' }}>
+          <b>+{xp}</b>
+          <span>XP</span>
         </div>
-        <div className="sum-box" style={{ ['--c' as any]: acc >= 70 ? 'var(--ok)' : 'var(--bad)' }}>
-          <div className="t">Precisione</div>
-          <div className="v">{acc}%</div>
+        <div className={`sticker ${acc >= 70 ? 'mint' : 'coral'}`} style={{ ['--d' as any]: '0.5s', ['--r' as any]: '3deg' }}>
+          <b>{acc}%</b>
+          <span>precisione</span>
         </div>
-        <div className="sum-box" style={{ ['--c' as any]: '#0ea5e9' }}>
-          <div className="t">Tempo</div>
-          <div className="v">
+        <div className="sticker paper" style={{ ['--d' as any]: '0.65s', ['--r' as any]: '-2deg' }}>
+          <b>
             {mm}:{ss}
-          </div>
+          </b>
+          <span>tempo</span>
         </div>
       </div>
       {newBadges.map((b) => (
@@ -66,11 +84,11 @@ export default function Summary({ r, newBadges, onContinue, onRetry }: { r: Sess
         </div>
       ))}
       <div style={{ marginTop: 'auto', width: '100%', display: 'grid', gap: 10, paddingTop: 18 }}>
-        <button className="btn block" onClick={onContinue} autoFocus>
+        <button className="btn light block" onClick={onContinue} autoFocus>
           Continua
         </button>
         {onRetry && (
-          <button className="btn ghost block" onClick={onRetry}>
+          <button className="btn ghost-light block" onClick={onRetry}>
             {r.mode === 'gym' ? 'Altri esercizi' : 'Riprova'}
           </button>
         )}

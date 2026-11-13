@@ -4,7 +4,7 @@ import { useCourse } from '../data/useCourse';
 import { level, setState, today, useStore } from '../engine/store';
 import { currentTarget } from '../screens/Path';
 import type { Lesson, Unit } from '../types';
-import { GoalRing, unitStyle } from './UI';
+import { Flame, GoalRing, Heart, Star, unitStyle } from './UI';
 
 interface Props {
   onHearts: () => void;
@@ -21,15 +21,15 @@ export default function Rail({ onHearts, onLesson, onBoss }: Props) {
     <aside className="rail" aria-label="Riepilogo">
       <div className="rail-stats">
         <span className={`stat-pill flame ${s.lastStudy === today() ? '' : 'off'}`} title="Giorni di fila">
-          <span className="ico">🔥</span>
+          <span className="ico"><Flame /></span>
           {s.streak}
         </span>
         <span className="stat-pill gold" title="Livello">
-          <span className="ico">⭐</span>
+          <span className="ico"><Star /></span>
           {level(s.xp).lvl}
         </span>
         <button className="stat-pill heart" onClick={onHearts} title="Cuori" style={{ cursor: 'pointer' }}>
-          <span className="ico">❤️</span>
+          <span className="ico"><Heart /></span>
           {s.relaxed ? '∞' : s.hearts}
         </button>
       </div>
@@ -52,14 +52,14 @@ export default function Rail({ onHearts, onLesson, onBoss }: Props) {
         <div className="rail-courses">
           {COURSES.map((c) => (
             <button key={c.id} className={c.id === course.id ? 'on' : ''} aria-pressed={c.id === course.id} onClick={() => setState((x) => void (x.course = c.id))}>
-              <span aria-hidden>{c.icon}</span> {c.short}
+              {c.short}
             </button>
           ))}
         </div>
       </section>
 
       {target && (
-        <section className="rail-card" style={unitStyle(target.unit)}>
+        <section className="rail-card rail-next-card" style={unitStyle(target.unit)}>
           <h3>Prossimo passo</h3>
           <p className="rail-next">
             <span>Unità {target.unit.n} · {target.unit.title}</span>

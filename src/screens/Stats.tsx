@@ -2,15 +2,15 @@ import { EX_INDEX } from '../data';
 import { useCourse } from '../data/useCourse';
 import { BADGES } from '../data/badges';
 import { addDays, level, today, useStore } from '../engine/store';
-import { Bar } from '../components/UI';
+import { Bar, Flame, Stage, Star } from '../components/UI';
 
 const DAYS = ['D', 'L', 'M', 'M', 'G', 'V', 'S'];
 
 function masteryColor(v: number) {
   // rosso → arancio → verde
-  if (v < 0.5) return '#ef4c5c';
-  if (v < 0.75) return '#f59e0b';
-  return '#12b076';
+  if (v < 0.5) return '#f2552c';
+  if (v < 0.75) return '#ffb800';
+  return '#1fa77a';
 }
 
 export default function Stats() {
@@ -53,37 +53,60 @@ export default function Stats() {
 
   return (
     <div className="screen">
-      <h1 className="page-title">Progressi</h1>
-      <p className="page-sub">
-        Livello {lv.lvl} · {lv.into} / {lv.need} XP per il prossimo
-      </p>
-      <div className="card" style={{ padding: 12, marginBottom: 14 }}>
-        <Bar value={lv.into / lv.need} color="var(--gold)" />
-      </div>
-      <div className="kpis">
-        <div className="kpi">
-          <span className="ki">🔥</span>
+      <Stage title="Progressi" sub={course.title}>
+        <div className="level">
+          <svg width="96" height="96" viewBox="0 0 96 96" role="img" aria-label={`Livello ${lv.lvl}: ${lv.into} di ${lv.need} XP per il prossimo`}>
+            <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,.14)" strokeWidth="10" />
+            <circle
+              cx="48"
+              cy="48"
+              r="38"
+              fill="none"
+              stroke="var(--sun)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              strokeDasharray={`${238.8 * (lv.into / lv.need)} 238.8`}
+              transform="rotate(-90 48 48)"
+              className="level-arc"
+            />
+            <text x="48" y="56" textAnchor="middle" className="level-n">
+              {lv.lvl}
+            </text>
+          </svg>
           <div>
-            <div className="kv">{s.streak}</div>
-            <div className="kl">giorni di fila (record {s.bestStreak})</div>
+            <b>Livello {lv.lvl}</b>
+            <span>{lv.need - lv.into} XP al prossimo</span>
           </div>
         </div>
-        <div className="kpi">
-          <span className="ki">💎</span>
+      </Stage>
+      <div className="kpis">
+        <div className="kpi sun">
+          <span className="ki"><Flame /></span>
+          <div>
+            <div className="kv">{s.streak}</div>
+            <div className="kl">giorni di fila, record {s.bestStreak}</div>
+          </div>
+        </div>
+        <div className="kpi lilac">
+          <span className="ki"><Star /></span>
           <div>
             <div className="kv">{s.xp}</div>
             <div className="kl">XP totali</div>
           </div>
         </div>
         <div className="kpi">
-          <span className="ki">🎯</span>
+          <span className="ki">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2.6" /><circle cx="12" cy="12" r="3.5" fill="currentColor" /></svg>
+          </span>
           <div>
             <div className="kv">{seenAll ? Math.round((okAll / seenAll) * 100) : 0}%</div>
-            <div className="kl">precisione ({seenAll} risposte)</div>
+            <div className="kl">precisione su {seenAll} risposte</div>
           </div>
         </div>
         <div className="kpi">
-          <span className="ki">⏱️</span>
+          <span className="ki">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" strokeWidth="2.6" /><path d="M12 9v4l2.5 2M10 2h4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" /></svg>
+          </span>
           <div>
             <div className="kv">{totalSec >= 3600 ? `${(totalSec / 3600).toFixed(1).replace('.', ',')} h` : `${Math.round(totalSec / 60)} min`}</div>
             <div className="kl">tempo di studio</div>

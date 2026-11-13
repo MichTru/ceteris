@@ -190,7 +190,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
         </div>
         <div className="session-body">
           <div className="speech" style={{ marginBottom: 14 }}>
-            <Mascot mood={tIdx === 0 ? 'wave' : 'think'} size={70} anim="bob" />
+            <Mascot mood={tIdx === 0 ? 'wave' : 'read'} size={70} anim="bob" />
             <div className="bubble">
               {tIdx === 0 ? `Prima un ripasso veloce: “${title}”.` : 'Ancora un concetto e poi si parte con gli esercizi.'}
             </div>
@@ -237,7 +237,7 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
         )}
       </div>
       <div className="combo" aria-live="polite">
-        {combo >= 3 ? `🔥 ${combo} di fila!` : ''}
+        {combo >= 3 ? `${combo} di fila!` : ''}
       </div>
       <div className="session-body" key={ex.id + idx}>
         <div className="ex-kind">
@@ -261,6 +261,9 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
         </div>
       ) : (
         <div className={`session-foot feedback ${ok ? 'good' : 'badf'}`} role="status" aria-live="assertive">
+          <span className="fb-mascot" aria-hidden>
+            <Mascot mood={ok ? (combo >= 3 ? 'party' : 'happy') : 'sad'} size={ok && combo >= 3 ? 124 : 112} />
+          </span>
           <div className="fb-head">
             <span className="fb-icon" aria-hidden>
               {ok ? '✓' : '✕'}

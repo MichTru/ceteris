@@ -1,9 +1,9 @@
+import { Stage } from '../components/UI';
 import { ask } from '../components/Confirm';
 import { useRef, useState } from 'react';
 import { exportState, importState, resetState, setState, useStore } from '../engine/store';
 import { COURSES, totals } from '../data';
 import { useCourse } from '../data/useCourse';
-import Mascot from '../components/Mascot';
 
 const GOALS: [number, string][] = [
   [20, 'Tranquilla · 20 XP'],
@@ -34,7 +34,7 @@ export default function Profile() {
       importState(await f.text());
       setMsg('Progressi importati.');
     } catch {
-      setMsg('Il file non è un backup valido di Ceteris.');
+      setMsg('Il file non è un backup valido di getit.');
     }
   };
 
@@ -50,23 +50,13 @@ export default function Profile() {
 
   return (
     <div className="screen">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14, paddingTop: 16 }}>
-        <Mascot size={80} mood="wave" anim="bob" />
-        <div>
-          <h1 className="page-title" style={{ padding: 0 }}>
-            {s.name}
-          </h1>
-          <p style={{ color: 'var(--ink-2)' }}>
-            {course.title} · {course.sub}
-          </p>
-        </div>
-      </div>
+      <Stage title={s.name} sub={`${course.title} · ${course.sub}`} mood="laptop" />
 
       <h2 className="section-title">Corso</h2>
-      <div className="goal-grid courses">
+      <div className="course-switch" role="tablist" aria-label="Corso">
         {COURSES.map((c) => (
-          <button key={c.id} className={`btn small ${s.course === c.id ? '' : 'ghost'}`} onClick={() => setState((x) => void (x.course = c.id))}>
-            {c.icon} {c.short}
+          <button key={c.id} role="tab" aria-selected={s.course === c.id} className={s.course === c.id ? 'on' : ''} onClick={() => setState((x) => void (x.course = c.id))}>
+            {c.short}
           </button>
         ))}
       </div>
@@ -96,8 +86,8 @@ export default function Profile() {
             {(
               [
                 ['auto', 'Auto'],
-                ['light', '☀️'],
-                ['dark', '🌙'],
+                ['light', 'Chiaro'],
+                ['dark', 'Scuro'],
               ] as const
             ).map(([v, l]) => (
               <button key={v} aria-pressed={s.theme === v} onClick={() => setState((x) => void (x.theme = v))}>
@@ -135,7 +125,7 @@ export default function Profile() {
           {course.title}: {t.units} unità con il loro capitolo di teoria e {t.lessons} lezioni costruite sugli appunti: {t.exercises} esercizi, {t.open} domande da interrogazione, {t.cards} flashcard e {course.refLabel === 'Articoli' ? 'gli articoli chiave' : 'il formulario'}.
         </p>
         <p style={{ marginTop: 8 }}>
-          Dove negli appunti c’è un errore o un refuso, dopo la risposta compare il riquadro <b>⚠️ Nota del prof</b> con la versione corretta.
+          Dove negli appunti c’è un errore o un refuso, dopo la risposta compare il riquadro <b>Nota del prof</b> con la versione corretta.
         </p>
       </div>
 

@@ -131,7 +131,7 @@ export default function Flashcards({ onExit }: { onExit: () => void }) {
         )}
         {deck && !card && (
           <div className="empty-state" style={{ marginTop: 30 }}>
-            <Mascot mood="party" size={130} anim="jump" />
+            <Mascot mood="done" size={130} anim="jump" />
             <h2 style={{ marginTop: 10 }}>Mazzo finito!</h2>
             <p style={{ marginTop: 6 }}>{doneCount} carte ripassate.</p>
           </div>

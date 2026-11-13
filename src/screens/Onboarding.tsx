@@ -9,10 +9,10 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
   const steps = [
     {
       mood: 'wave' as const,
-      text: 'Ciao! Sono Ceteris, il tuo salvadanaio laureando. Ti porto ai tuoi esami, Economia e Politica Industriale, Metodi Matematici e Diritto Commerciale, un passo alla volta.',
+      text: 'Ciao! Sono getit, il tuo compagno di studio. Ti porto ai tuoi esami, Economia e Politica Industriale, Metodi Matematici e Diritto Commerciale, un passo alla volta.',
     },
     {
-      mood: 'think' as const,
+      mood: 'read' as const,
       text: 'Ogni lezione parte con due schede di teoria prese dai tuoi appunti, poi esercizi: quiz, calcoli, grafici da toccare, curve da spostare. Il corso si cambia in cima al percorso.',
     },
     {
@@ -30,21 +30,21 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
     onDone();
   };
   return (
-    <div className="summary" style={{ justifyContent: 'center' }}>
-      <Mascot mood={s.mood} size={150} anim="bob" />
-      <div className="bubble" style={{ marginTop: 18, flex: 'none', fontSize: 17, textAlign: 'left' }}>
+    <div className="summary stage-full onboarding" style={{ justifyContent: 'center' }}>
+      <span key={step} className="onb-mascot"><Mascot mood={s.mood} size={190} anim="bob" /></span>
+      <div className="bubble up" key={'b' + step} style={{ marginTop: 18, flex: 'none', fontSize: 17, textAlign: 'left' }}>
         {s.text}
       </div>
       {step === 2 && (
         <div style={{ width: '100%', marginTop: 18, display: 'grid', gap: 10, textAlign: 'left' }}>
-          <label style={{ fontWeight: 800 }} htmlFor="nm">
+          <label style={{ fontWeight: 700 }} htmlFor="nm">
             Il tuo nome
           </label>
           <input id="nm" className="search" value={name} onChange={(e) => setName(e.target.value)} maxLength={24} />
-          <span style={{ fontWeight: 800, marginTop: 6 }}>Obiettivo giornaliero</span>
+          <span style={{ fontWeight: 700, marginTop: 6 }}>Obiettivo giornaliero</span>
           <div className="goal-grid">
             {[20, 50, 100, 150].map((g) => (
-              <button key={g} className={`btn small ${goal === g ? '' : 'ghost'}`} onClick={() => setGoal(g)}>
+              <button key={g} className={`btn small ${goal === g ? 'gold' : 'ghost-light'}`} onClick={() => setGoal(g)}>
                 {g} XP al giorno
               </button>
             ))}
@@ -52,7 +52,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
         </div>
       )}
       <div style={{ width: '100%', marginTop: 'auto', paddingTop: 24 }}>
-        <button className="btn block" onClick={() => (step < 2 ? setStep(step + 1) : finish())}>
+        <button className="btn light block" onClick={() => (step < 2 ? setStep(step + 1) : finish())}>
           {step < 2 ? 'Avanti' : 'Iniziamo!'}
         </button>
       </div>

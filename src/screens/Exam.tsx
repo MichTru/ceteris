@@ -157,7 +157,7 @@ export default function Exam({ onExit }: { onExit: () => void }) {
         </div>
         <div className="session-body">
           <div style={{ textAlign: 'center' }}>
-            <Mascot mood={pass ? 'party' : 'sad'} size={110} anim={pass ? 'jump' : undefined} />
+            <Mascot mood={pass ? 'grad' : 'sad'} size={110} anim={pass ? 'jump' : undefined} />
             <p style={{ color: 'var(--ink-2)', marginTop: 6 }}>Voto stimato</p>
             <div className="grade-big" style={{ color: pass ? 'var(--ok)' : 'var(--bad)', fontSize: g.length > 6 ? 52 : undefined }}>
               {g}

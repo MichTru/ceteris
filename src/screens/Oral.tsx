@@ -93,7 +93,7 @@ export default function Oral({ onExit }: { onExit: () => void }) {
               </button>
             </div>
             <div className="empty-state">
-              <Mascot mood="think" size={110} anim="bob" />
+              <Mascot mood="read" size={110} anim="bob" />
               <p>{pool.length} domande disponibili.</p>
             </div>
           </>
@@ -140,7 +140,7 @@ export default function Oral({ onExit }: { onExit: () => void }) {
         )}
         {list && !q && (
           <div className="empty-state" style={{ marginTop: 20 }}>
-            <Mascot mood="party" size={130} anim="jump" />
+            <Mascot mood="done" size={130} anim="jump" />
             <p style={{ marginTop: 10 }}>Voto stimato dell’interrogazione</p>
             <div className="grade-big">{finalGrade()}</div>
             <p style={{ marginTop: 10 }}>È un’autovalutazione: conta quanto sei stata onesta con te stessa.</p>

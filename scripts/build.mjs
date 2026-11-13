@@ -23,6 +23,9 @@ const result = await build({
   outdir: join(out, 'assets'),
   entryNames: '[name]-[hash]',
   metafile: true,
+  loader: { '.webp': single ? 'dataurl' : 'file' },
+  assetNames: '[name]-[hash]',
+  publicPath: './assets',
   write: !single,
   logLevel: 'warning',
 });
@@ -45,6 +48,7 @@ if (single) {
   const files = Object.keys(result.metafile.outputs).map((p) => p.replace(out + '/', ''));
   const js = files.find((f) => f.endsWith('.js'));
   const css = files.find((f) => f.endsWith('.css'));
+  const media = files.filter((f) => f.endsWith('.webp')).map((f) => `./${f}`);
   const html = template
     .replace('<!--CSS-->', `<link rel="stylesheet" href="./${css}" />`)
     .replace('<!--JS-->', `<script type="module" src="./${js}"></script>`);
@@ -52,7 +56,7 @@ if (single) {
   if (existsSync('public')) cpSync('public', out, { recursive: true });
   // service worker con la lista dei file da mettere in cache
   const icons = readdirSync('public/icons').map((f) => `./icons/${f}`);
-  const assets = ['./', './index.html', './manifest.webmanifest', `./${js}`, `./${css}`, ...icons];
+  const assets = ['./', './index.html', './manifest.webmanifest', `./${js}`, `./${css}`, ...media, ...icons];
   const version = createHash('sha1').update(assets.join()).digest('hex').slice(0, 10);
   const sw = readFileSync('scripts/sw-template.js', 'utf8')
     .replace('__VERSION__', version)

@@ -1,7 +1,7 @@
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { MAX_HEARTS, level, today, useStore } from '../engine/store';
 import type { Theory, Unit } from '../types';
-import Mascot from './Mascot';
+import Mascot, { Logo, type Mood } from './Mascot';
 
 export function unitStyle(u?: Pick<Unit, 'color' | 'colorDark'>): CSSProperties {
   if (!u) return {};
@@ -20,6 +20,47 @@ export function Rich({ text }: { text: string }) {
     </>
   );
 }
+
+
+const ICONS: Record<string, string> = {
+  path: 'M3 18c4 0 4-6 9-6s5-6 9-6|c3 18 1.6|c21 6 1.6',
+  study: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z|M4 19V5',
+  review: 'M20 11a8 8 0 1 0-2.3 5.7|M20 5v6h-6',
+  stats: 'M4 20V11|M10 20V5|M16 20v-6|M21 20H3',
+  profile: 'c12 8 4|M4 21c1-4 4-6 8-6s7 2 8 6',
+  book: 'M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z|M4 19V5',
+};
+
+/** Icone a tratto per navigazione e comandi. */
+export function Icon({ name, size = 22 }: { name: keyof typeof ICONS | string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      {(ICONS[name] ?? '').split('|').map((d, i) => {
+        if (d.startsWith('c')) {
+          const [cx, cy, r] = d.slice(1).split(' ').map(Number);
+          return <circle key={i} cx={cx} cy={cy} r={r} />;
+        }
+        return <path key={i} d={d} />;
+      })}
+    </svg>
+  );
+}
+
+export const Flame = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+    <path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4 1-6 1-9z" fill="currentColor" />
+  </svg>
+);
+export const Star = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+    <path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5-4.9-4.5 6.6-.8z" fill="currentColor" />
+  </svg>
+);
+export const Heart = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+    <path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z" fill="currentColor" />
+  </svg>
+);
 
 export function GoalRing({ size = 34 }: { size?: number }) {
   const xp = useStore((s) => s.days[today()] ?? 0);
@@ -42,9 +83,9 @@ export function GoalRing({ size = 34 }: { size?: number }) {
         transform={`rotate(-90 ${size / 2} ${size / 2})`}
         style={{ transition: 'stroke-dasharray .6s' }}
       />
-      <text x="50%" y="55%" textAnchor="middle" dominantBaseline="middle" fontSize="13">
-        {pct >= 1 ? '✓' : '🎯'}
-      </text>
+      {pct >= 1 && (
+        <path d={`M${size / 2 - 5} ${size / 2} l3.5 3.5 l6.5 -7`} fill="none" stroke="var(--ok)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+      )}
     </svg>
   );
 }
@@ -58,45 +99,76 @@ export function TopBar({ onHearts }: { onHearts?: () => void }) {
   return (
     <header className="topbar">
       <div className="brand">
-        <Mascot size={34} />
-        <span>Ceteris</span>
+        <Logo size={26} />
       </div>
       <GoalRing />
       <span className={`stat-pill flame ${studiedToday ? '' : 'off'}`} title="Giorni di fila">
-        <span className="ico">🔥</span>
+        <span className="ico"><Flame /></span>
         {streak}
       </span>
       <span className="stat-pill gold" title="Livello">
-        <span className="ico">⭐</span>
+        <span className="ico"><Star /></span>
         {level(xp).lvl}
       </span>
       <button className="stat-pill heart" onClick={onHearts} title="Cuori" style={{ cursor: 'pointer' }}>
-        <span className="ico">❤️</span>
+        <span className="ico"><Heart /></span>
         {relaxed ? '∞' : hearts}
       </button>
     </header>
   );
 }
 
+/** Colore del palco per ogni scheda. */
+export const TONE: Record<string, string> = { path: 'violet', study: 'lilac', review: 'sun', stats: 'night', profile: 'orange' };
+
+/** Il palco in cima alle schede: titolo grande e mascotte che sbuca dal bordo. */
+export function Stage({ title, sub, mood, top, children }: { title?: ReactNode; sub?: ReactNode; mood?: Mood; top?: boolean; children?: ReactNode }) {
+  const [tap, setTap] = useState(0);
+  const [react, setReact] = useState(false);
+  useEffect(() => {
+    if (!tap) return;
+    setReact(true);
+    const t = setTimeout(() => setReact(false), 1300);
+    return () => clearTimeout(t);
+  }, [tap]);
+  return (
+    <section className={`stage ${mood ? 'has-mascot' : ''} ${top ? 'mascot-top' : ''}`}>
+      <div className="stage-body">
+        {title && <h1 className="stage-title">{title}</h1>}
+        {sub && <p className="stage-sub">{sub}</p>}
+        {children}
+      </div>
+      {mood && (
+        <button className="stage-mascot" onClick={() => setTap((n) => n + 1)} aria-label="Saluta la mascotte">
+          <span key={tap} className={tap ? 'wig' : 'peek'}>
+            <Mascot mood={react ? 'happy' : mood} size={148} />
+          </span>
+        </button>
+      )}
+    </section>
+  );
+}
+
 export type Tab = 'path' | 'study' | 'review' | 'stats' | 'profile';
-const TABS: [Tab, string, string][] = [
-  ['path', '🗺️', 'Percorso'],
-  ['study', '📖', 'Studia'],
-  ['review', '🔁', 'Ripasso'],
-  ['stats', '📈', 'Progressi'],
-  ['profile', '🐷', 'Profilo'],
+const TABS: [Tab, string][] = [
+  ['path', 'Percorso'],
+  ['study', 'Studia'],
+  ['review', 'Ripasso'],
+  ['stats', 'Progressi'],
+  ['profile', 'Profilo'],
 ];
 
 export function BottomNav({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void }) {
   return (
     <nav className="bottomnav" aria-label="Navigazione">
-      <div className="bottomnav-inner">
-        {TABS.map(([id, ico, label]) => (
-          <button key={id} className="navbtn" aria-current={tab === id ? 'page' : undefined} onClick={() => onTab(id)}>
-            <span className="nav-ico" aria-hidden >
-              {ico}
+      <div className="bottomnav-inner" style={{ ['--i' as any]: TABS.findIndex(([id]) => id === tab) }}>
+        <span className="dock-ind" aria-hidden />
+        {TABS.map(([id, label]) => (
+          <button key={id} className="navbtn" aria-current={tab === id ? 'page' : undefined} onClick={() => onTab(id)} aria-label={label}>
+            <span className="nav-ico">
+              <Icon name={id} size={23} />
             </span>
-            {label}
+            <span className="nav-lbl">{label}</span>
           </button>
         ))}
       </div>
@@ -109,13 +181,12 @@ export function SideNav({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void }) {
   return (
     <nav className="sidenav" aria-label="Navigazione">
       <div className="sidenav-brand">
-        <Mascot size={44} />
-        <span>Ceteris</span>
+        <Logo size={36} />
       </div>
-      {TABS.map(([id, ico, label]) => (
+      {TABS.map(([id, label]) => (
         <button key={id} className="sidebtn" aria-current={tab === id ? 'page' : undefined} onClick={() => onTab(id)}>
-          <span className="nav-ico" aria-hidden>
-            {ico}
+          <span className="nav-ico">
+            <Icon name={id} size={22} />
           </span>
           {label}
         </button>
@@ -207,7 +278,7 @@ export function Confetti() {
     cv.width = innerWidth * dpr;
     cv.height = innerHeight * dpr;
     ctx.scale(dpr, dpr);
-    const colors = ['#4f46e5', '#ffb020', '#12b076', '#ef4c5c', '#0ea5e9', '#ec4899', '#8b5cf6'];
+    const colors = ['#8b5cf6', '#ffb800', '#ff8a00', '#d9c8ff', '#16163a', '#22c38e', '#ff5f7e'];
     const parts = Array.from({ length: 130 }, () => ({
       x: innerWidth / 2 + (Math.random() - 0.5) * 120,
       y: innerHeight * 0.35,

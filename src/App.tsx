@@ -5,7 +5,7 @@ import type { Exercise, Lesson, Unit } from './types';
 import { BADGES, type Badge } from './data/badges';
 import { checkStreak, getState, regenHearts, setState, useStore } from './engine/store';
 import { sample, shuffle } from './engine/utils';
-import { BottomNav, HeartsInfo, Sheet, SideNav, TopBar, type Tab } from './components/UI';
+import { BottomNav, HeartsInfo, Sheet, SideNav, TopBar, type Tab, TONE } from './components/UI';
 import Rail from './components/Rail';
 import Mascot from './components/Mascot';
 import Path, { lessonDone } from './screens/Path';
@@ -92,7 +92,7 @@ export default function App() {
     if (theme === 'auto') delete document.documentElement.dataset.theme;
     else document.documentElement.dataset.theme = theme;
     const dark = theme === 'dark' || (theme === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#10142a' : '#f5f7fc');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#12122b' : '#fbf6ee');
   }, [theme]);
 
   // tasto "indietro" del telefono: chiude la schermata a tutto schermo
@@ -214,7 +214,7 @@ export default function App() {
   return (
     <div className="app">
       <SideNav tab={tab} onTab={goTab} />
-      <div className="app-main">
+      <div className={`app-main tone-${TONE[tab]}`}>
       <TopBar onHearts={() => setHearts(true)} />
       <main key={tab}>
         {tab === 'path' && <Path onLesson={startLesson} onBoss={startBoss} onGuide={(u) => setRoute({ name: 'chapter', unit: u })} />}
