@@ -673,6 +673,177 @@ const SRC: Record<string, string> = {
 - Niente invalidità dopo l’iscrizione
 # Scissione
 - Beneficiarie solidali | Nei limiti del netto ricevuto.`,
+
+  i1: `Linguistics e FG
+# Linguistics
+- Scientific study of language | Oxford Learner’s Dictionary.
+- Dopo Saussure | Le lingue sono sistemi complessi.
+# Branches
+- Cognitive | Come il cervello elabora la lingua.
+- Structural | La struttura delle frasi.
+- Functional | Uso e funzioni.
+# Applications
+- Comparative
+- Computational | Traduzione automatica, IA.
+- Forensic | Nei tribunali.
+- Historical | Il cambiamento diacronico.
+# SFL
+- Language in use
+- Context | Ciò che va con il testo.
+- Descriptive, non prescriptive | Not a grammar of etiquette.
+# Formal o functional
+- Structure / meanings
+- Sentence / whole text
+- Syntax / semantics
+# Perché la FG
+- Empowering e appliable
+- Discourse analysis, stylistics | Anche traduzione, didattica, register studies.`,
+
+  i2: `Il contesto
+# Context of culture
+- Valori e convenzioni condivisi
+# Context of situation
+- Hic et nunc
+- Contiene il text | Meanings → wordings → suoni o grafemi.
+# Field
+- What is going on?
+- Social activity e subject matter
+# Tenor
+- Who is taking part?
+- Social roles | Fissati dalla società.
+- Discourse roles | Chi parla e chi ascolta, cambiano.
+# Mode
+- What is the role of language?
+- Channel | Fonico, grafico, ibrido.
+- Monologue o dialogue
+# Metafunzioni
+- Ideational | Clause as representation.
+- Interpersonal | Clause as exchange.
+- Textual | Clause as message.`,
+
+  i3: `La rank scale
+# Sentence e clause
+- Sentence | Unità della scrittura, il periodo.
+- Clause | Unità dell’analisi grammaticale.
+# Livelli
+- Clauses
+- Groups and phrases | Parole che lavorano insieme e si espandono.
+- Words
+- Morphemes
+- Conflation | Una unità su due livelli: “we”.
+# Morphemes
+- Free | Stanno da soli: use.
+- Bound | -ed, -s, -ful.
+# Groups and phrases
+- Nominal group
+- Verbal group
+- Adverbial group
+- Prepositional phrase | Preposizione + nominal group.
+# Complexes
+- Clause complex
+- Group complex | bread and cheese.`,
+
+  i4: `Il nominal group
+# Pre-modifiers
+- Deictic | the, my, those.
+- Numerative | How many?
+- Epithet | Qualità; accetta il comparativo.
+- Classifier | Classe; aggettivo o nome.
+# Thing
+- Head del gruppo
+# Post-modifier
+- Qualifier | PP o clause embedded, non si sposta.
+# Embedding
+- Unità di rango più alto o uguale | Thompson.
+- [ ] embedded PP
+- [[ ]] embedded clause
+# Test
+- Spostarla | Se si sposta non è embedded.
+- Which…? | La risposta contiene l’elemento embedded.
+- Tra virgole | Relativa non-defining, non embedded.`,
+
+  i5: `Transitivity
+# Il sistema
+- Process | Verbal group, il cuore.
+- Participants | Nominal groups.
+- Circumstances | Mai verbal groups.
+# Material
+- Actor
+- Goal
+# Mental
+- Senser
+- Phenomenon
+# Relational
+- Attributive | Carrier + Attribute.
+- Identifying | Identified + Identifier, scambiabili.
+# Verbal
+- Sayer e Receiver
+- Projected clause
+# Behavioural
+- Behaver | cry, sneeze, smile.
+# Existential
+- There + be
+- Existent | “There” non ha funzione.`,
+
+  i6: `Clauses in combination
+# Taxis
+- Hypotaxis | Una clause dipende dalla main.
+- Parataxis | Clauses indipendenti.
+- Dipende dal connettore
+# Elaboration =
+- Para: for example, that is
+- Hypo: relativa non-defining
+# Extension +
+- Para: and, but, or
+- Hypo: whereas, instead of
+# Enhancement ×
+- Para: so, then, still
+- Hypo: because, although, unless
+# Projection
+- Mental → ideas
+- Verbal → locutions
+- Quoting = parataxis
+- Reporting = hypotaxis`,
+
+  i7: `Mood
+# Mood block
+- Subject | Responsabile della validità della clause.
+- Finite | Polarity, tense, modality.
+- Modal adjuncts | frankly, maybe, never.
+# Residue
+- Predicator | Verbal group meno il Finite.
+- Complement | Solo nominal groups.
+- Circumstantial adjuncts
+# Trucchi
+- Tag question | Trova il Finite.
+- Conflation | I promise: Finite e Predicator fusi.
+# Tipi di mood
+- Declarative | Subject + Finite.
+- Interrogative | Finite + Subject.
+- Exclamative | wh- + Subject + Finite.`,
+
+  i8: `Theme e Rheme
+# Theme
+- Punto di partenza
+- Sempre all’inizio
+- Rheme | Il resto, l’informazione nuova.
+# Topical theme
+- Primo elemento della transitivity
+- Unmarked | Coincide con il Subject.
+- Marked | In 1997 J.K. Rowling…
+# Negli altri mood
+- Yes/no | Finite + participant.
+- Wh- | L’elemento wh-.
+- Exclamative | wh- + focus.
+- Imperative | Il processo; Don’t + processo.
+# Tipi di theme
+- Textual | Congiunzioni, continuatives.
+- Interpersonal | Finite, modal adjuncts.
+- Topical
+# Strutture speciali
+- Thematic equative | What you see is what you get.
+- Predicated theme | It was his teacher who…
+- Thematized comment | It may be that…`,
 };
 
 function parse(src: string): ConceptMap {

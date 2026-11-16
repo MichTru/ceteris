@@ -55,4 +55,10 @@ export const BADGES: Badge[] = [
   { id: 'd-snc', name: 'Socia illimitata', desc: 'Completa l’unità 8 di Diritto', icon: '🤝', test: (s) => unitDone(s, 'd8') },
   { id: 'd-spa', name: 'Consiglio di amministrazione', desc: 'Completa l’unità 10 di Diritto', icon: '🏛️', test: (s) => unitDone(s, 'd10') },
   { id: 'd-all', name: 'Diritto da 30 e lode', desc: 'Completa tutte e 12 le unità di Diritto', icon: '👩‍⚖️', test: (s) => COURSES[2].units.every((u) => unitDone(s, u.id)) },
+  // Lingua e Linguistica Inglese
+  { id: 'i-first', name: 'Hello, linguistics', desc: 'Completa la prima lezione di Linguistica Inglese', icon: '🇬🇧', test: (s) => Object.keys(s.lessons).some((k) => /^i\d+l/.test(k)) },
+  { id: 'i-ng', name: 'Splendid old trains', desc: 'Completa l’unità 4 di Inglese', icon: '🚂', test: (s) => unitDone(s, 'i4') },
+  { id: 'i-trans', name: 'Actor e Goal', desc: 'Completa l’unità 5 di Inglese', icon: '🎬', test: (s) => unitDone(s, 'i5') },
+  { id: 'i-mood', name: 'Won’t it?', desc: 'Completa l’unità 7 di Inglese', icon: '❓', test: (s) => unitDone(s, 'i7') },
+  { id: 'i-all', name: 'Functional grammar da 30', desc: 'Completa tutte e 8 le unità di Inglese', icon: '🎓', test: (s) => COURSES[3].units.every((u) => unitDone(s, u.id)) },
 ];

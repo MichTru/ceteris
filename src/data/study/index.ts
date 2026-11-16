@@ -25,7 +25,8 @@ import d9 from './d9';
 import d10 from './d10';
 import d11 from './d11';
 import d12 from './d12';
+import ing from './ing';
 
 export const CHAPTERS: Record<string, Chapter> = Object.fromEntries(
-  [u1, u2, u3, u4, u5, u6, u7, m1, m2, m3, m4, m5, m6, m7, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12].map((c) => [c.unit, c]),
+  [u1, u2, u3, u4, u5, u6, u7, m1, m2, m3, m4, m5, m6, m7, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, ...ing].map((c) => [c.unit, c]),
 );

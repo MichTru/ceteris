@@ -7,6 +7,7 @@ const PLACEHOLDER: Record<CourseId, string> = {
   econ: 'Cerca: elasticità, HH, costo marginale…',
   mate: 'Cerca: derivata, logaritmo, integrale…',
   dir: 'Cerca: 2082, fallimento, recesso…',
+  ling: 'Cerca: epithet, Finite, theme…',
 };
 
 export default function Formulas({ embedded }: { embedded?: boolean }) {
@@ -32,7 +33,7 @@ export default function Formulas({ embedded }: { embedded?: boolean }) {
             .map((f) => (
               <article key={f.id} className="formula" style={{ borderLeft: `6px solid ${u.color}` }}>
                 <h3>{f.name}</h3>
-                <div className="expr">{f.expr}</div>
+                <div className={course.id === 'ling' ? 'expr wrap' : 'expr'}>{f.expr}</div>
                 <ul>
                   {f.symbols.map((s) => (
                     <li key={s}>{s}</li>

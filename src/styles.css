@@ -6260,3 +6260,27 @@ textarea.answer {
     font-size: 16px;
   }
 }
+
+/* schede sullo stage accanto alla mascotte: su telefono il testo non va sotto la mascotte */
+@media (max-width: 559px) {
+  .stage.has-mascot:not(.mascot-top) .course-switch.on-stage {
+    margin-right: 112px;
+  }
+  .stage.has-mascot:not(.mascot-top):has(.course-switch) .stage-mascot .mascot {
+    width: 118px;
+  }
+  .stage.has-mascot .course-switch.on-stage button {
+    padding-inline: 4px;
+    font-size: 14px;
+    min-width: 0;
+  }
+}
+
+/* glossario: definizioni che vanno a capo */
+.formula .expr.wrap {
+  white-space: normal;
+  overflow-x: visible;
+  font-family: inherit;
+  font-size: 16.5px;
+  line-height: 1.35;
+}

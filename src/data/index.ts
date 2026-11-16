@@ -27,8 +27,17 @@ import d10 from './dir/d10';
 import d11 from './dir/d11';
 import d12 from './dir/d12';
 import { ARTICOLI_DIR } from './dir/articoli';
+import i1 from './ing/i1';
+import i2 from './ing/i2';
+import i3 from './ing/i3';
+import i4 from './ing/i4';
+import i5 from './ing/i5';
+import i6 from './ing/i6';
+import i7 from './ing/i7';
+import i8 from './ing/i8';
+import { GLOSSARIO_ING } from './ing/glossario';
 
-export type CourseId = 'econ' | 'mate' | 'dir';
+export type CourseId = 'econ' | 'mate' | 'dir' | 'ling';
 
 export const FORMULAS: Formula[] = [
   { id: 'f1', unit: 2, name: 'Surplus del consumatore', expr: 'SC = Σ (disponibilità a pagare − P)', symbols: ['Area sopra P* e sotto la domanda'], example: 'Libro a 30 $: (35−30) + (45−30) + (59−30) = 49 $' },
@@ -123,6 +132,18 @@ export const COURSES: Course[] = [
     refLabel: 'Articoli',
     examPer: [2, 2, 2, 3, 2, 3, 2, 3, 3, 4, 2, 2],
     outro: 'In fondo al percorso c’è l’esame di Diritto Commerciale. Ce la fai.',
+  }),
+  makeCourse({
+    id: 'ling',
+    title: 'Lingua e Linguistica Inglese 1',
+    short: 'Inglese',
+    sub: 'functional grammar',
+    icon: '🇬🇧',
+    units: [i1, i2, i3, i4, i5, i6, i7, i8],
+    formulas: GLOSSARIO_ING,
+    refLabel: 'Glossario',
+    examPer: [2, 3, 3, 4, 6, 4, 5, 3],
+    outro: 'In fondo al percorso c’è l’esame di Linguistica Inglese. Ce la fai.',
   }),
 ];
 

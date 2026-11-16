@@ -18,7 +18,7 @@ export interface ExamResult {
   score: number;
   total: number;
   grade: string;
-  course?: 'econ' | 'mate' | 'dir';
+  course?: 'econ' | 'mate' | 'dir' | 'ling';
 }
 
 /** Contatori del giorno per le missioni. */
@@ -66,7 +66,7 @@ export interface State {
   /** Numero sul bollino dell'icona: carte da ripassare oggi. */
   badge: boolean;
   /** Data dell'esame per corso (YYYY-MM-DD). */
-  examDates: Partial<Record<'econ' | 'mate' | 'dir', string>>;
+  examDates: Partial<Record<'econ' | 'mate' | 'dir' | 'ling', string>>;
   daily: Daily;
   /** Domande dell'interrogazione lette ad alta voce. */
   voice: boolean;
@@ -74,7 +74,7 @@ export interface State {
   bestCombo: number;
   onboarded: boolean;
   /** Corso attivo. */
-  course: 'econ' | 'mate' | 'dir';
+  course: 'econ' | 'mate' | 'dir' | 'ling';
 }
 
 export const today = (d = new Date()) => {
