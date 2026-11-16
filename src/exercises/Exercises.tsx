@@ -24,7 +24,11 @@ const KIND: Record<Exercise['type'], { label: string; ico: string }> = {
   steps: { label: 'Esercizio guidato', ico: '🪜' },
 };
 
+/** Uno scenario che è solo una frase tra virgolette (es. una clause inglese da analizzare). */
+export const isQuote = (t: string) => t.trimStart().startsWith('“');
+
 export function kindOf(ex: Exercise) {
+  if (ex.type === 'mc' && ex.scenario && isQuote(ex.scenario)) return { label: 'Analizza la frase', ico: '🔎' };
   if (ex.type === 'mc' && ex.scenario) return { label: 'Caso d’esame', ico: '💼' };
   if (ex.type === 'steps') return { label: ex.scenario ? 'Problema d’esame guidato' : 'Esercizio guidato', ico: '🪜' };
   return KIND[ex.type];

@@ -107,6 +107,7 @@ for (const u of UNITS) {
     if (!sec.blocks.length) errors.push(`${u.id} ${sec.title}: sezione vuota`);
     for (const b of sec.blocks) {
       if (b.t === 'figure' && !(b.scene in SCENES)) errors.push(`${u.id}: figura ${b.scene} sconosciuta`);
+      if (b.t === 'clause') b.rows.forEach((r) => r.cells.length !== b.parts.length && errors.push(`${u.id} ${sec.title}: analisi “${r.label}” con ${r.cells.length} celle invece di ${b.parts.length}`));
       if (b.t === 'table') b.rows.forEach((r, i) => r.length !== b.head.length && errors.push(`${u.id} ${sec.title}: riga ${i + 1} con ${r.length} colonne invece di ${b.head.length}`));
     }
   }

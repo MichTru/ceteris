@@ -205,7 +205,9 @@ export type Block =
   /** Tabella di confronto. */
   | { t: 'table'; head: string[]; rows: string[][] }
   /** Grafico. */
-  | { t: 'figure'; scene: SceneId; caption: string };
+  | { t: 'figure'; scene: SceneId; caption: string }
+  /** Analisi di una clause: i pezzi in fila e, sotto, una riga di etichette per ogni livello. "<" unisce la cella alla precedente. */
+  | { t: 'clause'; parts: string[]; rows: { label: string; cells: string[] }[]; note?: string };
 
 export interface StudySection {
   title: string;

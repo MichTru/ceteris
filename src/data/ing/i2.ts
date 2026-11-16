@@ -26,7 +26,7 @@ const i2: Unit = {
           points: [
             'Il testo si scompone in livelli: i **meanings** (semantics) sono realizzati dalle **wordings** (lexicogrammar), che sono realizzate da **suoni o segni grafici** (phonology/graphology), a seconda che la lingua sia parlata o scritta.',
             'Questo legame tra cultura, situazione e testo si chiama **text-context connection**.',
-            'Il **text** in FG è scritto o **parlato**: un’istanza di lingua in uso, di qualunque lunghezza, dalla Bibbia a un cartello di due parole.',
+            'Il **text** in FG è scritto o **parlato**: un’istanza di lingua in uso, di qualunque lunghezza, dalla Bibbia a testi brevissimi.',
           ],
           example: 'Una lezione universitaria in Italia è diversa da una in Spagna, dove il rapporto tra docente e studenti è meno formale: il context of culture influenza l’uso della lingua.',
         },
@@ -51,7 +51,7 @@ const i2: Unit = {
           points: [
             '**Field**: “What is going on?”. Comprende la **social activity** (es. una lezione universitaria) e la **subject matter** (es. linguistica).',
             '**Tenor**: “Who is taking part?”. Comprende i **social roles**, fissati dalla società e lenti a cambiare (docente e studenti), e i **discourse roles**, flessibili (chi parla e chi ascolta in quel momento).',
-            '**Mode**: “What is the role of language?”. Comprende il **channel** (fonico, grafico, ibrido come chat più microfono), il **medium** e altre caratteristiche: **monologue o dialogue**, **spontaneous o prepared**.',
+            '**Mode**: “What is the role of language?”. Comprende il **channel** (fonico, oppure ibrido come chat più microfono), il **medium** e altre caratteristiche: **monologue o dialogue**, **spontaneous o prepared**.',
           ],
           tip: 'Field = cosa, tenor = chi, mode = come passa la lingua.',
         },
@@ -105,7 +105,7 @@ const i2: Unit = {
   ],
   open: [
     { id: 'i2-o1', q: 'Spiega la differenza tra context of culture e context of situation.', answer: 'Il context of culture è il background culturale generale: valori, convenzioni, tradizioni e costumi condivisi da chi appartiene alla stessa cultura. Il context of situation è un contesto più specifico al suo interno: il qui e ora (hic et nunc) della comunicazione. Dentro il context of situation c’è la lingua, cioè il testo, con i suoi livelli: meanings, wordings, suoni o grafemi. Questo legame è la text-context connection.', keywords: ['culture', 'valori', 'situation', 'qui e ora', 'text', 'text-context connection'] },
-    { id: 'i2-o2', q: 'Quali sono le tre variabili del context of situation?', answer: 'Field, “What is going on?”: social activity e subject matter. Tenor, “Who is taking part?”: social roles, fissati dalla società, e discourse roles, flessibili. Mode, “What is the role of language?”: channel (fonico, grafico, ibrido), medium e caratteristiche come monologue/dialogue e spontaneous/prepared.', keywords: ['field', 'tenor', 'mode', 'social activity', 'social roles', 'discourse roles', 'channel'] },
+    { id: 'i2-o2', q: 'Quali sono le tre variabili del context of situation?', answer: 'Field, “What is going on?”: social activity e subject matter. Tenor, “Who is taking part?”: social roles, fissati dalla società, e discourse roles, flessibili. Mode, “What is the role of language?”: channel (fonico o ibrido), medium e caratteristiche come monologue/dialogue e spontaneous/prepared.', keywords: ['field', 'tenor', 'mode', 'social activity', 'social roles', 'discourse roles', 'channel'] },
     { id: 'i2-o3', q: 'Cosa sono le metafunzioni e come si collegano al contesto?', answer: 'Sono le funzioni fondamentali della lingua, tre viste simultanee della clause. Field: clause as representation, metafunzione ideational (experiential con la transitivity, logical con le clauses in combination). Tenor: clause as exchange, metafunzione interpersonal (mood, modality, appraisal). Mode: clause as message, metafunzione textual (theme/rheme e non-structural cohesion). Ogni clause esprime tutti e tre i significati insieme.', keywords: ['ideational', 'interpersonal', 'textual', 'representation', 'exchange', 'message', 'insieme'] },
     { id: 'i2-o4', q: 'Cos’è un text per la Functional Grammar?', answer: 'Un’istanza di lingua in uso: può essere scritto o parlato e avere qualunque lunghezza, dalla Bibbia o la saga di Harry Potter a un testo di poche parole. Si realizza su più livelli: i significati sono realizzati da parole, le parole da suoni o simboli grafici.', keywords: ['istanza', 'lingua in uso', 'parlato', 'scritto', 'lunghezza', 'significati'] },
     { id: 'i2-o5', q: 'Analizza il context of situation di una lezione universitaria di linguistica in inglese.', answer: 'Field: la social activity è una lezione universitaria, la subject matter è la linguistica. Tenor: social roles docente e studenti; discourse roles flessibili, perché chi parla e chi ascolta si scambiano quando la docente fa domande. Mode: canale fonico o ibrido (voce più chat), lezione in gran parte monologica e preparata. Il context of culture è accademico e italiano, con l’inglese come lingua straniera.', keywords: ['field', 'lezione', 'tenor', 'docente', 'studenti', 'mode', 'canale'] },

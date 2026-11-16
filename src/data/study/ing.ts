@@ -68,7 +68,7 @@ const i2: Chapter = {
         { t: 'def', term: 'Context of culture', text: 'L’ambiente generale: valori, sistemi, convenzioni, tradizioni e costumi che i parlanti condividono perché fanno parte della stessa **cultura**.' },
         { t: 'def', term: 'Context of situation', text: 'Dentro la cultura, il **qui e ora** della comunicazione: l’**hic et nunc**.' },
         { t: 'flow', title: 'Text-context connection', items: ['Context of culture', 'Context of situation', 'Text: meanings (semantics)', 'Wordings (lexicogrammar)', 'Suoni o simboli grafici (phonology/graphology)'] },
-        { t: 'p', text: 'Il **text** è un’istanza di lingua in uso, scritta o **parlata**, di qualunque lunghezza: dalla Bibbia e la saga di Harry Potter a un cartello di due parole.' },
+        { t: 'p', text: 'Il **text** è un’istanza di lingua in uso, scritta o **parlata**, di qualunque lunghezza: dalla Bibbia o la saga di Harry Potter a testi brevissimi.' },
         { t: 'example', title: 'Il contesto della nostra lezione', steps: ['Context of culture: ambiente accademico, in Italia, con le sue convenzioni.', 'Si usa l’inglese, una lingua straniera: comunicare è più difficile.', 'In Spagna il rapporto docente-studenti è meno formale: la cultura cambia il modo di usare la lingua.'] },
       ],
     },
@@ -81,7 +81,7 @@ const i2: Chapter = {
           ['Mode', 'What is the role of language?', 'Channel; medium; monologue/dialogue, spontaneous/prepared'],
         ] },
         { t: 'p', text: 'I **social roles** sono definiti dalla società e cambiano molto lentamente (docente e studenti). I **discourse roles** riguardano chi parla e chi ascolta: se la docente fa una domanda e una studentessa risponde, i ruoli nel discorso si invertono.' },
-        { t: 'p', text: 'Il **channel** può essere fonico, grafico o **ibrido**, come una lezione online con microfono e chat.' },
+        { t: 'p', text: 'Il **channel** può essere fonico o **ibrido**, come una lezione online con microfono e chat.' },
       ],
     },
     {
@@ -174,8 +174,8 @@ const i4: Chapter = {
       title: 'La Thing e i pre-modifiers',
       blocks: [
         { t: 'p', text: 'In ogni nominal group c’è un nome chiave, l’**head** o **Thing**. Ciò che viene prima sono i **pre-modifiers**, ciò che viene dopo i **post-modifiers**.' },
-        { t: 'table', head: ['those', 'two', 'splendid', 'old', 'electric', 'trains'], rows: [
-          ['Deictic', 'Numerative', 'Epithet', 'Epithet', 'Classifier', 'Thing'],
+        { t: 'clause', parts: ['those', 'two', 'splendid', 'old', 'electric', 'trains'], rows: [
+          { label: 'Funzioni nel nominal group', cells: ['Deictic', 'Numerative', 'Epithet', 'Epithet', 'Classifier', 'Thing'] },
         ] },
         { t: 'list', items: ['**Deictic**: indica la cosa di cui parliamo (the, a, my, those).', '**Numerative**: quantità o ordine, “How many?”.', '**Epithet**: qualità **soggettiva** (terrible) o **oggettiva** (old, British); di solito un aggettivo.', '**Classifier**: la **classe** della Thing (a movie queen, la regina dello schermo); aggettivo o **nome**.'] },
         { t: 'warn', text: 'Epithet e classifier si confondono facilmente. Trucco: l’epithet accetta **comparativo e superlativo** (a more colourful hat), il classifier no (the sorting hat).' },
@@ -186,7 +186,11 @@ const i4: Chapter = {
       blocks: [
         { t: 'def', term: 'Embedding (Thompson)', text: '“A unit (e.g. a clause, or a group) is expanded by the inclusion of another unit from a **higher or the same rank** in the rank scale.”' },
         { t: 'p', text: 'Si indica con **[ ]** per le prepositional phrases embedded e **[[ ]]** per le clauses embedded.' },
-        { t: 'example', title: 'Esempi', steps: ['Much [of continental Europe] is hardening its attitude [to Brexit].', 'A large rose tree stood near the entrance [of the garden].', 'Harry had never believed he would meet a boy [[he hated more than Dudley]].'] },
+        { t: 'clause', parts: ['Much', '[of continental Europe]', 'is hardening', 'its', 'attitude', '[to Brexit]'], rows: [
+          { label: 'Gruppi', cells: ['Nominal group', '<', 'Verbal group', 'Nominal group', '<', '<'] },
+          { label: 'Funzioni nei nominal groups', cells: ['Thing', 'Qualifier', '', 'Deictic', 'Thing', 'Qualifier'] },
+        ] },
+        { t: 'example', title: 'Altri esempi', steps: [ 'A large rose tree stood near the entrance [of the garden].', 'Harry had never believed he would meet a boy [[he hated more than Dudley]].'] },
         { t: 'h', text: 'Il qualifier' },
         { t: 'p', text: 'Dopo la Thing c’è una sola funzione, il **qualifier**: un PP o una clause embedded che dà un’informazione **definitoria** sulla Thing. Non si può spostare senza cambiare il significato.' },
         { t: 'table', head: ['Clause', 'La PP è embedded?', 'Perché'], rows: [
@@ -243,6 +247,15 @@ const i5: Chapter = {
           ['Behavioural', 'Tra material e mental', 'Behaver', 'cry, sneeze, smile'],
           ['Existential', 'Esistenza', 'Existent', 'there + be'],
         ] },
+        { t: 'clause', parts: ['The sun', 'lit up', 'the brass number four', 'on the Dursleys’ front door'], rows: [
+          { label: 'Transitivity', cells: ['Actor', 'Material process', 'Goal', 'Circumstance'] },
+        ] },
+        { t: 'clause', parts: ['Dudley Dursley', 'was', 'Harry’s only cousin'], rows: [
+          { label: 'Transitivity', cells: ['Identified', 'Relational process', 'Identifier'] },
+        ] },
+        { t: 'clause', parts: ['There', 'had been', 'a flying motorcycle', 'in it'], rows: [
+          { label: 'Transitivity', cells: ['', 'Existential process', 'Existent', 'Circumstance'] },
+        ], note: '“There” non ha nessuna funzione.' },
         { t: 'example', title: 'Esempi da Harry Potter', steps: ['The sun (Actor) lit up (Material) the brass number four (Goal) on the Dursleys’ front door (Circumstance).', 'He (Senser) tried to remember (Mental) the dream (Phenomenon).', 'Dudley Dursley (Carrier) was no longer (Relational) a baby (Attribute).', 'Dudley Dursley (Identified) was (Relational) Harry’s only cousin (Identifier).', '“Get up!” (projected clause), she (Sayer) said (Verbal).', 'There (nessuna funzione) had been (Existential) a flying motorcycle (Existent) in it (Circumstance).'] },
         { t: 'warn', text: 'Attributive o identifying? Prova a **scambiare** i partecipanti: “Harry’s only cousin was Dudley Dursley” funziona (identifying); “A baby was Dudley” no (attributive).' },
       ],
@@ -250,7 +263,8 @@ const i5: Chapter = {
     {
       title: 'Analisi del testo della casa',
       blocks: [
-        { t: 'list', items: ['“It was an old, condemned house [[that the landlord…]]”: relational attributive. It = Carrier; an old, condemned house [[…]] = Attribute.', '“The wind blew straight through the walls”: material. The wind = Actor; straight e through the walls = Circumstances (non Goal: il Goal è un nominal group).', '“there was fungus [[growing on the wallpaper]]”: existential. Existent = fungus growing on the wallpaper.', '“the garden at the back was just a rubbish dump”: relational attributive.', '“which in the winter is dead”: relational attributive; which = Carrier, dead = Attribute, in the winter = Circumstance.', '“in the summer manages somehow to grow about six feet of grass in the space of a month”: material; manages to grow = Process (verbal group complex); six feet of grass = Goal.'] },
+        { t: 'list', items: ['“It was an old, condemned house [[that the landlord…]]”: relational attributive. It = Carrier; an old, condemned house [[…]] = Attribute.', '“The wind blew straight through the walls”: material. The wind = Actor; straight e through the walls = Circumstances (non Goal: il Goal è un nominal group).', '“there was fungus [[growing on the wallpaper]]”: existential. Existent = fungus growing on the wallpaper.', '“the garden at the back was just a rubbish dump”: relational attributive. Carrier = the garden at the back; Attribute = a rubbish dump.', '“which in the winter is dead”: relational attributive; which = Carrier, dead = Attribute, in the winter = Circumstance.', '“in the summer manages somehow to grow about six feet of grass in the space of a month”: material; manages to grow = Process (verbal group complex); six feet of grass = Goal.'] },
+        { t: 'warn', text: 'Negli appunti l’Attribute di “the garden at the back was just a rubbish dump” risulta “was just a rubbish dump”: “was” è il processo, l’Attribute è solo “a rubbish dump”.' },
         { t: 'warn', text: 'Negli appunti l’Attribute della prima clause risulta “the landlord hadn’t made any improvements to in decades”. La relativa è solo il **qualifier**: l’Attribute è l’intero nominal group “an old, condemned house [[…]]”.' },
         { t: 'key', items: ['La transitivity descrive la nostra esperienza del mondo: experiential meanings.', 'L’ordine dei partecipanti non cambia il ruolo: “Food is made by them” = Goal, Process, Actor.', 'Una clause embedded non si analizza a parte.'] },
       ],
@@ -274,6 +288,7 @@ const i6: Chapter = {
       title: 'Dal clause al clause complex',
       blocks: [
         { t: 'p', text: '“When she opened the door, Professor Luporini saw the students outside.” Ogni clause ha la sua transitivity (material, mental), ma tra i due eventi c’è anche una **relazione logica**, segnata da “when”. La congiunzione non fa parte della transitivity: qui siamo nei **logical meanings**.' },
+        { t: 'warn', text: 'Negli appunti si legge che gli Ideational meanings si dividono in “Ideational and Logical”: sono **experiential** e **logical**.' },
         { t: 'tree', root: 'Clauses in combination', children: [
           { label: 'Taxis', sub: ['Hypotaxis', 'Parataxis'] },
           { label: 'Logico-semantic relations', sub: ['Expansion: elaboration, extension, enhancement', 'Projection: ideas, locutions'] },
@@ -350,11 +365,17 @@ const i7: Chapter = {
       title: 'Adjuncts e Complement',
       blocks: [
         { t: 'list', items: ['**Modal adjuncts** (Mood block): commento del parlante sulla clause (unfortunately, frankly, to be honest, surprisingly) o significati temporali e modali (always, never, maybe, sometimes).', '**Complement** (Residue): **sempre un nominal group** che potrebbe diventare Subject ma non lo è.', '**Circumstantial adjuncts** (Residue): informazioni circostanziali, corrispondono alle circumstances della transitivity.'] },
-        { t: 'table', head: ['Perhaps', 'we', 'have', 'learned', 'something', 'in the last two weeks'], rows: [
-          ['—', 'Senser', '—', 'Mental', 'Phenomenon', 'Circumstance'],
-          ['Modal adjunct', 'Subject', 'Finite', 'Predicator', 'Complement', 'Circumstantial adjunct'],
+        { t: 'p', text: 'La stessa clause si analizza con due viste: la transitivity (field) e il mood (tenor).' },
+        { t: 'clause', parts: ['The work ahead of us', 'will', 'be', 'hard'], rows: [
+          { label: 'Transitivity', cells: ['Carrier', 'Relational process', '<', 'Attribute'] },
+          { label: 'Mood', cells: ['Subject', 'Finite', 'Predicator', 'Complement'] },
+          { label: 'Mood block e Residue', cells: ['Mood block', '<', 'Residue', '<'] },
         ] },
-        { t: 'p', text: 'La stessa clause, due viste: prima riga transitivity, seconda riga mood. “The work ahead of us will be hard”: Carrier, Relational process, Attribute; oppure Subject, Finite, Predicator, Complement.' },
+        { t: 'clause', parts: ['Perhaps', 'we', 'have', 'learned', 'something', 'in the last two weeks'], rows: [
+          { label: 'Transitivity', cells: ['', 'Senser', 'Mental process', '<', 'Phenomenon', 'Circumstance'] },
+          { label: 'Mood', cells: ['Modal adjunct', 'Subject', 'Finite', 'Predicator', 'Complement', 'Circumstantial adjunct'] },
+          { label: 'Mood block e Residue', cells: ['Mood block', '<', '<', 'Residue', '<', '<'] },
+        ] },
       ],
     },
     {
@@ -396,9 +417,14 @@ const i8: Chapter = {
     {
       title: 'Marked e unmarked',
       blocks: [
-        { t: 'table', head: ['Clause', 'Topical theme', 'Tipo'], rows: [
-          ['J.K. Rowling wrote the first Harry Potter book in 1997', 'J.K. Rowling (Actor, Subject)', 'Unmarked'],
-          ['In 1997 J.K. Rowling wrote the first Harry Potter book', 'In 1997 (Circumstance)', 'Marked'],
+        { t: 'clause', parts: ['J.K. Rowling', 'wrote', 'the first Harry Potter book', 'in 1997'], rows: [
+          { label: 'Transitivity', cells: ['Actor', 'Material process', 'Goal', 'Circumstance'] },
+          { label: 'Mood', cells: ['Subject', 'Finite + Predicator', 'Complement', 'Circumstantial adjunct'] },
+          { label: 'Theme e Rheme', cells: ['Topical theme, unmarked', 'Rheme', '<', '<'] },
+        ] },
+        { t: 'clause', parts: ['In 1997', 'J.K. Rowling', 'wrote', 'the first Harry Potter book'], rows: [
+          { label: 'Transitivity', cells: ['Circumstance', 'Actor', 'Material process', 'Goal'] },
+          { label: 'Theme e Rheme', cells: ['Topical theme, marked', 'Rheme', '<', '<'] },
         ] },
         { t: 'p', text: 'Nelle dichiarative il TT è **unmarked** (tipico, naturale) quando coincide con il **Subject**, **marked** quando non coincide.' },
       ],
@@ -419,8 +445,8 @@ const i8: Chapter = {
       title: 'Tipi di theme',
       blocks: [
         { t: 'list', items: ['**Textual**: congiunzioni (because, until, while), conjunctive adjuncts (moreover, in other words, on the other hand), continuatives (well, so, yes, no).', '**Interpersonal**: il Finite nelle yes/no interrogative, modal adjuncts (honestly). Nelle wh- interrogative l’elemento wh- è insieme topical e interpersonal.', '**Topical**: il primo elemento esperienziale; chiude il theme.'] },
-        { t: 'table', head: ['Well, but in any case', 'honestly, wouldn’t', 'the best idea', 'be a party?'], rows: [
-          ['Textual', 'Interpersonal', 'Topical', 'Rheme'],
+        { t: 'clause', parts: ['Well, but in any case,', 'honestly,', 'wouldn’t', 'the best idea', 'be a party?'], rows: [
+          { label: 'Theme e Rheme', cells: ['Textual theme', 'Interpersonal theme', '<', 'Topical theme', 'Rheme'] },
         ] },
       ],
     },

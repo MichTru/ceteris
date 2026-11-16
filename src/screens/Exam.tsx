@@ -3,7 +3,7 @@ import { ask } from '../components/Confirm';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { currentCourse, useCourse } from '../data/useCourse';
 import type { Exercise, Unit } from '../types';
-import { ExerciseView, correctText, kindOf, questionText } from '../exercises/Exercises';
+import { ExerciseView, correctText, isQuote, kindOf, questionText } from '../exercises/Exercises';
 import { addXp, recordAnswer, setState, today } from '../engine/store';
 import { sample, shuffle } from '../engine/utils';
 import { sfx } from '../engine/sound';
@@ -228,10 +228,16 @@ export default function Exam({ onExit }: { onExit: () => void }) {
           <span aria-hidden>{kind.ico}</span> Domanda {i + 1} di {items.length} · Unità {it.unit.n}
         </div>
         {(it.ex.type === 'mc' || it.ex.type === 'num') && it.ex.scenario && (
-          <div className="scenario">
-            <b>Scenario. </b>
-            {it.ex.scenario}
-          </div>
+          isQuote(it.ex.scenario) ? (
+            <blockquote className="scenario quote" lang="en">
+              {it.ex.scenario}
+            </blockquote>
+          ) : (
+            <div className="scenario">
+              <b>Scenario. </b>
+              {it.ex.scenario}
+            </div>
+          )
         )}
         <h2 className="ex-q">{questionText(it.ex)}</h2>
         <ExerciseView ex={it.ex} revealed={false} onReady={onReady} />

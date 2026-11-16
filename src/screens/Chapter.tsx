@@ -1,11 +1,79 @@
 // Lettore di un capitolo di teoria: spiegazioni, schemi, esempi svolti, riassunto finale.
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import type { Block, Unit } from '../types';
 import { CHAPTERS } from '../data/study';
 import { Rich, unitStyle } from '../components/UI';
 import Scene from '../graphs/scenes';
 import { bumpDaily, setState, today } from '../engine/store';
 import Mascot from '../components/Mascot';
+
+/** Analisi a strati: la clause e, per ogni livello (transitivity, mood, theme…), la funzione di ogni pezzo.
+ *  Su schermi larghi i pezzi stanno in fila; su telefono in colonna, un pezzo per riga. */
+function ClauseView({ b }: { b: Extract<Block, { t: 'clause' }> }) {
+  const n = b.parts.length;
+  const L = b.rows.length;
+  const layers = b.rows.map((r) => {
+    const cells: { text: string; start: number; span: number }[] = [];
+    r.cells.forEach((c, i) => {
+      if (c === '<' && cells.length) cells[cells.length - 1].span++;
+      else cells.push({ text: c, start: i, span: 1 });
+    });
+    return cells;
+  });
+  return (
+    <figure className="sb-clause">
+      <div className="cl-wide" style={{ gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))` }}>
+        {b.parts.map((p, i) => (
+          <span key={i} className="cl-part" lang="en">
+            {p}
+          </span>
+        ))}
+        {layers.map((cells, k) => (
+          <Fragment key={k}>
+            <span className="cl-layer" style={{ gridColumn: `1 / span ${n}` }}>
+              {b.rows[k].label}
+            </span>
+            {cells.map((c, i) => (
+              <span key={i} lang="en" className={`cl-cell l${k % 4} ${c.text ? '' : 'empty'}`} style={{ gridColumn: `span ${c.span}` }}>
+                {c.text}
+              </span>
+            ))}
+          </Fragment>
+        ))}
+      </div>
+      <div className={`cl-tall layers-${L}`} style={{ gridTemplateColumns: `minmax(0, 1.25fr) repeat(${L}, minmax(0, 1fr))` }}>
+        <span className="cl-head" aria-hidden />
+        {b.rows.map((r, k) => (
+          <span key={k} className="cl-head">
+            {r.label}
+          </span>
+        ))}
+        {b.parts.map((p, i) => (
+          <span key={i} className="cl-part" lang="en" style={{ gridRow: i + 2, gridColumn: 1 }}>
+            {p}
+          </span>
+        ))}
+        {layers.map((cells, k) =>
+          cells.map((c, i) => (
+            <span
+              key={`${k}-${i}`}
+              lang="en"
+              className={`cl-cell l${k % 4} ${c.text ? '' : 'empty'}`}
+              style={{ gridRow: `${c.start + 2} / span ${c.span}`, gridColumn: k + 2 }}
+            >
+              {c.text}
+            </span>
+          )),
+        )}
+      </div>
+      {b.note && (
+        <figcaption>
+          <Rich text={b.note} />
+        </figcaption>
+      )}
+    </figure>
+  );
+}
 
 export function BlockView({ b }: { b: Block }) {
   switch (b.t) {
@@ -126,31 +194,57 @@ export function BlockView({ b }: { b: Block }) {
           </div>
         </div>
       );
-    case 'table':
+    case 'table': {
+      // su telefono le tabelle larghe diventano schede: una per riga, con l'intestazione accanto a ogni valore
+      const long = b.head.length >= 4 || (b.head.length === 3 && b.rows.some((r) => r.some((c) => c.length > 28)));
       return (
-        <div className="sb-table" role="region" tabIndex={0} aria-label="Tabella">
-          <table>
-            <thead>
-              <tr>
-                {b.head.map((h, i) => (
-                  <th key={i}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {b.rows.map((r, i) => (
-                <tr key={i}>
-                  {r.map((cell, k) => (
-                    <td key={k}>
-                      <Rich text={cell} />
-                    </td>
+        <>
+          <div className={`sb-table ${long ? 'has-cards' : ''}`} role="region" tabIndex={0} aria-label="Tabella">
+            <table>
+              <thead>
+                <tr>
+                  {b.head.map((h, i) => (
+                    <th key={i}>{h}</th>
                   ))}
                 </tr>
+              </thead>
+              <tbody>
+                {b.rows.map((r, i) => (
+                  <tr key={i}>
+                    {r.map((cell, k) => (
+                      <td key={k}>
+                        <Rich text={cell} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {long && (
+            <div className="sb-cards" aria-hidden>
+              {b.rows.map((r, i) => (
+                <div key={i} className="sb-card">
+                  <b>
+                    <Rich text={r[0]} />
+                  </b>
+                  <dl>
+                    {r.slice(1).map((cell, k) => (
+                      <div key={k}>
+                        {b.head[k + 1] && <dt>{b.head[k + 1]}</dt>}
+                        <dd>
+                          <Rich text={cell} />
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          )}
+        </>
       );
+    }
     case 'figure':
       return (
         <figure className="sb-figure">

@@ -714,7 +714,7 @@ const SRC: Record<string, string> = {
 - Discourse roles | Chi parla e chi ascolta, cambiano.
 # Mode
 - What is the role of language?
-- Channel | Fonico, grafico, ibrido.
+- Channel | Fonico o ibrido.
 - Monologue o dialogue
 # Metafunzioni
 - Ideational | Clause as representation.

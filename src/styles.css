@@ -6284,3 +6284,184 @@ textarea.answer {
   font-size: 16.5px;
   line-height: 1.35;
 }
+
+/* analisi della clause a strati */
+.sb-clause {
+  margin: 16px 0;
+}
+.cl-wide,
+.cl-tall {
+  display: grid;
+  gap: 4px;
+  border-radius: 18px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  padding: 12px;
+}
+.cl-tall {
+  display: none;
+}
+@media (max-width: 639px) {
+  .cl-wide {
+    display: none;
+  }
+  .cl-tall {
+    display: grid;
+    padding: 10px;
+  }
+}
+.cl-part {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.3;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+.cl-tall .cl-part {
+  text-align: left;
+  place-items: center start;
+  font-size: 14.5px;
+}
+.cl-layer {
+  margin: 8px 2px 0;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--ink-2);
+}
+.cl-head {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-2);
+  text-align: center;
+  padding: 0 2px 4px;
+  align-self: end;
+  line-height: 1.2;
+}
+.cl-cell {
+  padding: 7px 6px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  background: color-mix(in srgb, var(--unit, var(--primary)) 16%, var(--card));
+  color: var(--ink);
+}
+.cl-tall .cl-cell {
+  font-size: 12.5px;
+}
+.cl-tall.layers-3 {
+  grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 1fr)) !important;
+  gap: 3px;
+  padding: 8px;
+}
+.cl-tall.layers-3 .cl-cell {
+  font-size: 11.5px;
+  padding: 6px 3px;
+}
+.cl-tall.layers-3 .cl-part {
+  font-size: 13.5px;
+  padding: 7px 7px;
+}
+.cl-cell.l1 {
+  background: color-mix(in srgb, #ffb800 24%, var(--card));
+}
+.cl-cell.l2 {
+  background: color-mix(in srgb, #0ea5e9 18%, var(--card));
+}
+.cl-cell.l3 {
+  background: color-mix(in srgb, #10b981 18%, var(--card));
+}
+.cl-cell.empty {
+  background: transparent;
+  border: 1.5px dashed var(--line);
+}
+.sb-clause figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* frase da analizzare (corso di inglese) */
+.scenario.quote {
+  margin: 0 0 14px;
+  padding: 16px 18px 16px 20px;
+  border-left: 6px solid var(--unit);
+  border-radius: 8px 22px 22px 8px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* tabelle larghe su telefono: schede */
+.sb-cards {
+  display: none;
+}
+@media (max-width: 559px) {
+  .sb-table.has-cards {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    margin: 0;
+    border: 0;
+  }
+  .sb-cards {
+    display: grid;
+    gap: 8px;
+    margin: 14px 0;
+  }
+}
+.sb-card {
+  border-radius: 16px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  padding: 12px 14px;
+}
+.sb-card > b {
+  display: block;
+  font-weight: 900;
+  font-size: 15.5px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid color-mix(in srgb, var(--unit, var(--primary)) 22%, var(--card));
+}
+.sb-card dl {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.sb-card dl > div {
+  display: grid;
+  grid-template-columns: minmax(84px, 34%) 1fr;
+  gap: 10px;
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+.sb-card dt {
+  font-weight: 800;
+  color: var(--ink-2);
+  font-size: 13px;
+  padding-top: 1px;
+}
+.sb-card dd {
+  margin: 0;
+}

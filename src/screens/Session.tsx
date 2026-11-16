@@ -2,7 +2,7 @@ import { ask } from '../components/Confirm';
 // Sessione di esercizi: lezione, test di unità, ripasso errori, allenamento.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Exercise, Theory, Unit } from '../types';
-import { ExerciseView, correctText, kindOf, questionText } from '../exercises/Exercises';
+import { ExerciseView, correctText, isQuote, kindOf, questionText } from '../exercises/Exercises';
 import { TheoryCard, unitStyle } from '../components/UI';
 import Mascot from '../components/Mascot';
 import { addXp, bumpDaily, gainHeart, getState, loseHeart, recordAnswer, setState, useStore } from '../engine/store';
@@ -252,10 +252,16 @@ export default function Session({ mode, title, unit, lessonId, theory, items, on
           {(mode === 'review' || mode === 'gym') && <span style={{ marginLeft: 'auto', color: 'var(--ink-3)' }}>{mode === 'gym' ? 'Palestra' : 'Ripasso'}</span>}
         </div>
         {(ex.type === 'mc' || ex.type === 'num' || ex.type === 'steps') && ex.scenario && (
-          <div className="scenario">
-            <b>Scenario. </b>
-            {ex.scenario}
-          </div>
+          isQuote(ex.scenario) ? (
+            <blockquote className="scenario quote" lang="en">
+              {ex.scenario}
+            </blockquote>
+          ) : (
+            <div className="scenario">
+              <b>Scenario. </b>
+              {ex.scenario}
+            </div>
+          )
         )}
         <h2 className="ex-q">{questionText(ex)}</h2>
         <ExerciseView ex={ex} revealed={result !== null} onReady={onReady} />
