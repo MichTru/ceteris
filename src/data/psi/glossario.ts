@@ -1,0 +1,24 @@
+import type { Formula } from '../../types';
+
+/** Glossario di Psicologia generale: termine, definizione breve, punti chiave, esempio. */
+export const GLOSSARIO_PSI: Formula[] = [
+  { id: 'gp1', unit: 1, name: 'Apprendimento', expr: 'Modificazione relativamente stabile dovuta all’esperienza', symbols: ['Acquisire o modificare conoscenze, abilità, comportamenti', 'Non lo sono stanchezza e alterazioni da malattia', 'Funzione adattiva'], example: 'Rispondere meglio a una situazione già vissuta.' },
+  { id: 'gp2', unit: 1, name: 'Teorie associazioniste', expr: 'Associazioni tra stimoli, eventi e risposte', symbols: ['Il condizionamento classico è associativo'], example: 'Campanello associato al cibo.' },
+  { id: 'gp3', unit: 1, name: 'Teorie cognitive', expr: 'Importanza dei processi mentali', symbols: ['Memoria, attenzione', 'Ragionamento, rappresentazione delle informazioni'], example: 'Ricordare e ragionare su ciò che si è vissuto.' },
+  { id: 'gp4', unit: 1, name: 'Comportamentismo', expr: 'Ruolo dell’ambiente e dell’esperienza; comportamento osservabile', symbols: ['Alcuni primi esponenti molto radicali', 'Watson: metodi oggettivi, no introspezione'], example: 'L’individuo fortemente modellato dall’ambiente.' },
+  { id: 'gp5', unit: 2, name: 'Secrezione psichica', expr: 'Salivazione davanti a segnali che anticipano il cibo', symbols: ['Osservata da Pavlov nei cani'], example: 'Il cane saliva a un segnale che annuncia il cibo.' },
+  { id: 'gp6', unit: 2, name: 'Condizionamento classico', expr: 'Uno stimolo neutro associato a uno che provoca naturalmente una risposta', symbols: ['Apprendimento associativo', 'Permette di anticipare eventi significativi', 'Non richiede necessariamente consapevolezza'], example: 'Campanello → salivazione.' },
+  { id: 'gp7', unit: 2, name: 'SI e RI', expr: 'Stimolo incondizionato → risposta incondizionata', symbols: ['SI: provoca naturalmente la risposta', 'RI: risposta automatica'], example: 'Cibo → salivazione.' },
+  { id: 'gp8', unit: 2, name: 'SN, SC e RC', expr: 'Stimolo neutro → stimolo condizionato → risposta condizionata', symbols: ['SN: prima non provoca la risposta', 'SC: dopo l’associazione la provoca', 'RC: risposta appresa'], example: 'Campanello prima (SN) e dopo (SC).' },
+  { id: 'gp9', unit: 3, name: 'Estinzione', expr: 'SC senza SI: la risposta diminuisce', symbols: ['L’associazione non è necessariamente cancellata'], example: 'Campanello senza cibo per molte volte.' },
+  { id: 'gp10', unit: 3, name: 'Recupero spontaneo', expr: 'Ricomparsa della risposta dopo una pausa', symbols: ['Avviene dopo l’estinzione'], example: 'Dopo giorni il cane torna a salivare al campanello.' },
+  { id: 'gp11', unit: 3, name: 'Riapprendimento', expr: 'Riacquisizione più rapida della risposta', symbols: ['Detto anche risparmio nel riapprendimento'], example: 'Ristabilita l’associazione, bastano meno prove.' },
+  { id: 'gp12', unit: 3, name: 'Variabili del condizionamento', expr: 'Intensità · intervallo temporale · frequenza', symbols: ['Stimoli più significativi aiutano', 'Spesso lo SC precede lo SI', 'A volte basta una sola esperienza'], example: 'Il campanello suona prima del cibo.' },
+  { id: 'gp13', unit: 3, name: 'Generalizzazione', expr: 'La risposta si estende a stimoli simili', symbols: ['Amplia la risposta'], example: 'Il cane saliva a un suono simile.' },
+  { id: 'gp14', unit: 3, name: 'Discriminazione', expr: 'Distinguere lo SC da stimoli simili', symbols: ['Rende la risposta più selettiva'], example: 'Cibo solo con un tono preciso.' },
+  { id: 'gp15', unit: 3, name: 'Condizionamento di ordine superiore', expr: 'Uno SC già appreso condiziona un nuovo stimolo', symbols: ['Catene associative'], example: 'Luce → campanello → cibo.' },
+  { id: 'gp16', unit: 4, name: 'Condizionamento aversivo', expr: 'Stimolo neutro associato a un evento spiacevole', symbols: ['Paura, ansia, rifiuto, evitamento', 'Rapido; intervallo anche lungo', 'Valore adattivo'], example: 'Avversione a un cibo dopo essere stati male.' },
+  { id: 'gp17', unit: 4, name: 'Piccolo Albert', expr: 'Watson e Rayner, 1920: la paura si può condizionare', symbols: ['Topolino bianco + rumore forte', 'Generalizzazione a oggetti con il pelo', 'Limiti etici e metodologici'], example: 'Topolino (SC) → paura (RC).' },
+  { id: 'gp18', unit: 4, name: 'Risposta psicogalvanica', expr: 'Variazione delle proprietà elettriche della pelle', symbols: ['Oggi risposta elettrodermica', 'Ghiandole sudoripare', 'Misura l’attivazione fisiologica'], example: 'Lo SC da solo provoca una risposta misurabile.' },
+  { id: 'gp19', unit: 4, name: 'Pavlov e Watson', expr: 'Risposte fisiologiche riflesse / risposte emotive', symbols: ['Pavlov: salivazione nei cani', 'Watson: paura nel piccolo Albert'], example: 'La distinzione più importante per l’esame.' },
+];

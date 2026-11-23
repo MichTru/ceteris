@@ -61,4 +61,8 @@ export const BADGES: Badge[] = [
   { id: 'i-trans', name: 'Actor e Goal', desc: 'Completa l’unità 5 di Inglese', icon: '🎬', test: (s) => unitDone(s, 'i5') },
   { id: 'i-mood', name: 'Won’t it?', desc: 'Completa l’unità 7 di Inglese', icon: '❓', test: (s) => unitDone(s, 'i7') },
   { id: 'i-all', name: 'Functional grammar da 30', desc: 'Completa tutte e 8 le unità di Inglese', icon: '🎓', test: (s) => COURSES[3].units.every((u) => unitDone(s, u.id)) },
+  // Psicologia generale
+  { id: 'p-first', name: 'Din don', desc: 'Completa la prima lezione di Psicologia', icon: '🔔', test: (s) => Object.keys(s.lessons).some((k) => /^p\d+l/.test(k)) },
+  { id: 'p-pavlov', name: 'Il cane di Pavlov', desc: 'Completa l’unità 2 di Psicologia', icon: '🐕', test: (s) => unitDone(s, 'p2') },
+  { id: 'p-all', name: 'Condizionata al 30', desc: 'Completa tutte e 4 le unità di Psicologia', icon: '🧠', test: (s) => COURSES[4].units.every((u) => unitDone(s, u.id)) },
 ];

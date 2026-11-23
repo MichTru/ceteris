@@ -1,4 +1,4 @@
-import { Stage } from '../components/UI';
+import { Stage, centerActive } from '../components/UI';
 import { ask } from '../components/Confirm';
 import { useRef, useState } from 'react';
 import { exportState, importState, resetState, setState, useStore } from '../engine/store';
@@ -54,7 +54,7 @@ export default function Profile() {
       <Stage title={s.name} sub={`${course.title} · ${course.sub}`} mood="laptop" />
 
       <h2 className="section-title">Corso</h2>
-      <div className="course-switch" role="tablist" aria-label="Corso">
+      <div className={`course-switch ${COURSES.length > 4 ? 'many' : ''}`} ref={centerActive} role="tablist" aria-label="Corso">
         {COURSES.map((c) => (
           <button key={c.id} role="tab" aria-selected={s.course === c.id} className={s.course === c.id ? 'on' : ''} onClick={() => setState((x) => void (x.course = c.id))}>
             {c.short}

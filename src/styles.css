@@ -6465,3 +6465,27 @@ textarea.answer {
 .sb-card dd {
   margin: 0;
 }
+
+/* fila dei corsi quando sono più di quattro: scorre di lato */
+.course-switch.many {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.course-switch.many::-webkit-scrollbar {
+  display: none;
+}
+.course-switch.many button {
+  flex: 0 0 auto;
+  padding-inline: 14px;
+  scroll-snap-align: center;
+  white-space: nowrap;
+}
+/* titoli delle unità lunghi nelle tessere di Studia */
+.ut-title {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 12 5 5;
+  overflow-wrap: break-word;
+}

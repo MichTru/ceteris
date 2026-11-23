@@ -36,8 +36,13 @@ import i6 from './ing/i6';
 import i7 from './ing/i7';
 import i8 from './ing/i8';
 import { GLOSSARIO_ING } from './ing/glossario';
+import p1 from './psi/p1';
+import p2 from './psi/p2';
+import p3 from './psi/p3';
+import p4 from './psi/p4';
+import { GLOSSARIO_PSI } from './psi/glossario';
 
-export type CourseId = 'econ' | 'mate' | 'dir' | 'ling';
+export type CourseId = 'econ' | 'mate' | 'dir' | 'ling' | 'psi';
 
 export const FORMULAS: Formula[] = [
   { id: 'f1', unit: 2, name: 'Surplus del consumatore', expr: 'SC = Σ (disponibilità a pagare − P)', symbols: ['Area sopra P* e sotto la domanda'], example: 'Libro a 30 $: (35−30) + (45−30) + (59−30) = 49 $' },
@@ -144,6 +149,18 @@ export const COURSES: Course[] = [
     refLabel: 'Glossario',
     examPer: [2, 3, 3, 4, 6, 4, 5, 3],
     outro: 'In fondo al percorso c’è l’esame di Linguistica Inglese. Ce la fai.',
+  }),
+  makeCourse({
+    id: 'psi',
+    title: 'Psicologia generale',
+    short: 'Psicologia',
+    sub: 'apprendimento e condizionamento',
+    icon: '🧠',
+    units: [p1, p2, p3, p4],
+    formulas: GLOSSARIO_PSI,
+    refLabel: 'Glossario',
+    examPer: [5, 9, 8, 8],
+    outro: 'In fondo al percorso c’è l’esame di Psicologia generale. Ce la fai.',
   }),
 ];
 

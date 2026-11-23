@@ -324,3 +324,9 @@ export function Bar({ value, color }: { value: number; color: string }) {
     </div>
   );
 }
+
+/** Scorre la fila dei corsi in modo che quello attivo sia visibile. */
+export const centerActive = (el: HTMLElement | null) => {
+  const on = el?.querySelector<HTMLElement>('.on');
+  if (el && on && el.scrollWidth > el.clientWidth) el.scrollLeft = on.offsetLeft - el.clientWidth / 2 + on.offsetWidth / 2;
+};

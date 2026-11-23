@@ -4,7 +4,7 @@ import { COURSES, courseById, courseOfUnit } from '../data';
 import { useCourse } from '../data/useCourse';
 import type { Lesson, Unit } from '../types';
 import { setState, today, useStore, type State } from '../engine/store';
-import { Icon, Stage, unitStyle } from '../components/UI';
+import { Icon, Stage, unitStyle, centerActive } from '../components/UI';
 import Mascot from '../components/Mascot';
 import { ExamCard, Missions } from '../components/Today';
 
@@ -75,7 +75,7 @@ export default function Path({ onLesson, onBoss, onGuide }: Props) {
         <div className="stage-goal" aria-hidden>
           <i style={{ width: `${Math.round(Math.min(1, todayXp / s.dailyGoal) * 100)}%` }} />
         </div>
-        <div className="course-switch on-stage courses" role="tablist" aria-label="Corso">
+        <div className={`course-switch on-stage courses ${COURSES.length > 4 ? 'many' : ''}`} ref={centerActive} role="tablist" aria-label="Corso">
           {COURSES.map((c) => (
             <button
               key={c.id}

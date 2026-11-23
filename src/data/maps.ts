@@ -844,6 +844,87 @@ const SRC: Record<string, string> = {
 - Thematic equative | What you see is what you get.
 - Predicated theme | It was his teacher who…
 - Thematized comment | It may be that…`,
+
+  p1: `L’apprendimento
+# Definizione
+- Acquisire o modificare | Conoscenze, abilità, comportamenti.
+- Esperienza e ambiente
+- Relativamente stabile
+# Non è apprendimento
+- Stanchezza
+- Malattia temporanea
+# Funzione adattiva
+- Rispondere meglio | A situazioni già sperimentate.
+# Teorie associazioniste
+- Associazioni | Tra stimoli, eventi e risposte.
+# Teorie cognitive
+- Processi mentali | Memoria, attenzione, ragionamento, rappresentazione.
+# Comportamentismo
+- Ambiente ed esperienza
+- Posizioni radicali | Individuo modellato dall’ambiente.`,
+
+  p2: `Condizionamento classico
+# Pavlov
+- Fisiologo russo | 1849-1936, studiava la digestione.
+- Nobel 1904 | Fisiologia o medicina.
+- Secrezione psichica | Saliva ai segnali che anticipano il cibo.
+# Stimoli
+- SI | Cibo: provoca naturalmente la risposta.
+- SN | Campanello prima: nessuna risposta.
+- SC | Campanello dopo: provoca la risposta.
+# Risposte
+- RI | Salivazione al cibo, automatica.
+- RC | Salivazione al campanello, appresa.
+# Fasi
+- Prima | SI → RI; SN → niente.
+- Durante | SN + SI ripetuti, SN prima.
+- Dopo | SC → RC senza cibo.
+# Cosa si impara
+- Un’associazione | Non a salivare.
+- Anticipare eventi | Funzione adattiva.
+- Senza consapevolezza | Non necessariamente esplicita.`,
+
+  p3: `La risposta cambia
+# Estinzione
+- SC senza SI | La risposta cala.
+- Associazione non cancellata
+# Dopo l’estinzione
+- Recupero spontaneo | Ricompare dopo una pausa.
+- Riapprendimento | Più rapido: risparmio.
+# Variabili
+- Intensità | Stimoli più significativi.
+- Intervallo temporale | Spesso SC prima di SI.
+- Frequenza | A volte basta una volta.
+# Generalizzazione
+- Stimoli simili | Amplia la risposta.
+# Discriminazione
+- Distinguere lo SC | Risposta più selettiva.
+# Ordine superiore
+- Luce → campanello → cibo
+- Catene associative`,
+
+  p4: `Paura e corpo
+# Aversivo
+- Evento spiacevole | Paura, ansia, rifiuto, evitamento.
+- Rapido | A volte una sola associazione.
+- Avversione al gusto | Malessere anche molto dopo.
+- Valore adattivo
+# Watson
+- Comportamentismo | Comportamento osservabile.
+- Metodi oggettivi | No introspezione.
+# Piccolo Albert
+- 1920, con Rosalie Rayner
+- Topolino + rumore forte | Sbarra metallica.
+- Paura al topolino | SC → RC.
+- Generalizzazione | Oggetti con il pelo.
+- Limiti etici e metodologici
+# Psicogalvanica
+- Pelle e sudore | Oggi risposta elettrodermica.
+- Attivazione fisiologica
+- Misura senza parole | Non solo ciò che si riferisce.
+# Pavlov e Watson
+- Pavlov | Risposte fisiologiche riflesse.
+- Watson | Risposte emotive, la paura.`,
 };
 
 function parse(src: string): ConceptMap {
