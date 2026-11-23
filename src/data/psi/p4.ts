@@ -138,6 +138,31 @@ const p4: Unit = {
         { id: 'p4-4-7', type: 'tf', topic: 'Psicogalvanica', q: 'Gli appunti attribuiscono con certezza l’esperimento del 1936 a un ricercatore preciso.', answer: false, explain: 'La trascrizione non lo identifica con certezza.' },
       ],
     },
+    {
+      id: 'p4l5',
+      title: 'Allenati sui casi',
+      icon: '🧪',
+      theory: [
+        {
+          title: 'Paura, rifiuto e corpo nella vita di tutti i giorni',
+          points: [
+            'Se c’è un **evento spiacevole** e da lì nasce paura, ansia, rifiuto o evitamento, pensa al **condizionamento aversivo**.',
+            'Se la reazione si estende a cose **simili**, è **generalizzazione**, come per Albert con gli oggetti con il pelo.',
+            'Se la reazione si **misura sulla pelle** invece di chiederla alla persona, è la **risposta psicogalvanica**.',
+          ],
+        },
+      ],
+      exercises: [
+        { id: 'p4-5-1', type: 'mc', topic: 'Casi', scenario: 'Dopo un’intossicazione con le cozze, a Paolo basta l’odore delle cozze per sentirsi male. È successo una volta sola.', q: 'Che cosa è successo?', options: ['Condizionamento aversivo: un’avversione al gusto nata da una sola associazione', 'Generalizzazione verso tutti i cibi', 'Estinzione', 'Condizionamento di ordine superiore'], answer: 0, explain: 'Rapidità: a volte basta una sola associazione.' },
+        { id: 'p4-5-2', type: 'match', topic: 'Casi', q: 'Durante un temporale un tuono fortissimo spaventa Marta. Ora ha paura appena inizia a piovere.', pairs: [['Tuono fortissimo', 'SI'], ['Paura al tuono', 'RI'], ['Pioggia dopo le associazioni', 'SC'], ['Paura alla pioggia', 'RC']], explain: 'Lo stesso schema del piccolo Albert.' },
+        { id: 'p4-5-3', type: 'mc', topic: 'Casi', scenario: 'Dopo il temporale, Marta ha paura anche del rumore della doccia, che somiglia a quello della pioggia.', q: 'Che fenomeno è?', options: ['Generalizzazione dello stimolo', 'Discriminazione', 'Estinzione', 'Recupero spontaneo'], answer: 0, explain: 'La paura si estende a uno stimolo simile, come per Albert con gli oggetti con il pelo.' },
+        { id: 'p4-5-4', type: 'mc', topic: 'Casi', scenario: 'In laboratorio una luce viene più volte seguita da una lieve scarica. Poi si accende la luce da sola e si misurano le proprietà elettriche della pelle.', q: 'Cosa si sta misurando?', options: ['La risposta psicogalvanica (elettrodermica)', 'La secrezione psichica', 'La salivazione', 'Una risposta verbale'], answer: 0, explain: 'La luce, ora stimolo condizionato, provoca una risposta fisiologica misurabile.' },
+        { id: 'p4-5-5', type: 'mc', topic: 'Casi', scenario: 'Un ricercatore vuole sapere se una persona ha imparato ad associare un suono a qualcosa di spiacevole, senza fidarsi solo di quello che la persona dice.', q: 'Quale misura degli appunti può usare?', options: ['La risposta psicogalvanica', 'L’introspezione', 'Il numero di parole che ricorda', 'La salivazione'], answer: 0, explain: 'Permette di osservare l’apprendimento senza basarsi solo su ciò che la persona riferisce.' },
+        { id: 'p4-5-6', type: 'match', topic: 'Casi', q: 'Pavlov o Watson?', pairs: [['Un cane saliva al campanello', 'Pavlov'], ['Un bambino ha paura del topolino', 'Watson'], ['Risposta fisiologica riflessa', 'Pavlov'], ['Risposta emotiva appresa', 'Watson']], explain: 'La distinzione più importante per l’esame.' },
+        { id: 'p4-5-7', type: 'tf', topic: 'Casi', q: 'Oggi un esperimento come quello del piccolo Albert sarebbe accettabile, perché ha aiutato la psicologia.', answer: false, explain: 'Resta importante storicamente, ma provocò paura in un bambino senza le tutele etiche di oggi.' },
+        { id: 'p4-5-8', type: 'mc', topic: 'Casi', q: 'Che valore adattivo ha l’avversione di Paolo per le cozze?', options: ['Lo aiuta a evitare qualcosa di potenzialmente dannoso', 'Lo rende più affamato', 'Nessuno: è solo un errore', 'Gli fa dimenticare l’intossicazione'], answer: 0, explain: 'Anche se a volte il cibo non era davvero la causa del malessere.' },
+      ],
+    },
   ],
   open: [
     { id: 'p4-o1', q: 'Cos’è il condizionamento aversivo e quali caratteristiche ha?', answer: 'È l’apprendimento in cui uno stimolo neutro viene associato a un evento spiacevole (un rumore forte, un evento doloroso), fino a provocare paura, ansia, rifiuto o evitamento. È rapido (a volte basta una sola associazione); nell’avversione al gusto il malessere può arrivare molto tempo dopo il cibo; ha valore adattivo perché aiuta a evitare situazioni dannose. Es. chi sta male dopo un alimento può svilupparne un’avversione anche se non era stato l’alimento a causarlo.', keywords: ['spiacevole', 'paura', 'evitamento', 'una sola', 'avversione al gusto', 'adattivo'] },
@@ -145,6 +170,7 @@ const p4: Unit = {
     { id: 'p4-o3', q: 'Descrivi l’esperimento del piccolo Albert e i suoi limiti.', answer: 'Nel 1920 Watson e Rosalie Rayner mostrarono a un bambino, il piccolo Albert, un topolino bianco che inizialmente non gli faceva paura. Quando si avvicinava al topolino, producevano un rumore forte colpendo una sbarra metallica. Dopo alcune associazioni Albert aveva paura del solo topolino (SC → RC), e la paura si generalizzò a oggetti con il pelo. Oggi è criticato per motivi etici, perché provocò deliberatamente paura in un bambino piccolo senza tutele, e metodologici, perché non permette conclusioni definitive sulle paure in generale.', keywords: ['1920', 'Rayner', 'topolino', 'rumore', 'sbarra', 'paura', 'generalizzazione', 'etici', 'metodologici'] },
     { id: 'p4-o4', q: 'Cos’è la risposta psicogalvanica e cosa c’entra con il condizionamento?', answer: 'È una variazione delle proprietà elettriche della pelle, legata soprattutto alle ghiandole sudoripare; oggi si studia come risposta elettrodermica. Misura l’attivazione fisiologica legata a emozioni o minacce. Se uno stimolo neutro viene associato a un evento spiacevole come una scarica elettrica, dopo l’apprendimento il solo stimolo condizionato provoca una risposta misurabile. Così si osserva l’apprendimento senza basarsi solo su ciò che la persona riferisce.', keywords: ['pelle', 'sudoripare', 'elettrodermica', 'attivazione', 'scarica', 'misurabile', 'riferisce'] },
     { id: 'p4-o5', q: 'Qual è la differenza principale tra gli studi di Pavlov e quelli di Watson?', answer: 'Pavlov studiò soprattutto le risposte fisiologiche riflesse, come la salivazione nei cani. Watson applicò i principi del condizionamento classico alle risposte emotive, in particolare alla paura, con l’esperimento del piccolo Albert.', keywords: ['Pavlov', 'fisiologiche', 'riflesse', 'Watson', 'emotive', 'paura'] },
+    { id: 'p4-o6', q: 'Fai un esempio di condizionamento aversivo nella vita quotidiana e spiega le sue caratteristiche.', answer: 'Dopo un’intossicazione con un cibo, basta il suo odore per stare male: lo stimolo prima neutro è stato associato a un evento spiacevole. Può bastare una sola associazione (rapidità), il malessere può arrivare anche molto dopo aver mangiato (intervallo temporale) e serve a evitare situazioni potenzialmente dannose (valore adattivo), anche se a volte il cibo non era la vera causa.', keywords: ['spiacevole', 'una sola', 'intervallo', 'adattivo', 'evitare'] },
   ],
   cards: [
     { id: 'p4-c1', front: 'Condizionamento aversivo', back: 'Stimolo neutro associato a un evento spiacevole: paura, ansia, rifiuto o evitamento.' },
@@ -158,6 +184,8 @@ const p4: Unit = {
     { id: 'p4-c9', front: 'Risposta psicogalvanica', back: 'Variazione delle proprietà elettriche della pelle (ghiandole sudoripare); oggi risposta elettrodermica.' },
     { id: 'p4-c10', front: 'Risposta psicogalvanica e condizionamento', back: 'Lo SC da solo provoca una risposta fisiologica misurabile, senza basarsi su ciò che la persona riferisce.' },
     { id: 'p4-c11', front: 'Pavlov vs Watson', back: 'Pavlov: risposte fisiologiche riflesse. Watson: risposte emotive, in particolare la paura.' },
+    { id: 'p4-c12', front: 'Esempio quotidiano di avversione al gusto', back: 'Dopo un’intossicazione basta l’odore di quel cibo per stare male: una sola associazione può bastare.' },
+    { id: 'p4-c13', front: 'Paura e generalizzazione: esempio', back: 'Paura nata con i tuoni che si estende alla pioggia e a rumori simili, come per Albert con il pelo.' },
   ],
 };
 

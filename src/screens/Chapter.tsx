@@ -245,6 +245,8 @@ export function BlockView({ b }: { b: Block }) {
         </>
       );
     }
+    case 'clause':
+      return <ClauseView b={b} />;
     case 'figure':
       return (
         <figure className="sb-figure">

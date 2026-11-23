@@ -101,12 +101,39 @@ const p2: Unit = {
         { id: 'p2-3-8', type: 'fill', topic: 'Fasi', text: 'Dopo il condizionamento il campanello è uno stimolo ___ e la salivazione è una risposta ___.', answers: ['condizionato', 'condizionata'], extra: ['neutro', 'incondizionata'], explain: 'SC → RC.' },
       ],
     },
+    {
+      id: 'p2l4',
+      title: 'Trova SI, RI, SN, SC, RC',
+      icon: '🧁',
+      theory: [
+        {
+          title: 'Il metodo',
+          points: [
+            'Cerca la **risposta naturale**: cosa la provoca senza bisogno di imparare? Quello è lo **SI**, la risposta è la **RI**.',
+            'Cerca il **segnale che arriva prima**: all’inizio non fa niente (**SN**), dopo le associazioni provoca la risposta (**SC**).',
+            'La risposta al segnale è la **RC**: spesso è la stessa reazione della RI, ma provocata da un altro stimolo.',
+          ],
+          example: 'Il forno fa “ding” e subito dopo arriva la torta: a Luca viene l’acquolina. Dopo molte volte gli viene l’acquolina al solo “ding”.',
+        },
+      ],
+      exercises: [
+        { id: 'p2-4-1', type: 'match', topic: 'Casi', q: 'Il “ding” del forno e la torta di Luca', pairs: [['Torta', 'SI'], ['Acquolina davanti alla torta', 'RI'], ['“Ding” prima delle associazioni', 'SN'], ['“Ding” dopo le associazioni', 'SC'], ['Acquolina al solo “ding”', 'RC']], explain: 'Stesso schema del cane di Pavlov.' },
+        { id: 'p2-4-2', type: 'tf', topic: 'Casi', q: 'Nel caso del forno, la torta è lo stimolo condizionato.', answer: false, explain: 'La torta provoca l’acquolina naturalmente: è lo stimolo incondizionato.' },
+        { id: 'p2-4-3', type: 'mc', topic: 'Casi', q: 'Nel caso del forno, che cosa ha imparato Luca?', options: ['Ad associare il “ding” alla torta, e quindi all’acquolina', 'Ad avere l’acquolina', 'A cucinare le torte', 'A riconoscere il forno'], answer: 0, explain: 'L’acquolina c’era già: è nuova solo l’associazione.' },
+        { id: 'p2-4-4', type: 'order', topic: 'Casi', q: 'Metti in ordine le fasi del caso del forno', items: ['Il “ding” non provoca niente di particolare', 'Il “ding” suona e subito dopo arriva la torta, più volte', 'Il solo “ding” fa venire l’acquolina'], explain: 'Prima, durante, dopo.' },
+        { id: 'p2-4-5', type: 'mc', topic: 'Casi', scenario: 'Ogni estate Giulia mette la stessa crema solare in spiaggia, dove si rilassa. Ora, a novembre, il solo profumo della crema la rilassa.', q: 'Cos’è il profumo della crema adesso?', options: ['Uno stimolo condizionato', 'Uno stimolo incondizionato', 'Una risposta condizionata', 'Uno stimolo neutro'], answer: 0, explain: 'All’inizio era neutro, poi è stato associato alle vacanze.' },
+        { id: 'p2-4-6', type: 'mc', topic: 'Casi', scenario: 'Ogni estate Giulia mette la stessa crema solare in spiaggia, dove si rilassa. Ora, a novembre, il solo profumo della crema la rilassa.', q: 'Cos’è il rilassamento che Giulia prova al profumo?', options: ['Una risposta condizionata', 'Una risposta incondizionata', 'Uno stimolo condizionato', 'Un’estinzione'], answer: 0, explain: 'È una risposta appresa, provocata dallo stimolo condizionato.' },
+        { id: 'p2-4-7', type: 'mc', topic: 'Casi', q: 'Perché, nell’esempio del forno, il “ding” deve suonare prima della torta?', options: ['Perché spesso lo stimolo condizionato deve precedere quello incondizionato', 'Perché la torta deve raffreddarsi', 'Perché altrimenti è uno stimolo incondizionato', 'Non conta l’ordine'], answer: 0, explain: 'Così il segnale permette di anticipare l’evento.' },
+        { id: 'p2-4-8', type: 'tf', topic: 'Casi', q: 'Luca potrebbe avere l’acquolina al “ding” anche senza rendersi conto dell’associazione.', answer: true, explain: 'Il condizionamento classico non richiede necessariamente consapevolezza esplicita.' },
+      ],
+    },
   ],
   open: [
     { id: 'p2-o1', q: 'Chi era Ivan Pavlov e come scoprì il condizionamento classico?', answer: 'Un fisiologo russo (1849-1936) che studiava i processi digestivi; nel 1904 ricevette il Nobel per la fisiologia o la medicina per le ricerche sulla digestione. Negli esperimenti sui cani notò che salivavano anche davanti a segnali che anticipavano il cibo: la secrezione psichica. Approfondendo il fenomeno studiò il condizionamento classico.', keywords: ['fisiologo', 'russo', 'digestione', 'Nobel', '1904', 'cani', 'secrezione psichica'] },
     { id: 'p2-o2', q: 'Definisci SI, RI, SN, SC e RC con l’esempio di Pavlov.', answer: 'Lo stimolo incondizionato provoca naturalmente una risposta (cibo); la risposta incondizionata è automatica (salivazione al cibo). Lo stimolo neutro inizialmente non provoca la risposta (campanello prima). Lo stimolo condizionato è lo stimolo neutro che ha acquisito la capacità di provocarla (campanello dopo). La risposta condizionata è appresa e provocata dallo SC (salivazione al campanello).', keywords: ['incondizionato', 'cibo', 'neutro', 'campanello', 'condizionato', 'salivazione', 'appresa'] },
     { id: 'p2-o3', q: 'Descrivi le fasi del condizionamento classico.', answer: 'Prima: il cibo (SI) provoca salivazione (RI), il campanello (SN) nessuna salivazione specifica. Durante: il campanello viene presentato prima del cibo e l’associazione viene ripetuta. Dopo: il campanello (SC) provoca salivazione (RC) anche senza cibo.', keywords: ['prima', 'durante', 'dopo', 'campanello', 'cibo', 'ripetuta', 'senza'] },
     { id: 'p2-o4', q: 'Nel condizionamento classico, che cosa si apprende? Ha una funzione adattiva?', answer: 'Non si impara a salivare, perché la salivazione è una risposta biologica già presente: si impara ad associare uno stimolo nuovo a una risposta che prima non provocava. Ha una funzione adattiva perché permette di anticipare eventi significativi, e non richiede necessariamente una consapevolezza esplicita dell’associazione.', keywords: ['salivare', 'biologica', 'associare', 'stimolo nuovo', 'anticipare', 'adattiva', 'consapevolezza'] },
+    { id: 'p2-o5', q: 'Spiega il condizionamento classico con un esempio di vita quotidiana.', answer: 'Se il forno fa “ding” e subito dopo arriva la torta, all’inizio il “ding” è uno stimolo neutro, la torta lo stimolo incondizionato e l’acquolina la risposta incondizionata. Dopo molte associazioni il “ding” diventa stimolo condizionato e basta da solo a provocare l’acquolina, che ora è una risposta condizionata. Non si impara ad avere l’acquolina, ma ad associarla a un segnale nuovo.', keywords: ['neutro', 'incondizionato', 'condizionato', 'associazioni', 'segnale', 'acquolina'] },
   ],
   cards: [
     { id: 'p2-c1', front: 'Ivan Pavlov', back: 'Ivan Pavlov (1849-1936): fisiologo russo, studiava la digestione; Nobel per la fisiologia o la medicina nel 1904.' },
@@ -120,6 +147,8 @@ const p2: Unit = {
     { id: 'p2-c9', front: 'Fasi del condizionamento classico', back: 'Prima: SI → RI, SN → niente. Durante: SN + SI → RI, ripetuto. Dopo: SC → RC.' },
     { id: 'p2-c10', front: 'Cosa si apprende nel condizionamento classico', back: 'Non a salivare: ad associare uno stimolo nuovo a una risposta che prima non provocava.' },
     { id: 'p2-c11', front: 'Condizionamento classico e consapevolezza', back: 'Non richiede necessariamente una consapevolezza esplicita dell’associazione.' },
+    { id: 'p2-c12', front: 'Come trovare SI, RI, SN, SC, RC in un caso', back: 'SI: provoca la risposta da sé. SN/SC: il segnale che arriva prima. RC: la risposta al segnale, spesso uguale alla RI.' },
+    { id: 'p2-c13', front: 'Esempio quotidiano di condizionamento classico', back: 'Il “ding” del forno (SC) annuncia la torta (SI): dopo molte volte basta il “ding” per l’acquolina (RC).' },
   ],
 };
 

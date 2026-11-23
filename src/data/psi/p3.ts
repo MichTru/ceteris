@@ -100,12 +100,37 @@ const p3: Unit = {
         { id: 'p3-4-5', type: 'fill', topic: 'Ordine superiore', text: 'Con il condizionamento di ordine superiore si possono costruire ___ associative tra stimoli ___.', answers: ['catene', 'differenti'], extra: ['risposte', 'identici'], explain: 'Luce → campanello → cibo.' },
       ],
     },
+    {
+      id: 'p3l5',
+      title: 'Allenati sui casi',
+      icon: '🧪',
+      theory: [
+        {
+          title: 'Torniamo al forno di Luca',
+          points: [
+            'Il “ding” del forno (SC) provoca l’acquolina (RC). Ora vediamo cosa succede se cambiano le condizioni.',
+            'Chiediti: lo SI arriva ancora? È passata una pausa? Lo stimolo è lo stesso o solo simile? C’è un nuovo stimolo che arriva prima?',
+          ],
+        },
+      ],
+      exercises: [
+        { id: 'p3-5-1', type: 'mc', topic: 'Casi', scenario: 'Per settimane il forno fa “ding” ma la torta non arriva più. L’acquolina di Luca cala sempre di più.', q: 'Che fenomeno è?', options: ['Estinzione', 'Discriminazione', 'Generalizzazione', 'Recupero spontaneo'], answer: 0, explain: 'Lo SC viene presentato ripetutamente senza lo SI.' },
+        { id: 'p3-5-2', type: 'mc', topic: 'Casi', scenario: 'L’acquolina al “ding” si era spenta. Dopo un mese senza usare il forno, Luca lo risente e gli torna un po’ di acquolina.', q: 'Che fenomeno è?', options: ['Recupero spontaneo', 'Riapprendimento', 'Ordine superiore', 'Condizionamento aversivo'], answer: 0, explain: 'La risposta ricompare dopo una pausa successiva all’estinzione.' },
+        { id: 'p3-5-3', type: 'mc', topic: 'Casi', scenario: 'Il “ding” torna a essere seguito dalla torta. Bastano un paio di volte e l’acquolina è forte come prima.', q: 'Che fenomeno è?', options: ['Riapprendimento (risparmio)', 'Estinzione', 'Generalizzazione', 'Discriminazione'], answer: 0, explain: 'La risposta si riacquisisce più rapidamente della prima volta.' },
+        { id: 'p3-5-4', type: 'mc', topic: 'Casi', scenario: 'A Luca viene l’acquolina anche col “ding” del microonde, che suona in modo simile.', q: 'Che fenomeno è?', options: ['Generalizzazione', 'Discriminazione', 'Estinzione', 'Riapprendimento'], answer: 0, explain: 'La risposta si estende a uno stimolo simile.' },
+        { id: 'p3-5-5', type: 'mc', topic: 'Casi', scenario: 'Il microonde non porta mai torte, il forno sì. Col tempo Luca ha l’acquolina solo al “ding” del forno.', q: 'Che fenomeno è?', options: ['Discriminazione', 'Generalizzazione', 'Recupero spontaneo', 'Ordine superiore'], answer: 0, explain: 'Impara a distinguere lo SC da uno stimolo simile.' },
+        { id: 'p3-5-6', type: 'mc', topic: 'Casi', scenario: 'Prima del “ding” si accende sempre la lucina del forno. Dopo molte volte, alla sola lucina Luca ha l’acquolina.', q: 'Che fenomeno è?', options: ['Condizionamento di ordine superiore', 'Generalizzazione', 'Discriminazione', 'Estinzione'], answer: 0, explain: 'Uno stimolo già condizionato (il “ding”) ne condiziona uno nuovo (la luce).' },
+        { id: 'p3-5-7', type: 'mc', topic: 'Casi', scenario: 'Il forno fa “ding” solo dopo che la torta è già in tavola da un po’. L’associazione fa fatica a formarsi.', q: 'Quale variabile è in gioco?', options: ['L’intervallo temporale tra SC e SI', 'L’intensità degli stimoli', 'La frequenza degli accoppiamenti', 'La discriminazione'], answer: 0, explain: 'Spesso lo SC deve precedere lo SI.' },
+        { id: 'p3-5-8', type: 'match', topic: 'Casi', q: 'Abbina il caso al fenomeno', pairs: [['“Ding” senza torta, l’acquolina cala', 'Estinzione'], ['Acquolina anche col microonde', 'Generalizzazione'], ['Acquolina solo col forno', 'Discriminazione'], ['La lucina basta da sola', 'Ordine superiore'], ['Dopo una pausa l’acquolina torna', 'Recupero spontaneo']], explain: 'Riepilogo dell’unità.' },
+      ],
+    },
   ],
   open: [
     { id: 'p3-o1', q: 'Spiega estinzione, recupero spontaneo e riapprendimento.', answer: 'L’estinzione si ha quando lo stimolo condizionato viene presentato ripetutamente senza quello incondizionato: la risposta diminuisce progressivamente, ma l’associazione non è necessariamente cancellata. Il recupero spontaneo è la ricomparsa della risposta dopo una pausa successiva all’estinzione. Nel riapprendimento, se l’associazione viene ristabilita, la risposta si riacquisisce più rapidamente: è il risparmio nel riapprendimento.', keywords: ['estinzione', 'senza', 'diminuisce', 'cancellata', 'pausa', 'ricomparire', 'rapidamente', 'risparmio'] },
     { id: 'p3-o2', q: 'Quali variabili influenzano il condizionamento classico?', answer: 'L’intensità degli stimoli (stimoli più significativi possono favorire l’apprendimento), l’intervallo temporale tra SC e SI (spesso lo SC deve precedere lo SI) e la frequenza degli accoppiamenti (la ripetizione rafforza l’associazione, ma a volte basta una sola esperienza).', keywords: ['intensità', 'significativi', 'intervallo', 'precedere', 'frequenza', 'ripetizione', 'una sola'] },
     { id: 'p3-o3', q: 'Differenza tra generalizzazione e discriminazione, con esempi.', answer: 'Nella generalizzazione la risposta condizionata compare anche davanti a stimoli simili a quello originario: il cane saliva anche a un suono simile. Nella discriminazione l’organismo impara a distinguere lo stimolo condizionato da stimoli simili: se il cibo arriva solo con un tono preciso, il cane risponde soprattutto a quello. La generalizzazione amplia la risposta, la discriminazione la rende più selettiva.', keywords: ['simili', 'generalizzazione', 'distinguere', 'discriminazione', 'tono', 'amplia', 'selettiva'] },
     { id: 'p3-o4', q: 'Cos’è il condizionamento di ordine superiore?', answer: 'Si ha quando uno stimolo già condizionato viene usato per condizionarne uno nuovo. Il cane associa il campanello al cibo; poi una luce viene presentata prima del campanello e, dopo ripetute associazioni, la luce da sola provoca la risposta condizionata. La luce è uno stimolo condizionato di ordine superiore: si possono costruire catene associative.', keywords: ['già condizionato', 'nuovo stimolo', 'luce', 'campanello', 'catene'] },
+    { id: 'p3-o5', q: 'Con un unico esempio, mostra estinzione, recupero spontaneo, generalizzazione e discriminazione.', answer: 'Se il “ding” del forno non è più seguito dalla torta, l’acquolina cala: estinzione. Se dopo una pausa il “ding” torna a dare un po’ di acquolina: recupero spontaneo. Se l’acquolina viene anche col “ding” simile del microonde: generalizzazione. Se solo il “ding” del forno, che porta la torta, la provoca: discriminazione.', keywords: ['estinzione', 'pausa', 'recupero spontaneo', 'simile', 'generalizzazione', 'discriminazione'] },
   ],
   cards: [
     { id: 'p3-c1', front: 'Estinzione', back: 'Estinzione: lo SC presentato più volte senza lo SI; la risposta diminuisce, ma l’associazione non è necessariamente cancellata.' },
@@ -117,6 +142,8 @@ const p3: Unit = {
     { id: 'p3-c7', front: 'Generalizzazione dello stimolo', back: 'Generalizzazione: la risposta compare anche con stimoli simili all’originale; amplia la risposta.' },
     { id: 'p3-c8', front: 'Discriminazione dello stimolo', back: 'Discriminazione: si impara a distinguere lo SC da stimoli simili; la risposta diventa più selettiva.' },
     { id: 'p3-c9', front: 'Condizionamento di ordine superiore', back: 'Uno stimolo già condizionato (campanello) serve a condizionarne uno nuovo (luce): catene associative.' },
+    { id: 'p3-c10', front: 'Estinzione vs recupero spontaneo', back: 'Estinzione: la risposta cala se lo SC arriva senza SI. Recupero spontaneo: dopo una pausa la risposta ritorna.' },
+    { id: 'p3-c11', front: 'Generalizzazione vs discriminazione: esempio', back: 'Acquolina anche col “ding” del microonde = generalizzazione. Solo con quello del forno = discriminazione.' },
   ],
 };
 

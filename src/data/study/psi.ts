@@ -59,12 +59,17 @@ const p2: Chapter = {
           ['Stimolo condizionato (SC)', 'Stimolo inizialmente neutro che acquisisce la capacità di provocare una risposta', 'Campanello dopo l’associazione'],
           ['Risposta condizionata (RC)', 'Risposta appresa provocata dallo stimolo condizionato', 'Salivazione al campanello'],
         ] },
+        { t: 'clause', parts: ['Campanello', 'Cibo', 'Salivazione'], rows: [
+          { label: 'Prima', cells: ['SN', 'SI', 'RI, davanti al cibo'] },
+          { label: 'Dopo', cells: ['SC', '', 'RC, al solo campanello'] },
+        ], note: 'Lo stesso campanello cambia ruolo; la stessa salivazione è RI o RC a seconda di cosa la provoca.' },
       ],
     },
     {
       title: 'Le fasi del condizionamento',
       blocks: [
         { t: 'flow', title: 'Le tre fasi', items: ['**Prima**: cibo (SI) → salivazione (RI); campanello (SN) → nessuna salivazione specifica', '**Durante**: campanello (SN) + cibo (SI) → salivazione (RI); il campanello precede il cibo e l’associazione si ripete', '**Dopo**: campanello (SC) → salivazione (RC), anche senza cibo'] },
+        { t: 'example', title: 'Un caso di tutti i giorni: il forno di Luca', steps: ['Prima: la torta (SI) fa venire l’acquolina (RI); il “ding” del forno (SN) non fa niente di particolare.', 'Durante: il “ding” suona e subito dopo arriva la torta, molte volte.', 'Dopo: il solo “ding” (SC) fa venire l’acquolina (RC).'], result: 'Luca non ha imparato ad avere l’acquolina, ma ad associarla a un segnale nuovo.' },
         { t: 'key', items: ['Non si impara a salivare: la salivazione è una risposta biologica già presente.', 'Si impara ad associare uno stimolo nuovo a una risposta che prima non provocava.', 'Permette di anticipare eventi significativi: funzione adattiva.', 'Non richiede necessariamente consapevolezza esplicita dell’associazione.'] },
       ],
     },
@@ -120,6 +125,19 @@ const p3: Chapter = {
         { t: 'p', text: 'La luce diventa uno **stimolo condizionato di ordine superiore**: si possono costruire **catene associative** tra stimoli differenti.' },
       ],
     },
+    {
+      title: 'Tutto in un esempio',
+      blocks: [
+        { t: 'table', head: ['Cosa succede al forno di Luca', 'Fenomeno'], rows: [
+          ['Il “ding” suona per settimane senza torta: l’acquolina cala', 'Estinzione'],
+          ['Dopo un mese di pausa il “ding” dà di nuovo un po’ di acquolina', 'Recupero spontaneo'],
+          ['La torta torna dopo il “ding”: bastano poche volte', 'Riapprendimento (risparmio)'],
+          ['L’acquolina viene anche col “ding” simile del microonde', 'Generalizzazione'],
+          ['Il microonde non porta torte: l’acquolina resta solo col forno', 'Discriminazione'],
+          ['La lucina che precede il “ding” basta da sola', 'Ordine superiore'],
+        ] },
+      ],
+    },
   ],
   summary: [
     'Estinzione: SC senza SI, la risposta cala ma l’associazione resta.',
@@ -155,6 +173,10 @@ const p4: Chapter = {
       blocks: [
         { t: 'p', text: 'Nel **1920** Watson e **Rosalie Rayner** vollero capire se una **risposta emotiva di paura** si potesse apprendere con il condizionamento classico.' },
         { t: 'p', text: 'Al **piccolo Albert** venne mostrato un **topolino bianco**, che inizialmente non gli faceva una paura significativa. Quando si avvicinava al topolino, i ricercatori producevano un **rumore molto forte** colpendo una **sbarra metallica**. Dopo alcune associazioni Albert aveva paura alla sola presenza del topolino.' },
+        { t: 'clause', parts: ['Topolino bianco', 'Rumore forte', 'Paura'], rows: [
+          { label: 'Prima', cells: ['SN', 'SI', 'RI, al rumore'] },
+          { label: 'Dopo', cells: ['SC', '', 'RC, al solo topolino'] },
+        ] },
         { t: 'flow', title: 'Schema dell’esperimento', items: ['**Prima**: topolino bianco (SN) → nessuna paura significativa; rumore forte (SI) → paura (RI)', '**Durante**: topolino bianco (SN) + rumore forte (SI) → paura (RI)', '**Dopo**: topolino bianco (SC) → paura (RC)'] },
         { t: 'p', text: 'La paura si estese a stimoli **simili** al topolino, come oggetti con il **pelo** o certe caratteristiche visive: un esempio di **generalizzazione dello stimolo**.' },
         { t: 'warn', text: '**Limiti etici**: provocò deliberatamente paura in un bambino molto piccolo, senza le tutele richieste dagli standard etici contemporanei. **Limiti metodologici**: non permette conclusioni definitive sulla formazione delle paure in generale.' },

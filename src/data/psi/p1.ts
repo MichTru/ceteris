@@ -91,12 +91,36 @@ const p1: Unit = {
         { id: 'p1-3-7', type: 'tf', topic: 'Orientamenti', q: 'Il ragionamento è un processo centrale per le teorie associazioniste.', answer: false, explain: 'È centrale per le teorie cognitive.' },
       ],
     },
+    {
+      id: 'p1l4',
+      title: 'Riconosci l’apprendimento',
+      icon: '🔍',
+      theory: [
+        {
+          title: 'Le domande da farsi',
+          points: [
+            'Il cambiamento nasce dall’**esperienza** o dall’**interazione con l’ambiente**?',
+            'È **relativamente stabile**, o sparisce appena passa la stanchezza o la malattia?',
+            'Se si basa su un’**associazione** tra stimoli ed eventi, pensa alle **teorie associazioniste**; se contano memoria, attenzione e ragionamento, alle **teorie cognitive**.',
+          ],
+        },
+      ],
+      exercises: [
+        { id: 'p1-4-1', type: 'mc', topic: 'Casi', scenario: 'Dopo mesi di pratica, Marco suona una canzone alla chitarra senza guardare le corde.', q: 'È apprendimento?', options: ['Sì: un’abilità acquisita con l’esperienza e stabile', 'No: è un cambiamento temporaneo', 'No: è una risposta automatica innata', 'No: non c’è nessun ambiente'], answer: 0, explain: 'Esperienza e stabilità: le due parole chiave.' },
+        { id: 'p1-4-2', type: 'mc', topic: 'Casi', scenario: 'Con la febbre alta Anna per due giorni non riesce a concentrarsi; poi torna come prima.', q: 'È apprendimento?', options: ['Non necessariamente: è un’alterazione temporanea dovuta a una malattia', 'Sì: il comportamento è cambiato', 'Sì: è apprendimento associativo', 'Sì: è condizionamento aversivo'], answer: 0, explain: 'Il cambiamento non è stabile e non nasce dall’esperienza.' },
+        { id: 'p1-4-3', type: 'mc', topic: 'Casi', scenario: 'Il gatto di Sara corre in cucina appena sente il rumore dell’apriscatole.', q: 'Quale orientamento lo spiega meglio?', options: ['Le teorie associazioniste: un suono associato a un evento', 'Le teorie cognitive: il gatto ragiona sul cibo', 'Nessuno: è un riflesso innato', 'Il ragionamento logico'], answer: 0, explain: 'Associazione tra uno stimolo (il rumore) e un evento (il cibo).' },
+        { id: 'p1-4-4', type: 'mc', topic: 'Casi', scenario: 'Per ricordare meglio, Giulia trasforma gli appunti in schemi e collegamenti tra concetti.', q: 'Su quali processi puntano le teorie che spiegano meglio questo modo di imparare?', options: ['Memoria e rappresentazione delle informazioni (teorie cognitive)', 'Associazioni tra stimoli (teorie associazioniste)', 'Riflessi fisiologici', 'Stanchezza e recupero'], answer: 0, explain: 'Le teorie cognitive danno importanza ai processi mentali.' },
+        { id: 'p1-4-5', type: 'match', topic: 'Casi', q: 'Apprendimento o no?', pairs: [['Parlare meglio l’inglese dopo un anno all’estero', 'Apprendimento'], ['Sbadigliare dopo una notte in bianco', 'Non necessariamente'], ['Evitare la stufa dopo essersi scottati', 'Apprendimento'], ['Essere lenti per l’influenza', 'Non necessariamente']], explain: 'Esperienza e stabilità contro stanchezza e malattia.' },
+        { id: 'p1-4-6', type: 'tf', topic: 'Casi', q: 'Un cambiamento del comportamento che nasce dall’esperienza e dura nel tempo è un segnale di apprendimento.', answer: true, explain: 'È la definizione: modificazione relativamente stabile dovuta all’esperienza.' },
+      ],
+    },
   ],
   open: [
     { id: 'p1-o1', q: 'Che cos’è l’apprendimento?', answer: 'È un processo con cui si acquisiscono nuove conoscenze, abilità o comportamenti, oppure si modificano quelli già esistenti, in seguito all’esperienza e all’interazione con l’ambiente. Le modificazioni sono relativamente stabili. Non ogni cambiamento è apprendimento: la stanchezza o le alterazioni temporanee per una malattia non lo sono necessariamente.', keywords: ['acquisiscono', 'modificano', 'esperienza', 'ambiente', 'stabili', 'stanchezza', 'malattia'] },
     { id: 'p1-o2', q: 'Perché si dice che l’apprendimento ha una funzione adattiva?', answer: 'Perché permette all’individuo di rispondere in modo più efficace alle situazioni ambientali che ha già sperimentato.', keywords: ['adattiva', 'efficace', 'situazioni', 'sperimentate'] },
     { id: 'p1-o3', q: 'Quali sono i due grandi orientamenti teorici sull’apprendimento?', answer: 'Le teorie associazioniste, che spiegano l’apprendimento con le associazioni tra stimoli, eventi e risposte, e le teorie cognitive, che danno importanza ai processi mentali: memoria, attenzione, ragionamento e rappresentazione delle informazioni.', keywords: ['associazioniste', 'associazioni', 'stimoli', 'cognitive', 'processi mentali', 'memoria'] },
     { id: 'p1-o4', q: 'Che posizione hanno i comportamentisti sull’apprendimento?', answer: 'Sottolineano il ruolo dell’ambiente e dell’esperienza nell’acquisizione dei comportamenti. Alcuni primi esponenti avevano una posizione molto radicale e consideravano l’individuo fortemente modellato dall’ambiente.', keywords: ['ambiente', 'esperienza', 'comportamenti', 'radicale', 'modellato'] },
+    { id: 'p1-o5', q: 'Fai un esempio di apprendimento e uno di cambiamento che non lo è, spiegando perché.', answer: 'Imparare a suonare la chitarra con mesi di pratica è apprendimento: è un’abilità acquisita con l’esperienza e relativamente stabile. Essere lenti per la stanchezza o per la febbre non lo è necessariamente: è un’alterazione temporanea che passa da sola.', keywords: ['esperienza', 'stabile', 'stanchezza', 'malattia', 'temporanea'] },
   ],
   cards: [
     { id: 'p1-c1', front: 'Apprendimento: definizione', back: 'Processo con cui si acquisiscono o si modificano conoscenze, abilità o comportamenti, in seguito all’esperienza e all’interazione con l’ambiente.' },
@@ -106,6 +130,7 @@ const p1: Unit = {
     { id: 'p1-c5', front: 'Teorie associazioniste', back: 'Teorie associazioniste: spiegano l’apprendimento con le associazioni tra stimoli, eventi e risposte.' },
     { id: 'p1-c6', front: 'Teorie cognitive', back: 'Teorie cognitive: danno importanza ai processi mentali (memoria, attenzione, ragionamento, rappresentazione delle informazioni).' },
     { id: 'p1-c7', front: 'Comportamentisti e apprendimento', back: 'Sottolineano il ruolo dell’ambiente e dell’esperienza; alcuni primi esponenti vedevano l’individuo fortemente modellato dall’ambiente.' },
+    { id: 'p1-c8', front: 'Come riconoscere l’apprendimento in un caso', back: 'Chiediti: nasce dall’esperienza? È relativamente stabile? Se è stanchezza o malattia, non necessariamente.' },
   ],
 };
 
