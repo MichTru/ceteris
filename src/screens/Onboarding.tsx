@@ -79,7 +79,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
   const [goal, setGoal] = useState(goal0 || 50);
-  const [name, setName] = useState(name0 || 'Chiara');
+  const [name, setName] = useState(name0 || '');
   const [course, setCourse] = useState<CourseId>(course0);
   const [party, setParty] = useState(false);
   const swipe = useRef<number | null>(null);
@@ -96,7 +96,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
         setState((x) => {
           x.onboarded = true;
           x.dailyGoal = goal;
-          x.name = name.trim() || 'Chiara';
+          x.name = name.trim();
           x.course = course;
         });
         onDone();
@@ -197,7 +197,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
           <label className="setup-label" htmlFor="nm">
             Come ti chiami?
           </label>
-          <input id="nm" className="setup-name" value={name} onChange={(e) => setName(e.target.value)} maxLength={24} autoComplete="given-name" />
+          <input id="nm" className="setup-name" value={name} onChange={(e) => setName(e.target.value)} maxLength={24} autoComplete="given-name" placeholder="Il tuo nome" />
           <span className="setup-label" id="goal-l">
             Quanto vuoi studiare al giorno?
           </span>
@@ -231,7 +231,7 @@ export default function Onboarding({ onDone }: { onDone: () => void }) {
           </div>
         )}
         <button className="intro-cta" onClick={() => (step < 4 ? go(step + 1) : finish())} disabled={party}>
-          {step === 0 ? 'Iniziamo' : step < 4 ? 'Avanti' : `Andiamo, ${name.trim() || 'Chiara'}!`}
+          {step === 0 ? 'Iniziamo' : step < 4 ? 'Avanti' : name.trim() ? `Andiamo, ${name.trim()}!` : 'Andiamo!'}
         </button>
       </div>
     </div>

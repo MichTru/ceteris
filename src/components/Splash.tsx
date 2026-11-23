@@ -5,15 +5,16 @@ import { getState } from '../engine/store';
 
 function greeting(name: string) {
   const h = new Date().getHours();
-  if (h < 5 || h >= 23) return { text: `Ancora sveglia, ${name}?`, mood: 'sleep' as const };
-  if (h < 13) return { text: `Buongiorno, ${name}!`, mood: 'wave' as const };
-  if (h < 18) return { text: `Buon pomeriggio, ${name}!`, mood: 'wave' as const };
-  return { text: `Buonasera, ${name}!`, mood: 'wave' as const };
+  const n = name ? `, ${name}` : '';
+  if (h < 5 || h >= 23) return { text: `Ancora in piedi${n}?`, mood: 'sleep' as const };
+  if (h < 13) return { text: `Buongiorno${n}!`, mood: 'wave' as const };
+  if (h < 18) return { text: `Buon pomeriggio${n}!`, mood: 'wave' as const };
+  return { text: `Buonasera${n}!`, mood: 'wave' as const };
 }
 
 export default function Splash({ onDone }: { onDone: () => void }) {
   const [out, setOut] = useState(false);
-  const g = greeting(getState().name || 'Chiara');
+  const g = greeting(getState().name.trim());
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

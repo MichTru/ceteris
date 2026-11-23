@@ -51,7 +51,7 @@ export default function Profile() {
 
   return (
     <div className="screen">
-      <Stage title={s.name} sub={`${course.title} · ${course.sub}`} mood="laptop" />
+      <Stage title={s.name.trim() || 'Il tuo profilo'} sub={`${course.title} · ${course.sub}`} mood="laptop" />
 
       <h2 className="section-title">Corso</h2>
       <div className={`course-switch ${COURSES.length > 4 ? 'many' : ''}`} ref={centerActive} role="tablist" aria-label="Corso">
@@ -63,7 +63,7 @@ export default function Profile() {
       </div>
 
       <h2 className="section-title">Il tuo nome</h2>
-      <input className="search" value={s.name} maxLength={24} aria-label="Nome" onChange={(e) => setState((x) => void (x.name = e.target.value || 'Chiara'))} />
+      <input className="search" value={s.name} maxLength={24} aria-label="Nome" placeholder="Il tuo nome" onChange={(e) => setState((x) => void (x.name = e.target.value))} />
 
       <h2 className="section-title">Obiettivo giornaliero</h2>
       <div className="goal-grid">

@@ -113,7 +113,7 @@ export function bumpDaily(fn: (d: Daily) => void) {
 
 const fresh = (): State => ({
   version: 1,
-  name: 'Chiara',
+  name: '',
   xp: 0,
   dailyGoal: 50,
   days: {},

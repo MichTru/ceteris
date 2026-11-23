@@ -69,7 +69,7 @@ export default function Path({ onLesson, onBoss, onGuide }: Props) {
       <Stage
         top
         mood={todayXp >= s.dailyGoal ? 'party' : 'wave'}
-        title={<>Ciao {s.name}!</>}
+        title={<>Ciao{s.name.trim() ? ` ${s.name.trim()}` : ''}!</>}
         sub={todayXp >= s.dailyGoal ? 'Obiettivo di oggi raggiunto.' : `Oggi ${todayXp} di ${s.dailyGoal} XP.`}
       >
         <div className="stage-goal" aria-hidden>
